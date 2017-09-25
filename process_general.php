@@ -1,6 +1,24 @@
 <?php
 include 'parameters.php';
 
+
+function get_points_actions($id_joueur){
+    try
+    {
+        $db = openBDD(); //fonction pour ouvrir acces BDD
+        
+        $bdd = $db->prepare('SELECT points_actions FROM games_data WHERE id_joueur = ?');
+        $bdd->execute(array($id_joueur));
+        
+        $result = $bdd->fetch();
+        
+        return $result["points_actions"];
+    }
+    catch (PDOException $e) {
+        return $e->getMessage();
+    }
+}
+
 function get_position($id_joueur){
     try 
     {
