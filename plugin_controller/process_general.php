@@ -1,4 +1,12 @@
 <?php
+
+/*
+ Plugin Name: Fonctions de base
+ Description: Les fonctions de base comme get_points_actions, set_position, ...
+ Version: 1.0
+ Author: Benoît et Alexis
+ */
+
 include 'parameters.php';
 
 
