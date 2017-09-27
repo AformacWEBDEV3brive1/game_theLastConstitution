@@ -22,6 +22,7 @@
   # this version ignores all files by default 
   # ----------------------------------------------------------------- 
   # ignore everything in the root except the "wp-content" directory. 
+  ! nbproject/
   /* 
   !wp-content/ 
   # ignore everything in the "wp-content" directory, except: 
