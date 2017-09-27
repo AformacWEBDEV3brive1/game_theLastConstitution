@@ -1,0 +1,21 @@
+@charset "UTF-8";
+/*
+
+Theme Name: themeLastConstitution
+
+Author: OmegaZord
+
+Author URI: http://bidon.com
+
+Description: Theme last constitution
+
+*/
+.cellule{
+    width:28px;
+    height:28px;
+    border:1px solid black;
+    background-color:grey;
+}
+.cellule:hover{
+    background-color:red;
+}
