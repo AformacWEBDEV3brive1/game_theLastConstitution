@@ -22,7 +22,8 @@
   # this version ignores all files by default 
   # ----------------------------------------------------------------- 
   # ignore everything in the root except the "wp-content" directory. 
-  ! nbproject/
+  nbproject/
+  
   /* 
   !wp-content/ 
   # ignore everything in the "wp-content" directory, except: 
@@ -36,6 +37,11 @@
   wp-content/mu-plugins/* 
   wp-content/plugins/* 
   wp-content/themes/* 
+  wp-admin/*
+wp-content/*
+wp-activate.php
+wp-blog-header.php
+wp-comments-post.php
   # ignore all files starting with .  or ~ 
   .* 
   ~* 
