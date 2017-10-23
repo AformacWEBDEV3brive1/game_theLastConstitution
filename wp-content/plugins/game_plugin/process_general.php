@@ -2,11 +2,10 @@
 <?php
 
 /*
-  Plugin Name: game_process
- 
+  Plugin Name: Process_general
  */
 
-require_once( explode( "wp-content" , __FILE__ )[0] . "wp-load.php" );
+require_once( explode("wp-content", __FILE__)[0] . "wp-load.php" );
 include_once 'plugin_controller/parameters.php';
 
 if (isset($_POST['info'])) {
@@ -16,7 +15,7 @@ if (isset($_POST['info'])) {
 
 function get_points_action($id_joueur) {
     error_log(__FUNCTION__);
-    
+
     try {
         error_log("debut try __FUNCTION__");
         $db = openBDD(); //fonction pour ouvrir acces BDD
@@ -33,27 +32,26 @@ function get_points_action($id_joueur) {
     }
 }
 
-function get_position($all=false) {
-    if($all == false){
+function get_position($all = false) {
+    if ($all == false) {
         $id_joueur = get_current_user_id();
-        error_log("id joueur : ".$id_joueur);
-         
+        error_log("id joueur : " . $id_joueur);
+
         try {
-         $db = openBDD(); //fonction pour ouvrir acces BDD
+            $db = openBDD(); //fonction pour ouvrir acces BDD
 
-         $bdd = $db->prepare('SELECT position FROM games_data WHERE id_joueur = ?');
-         $bdd->execute(array($id_joueur));
+            $bdd = $db->prepare('SELECT position FROM games_data WHERE id_joueur = ?');
+            $bdd->execute(array($id_joueur));
 
-         $result = $bdd->fetch();
-         error_log('fin traitement bdd');
-         return $result["position"];
-     } catch (PDOException $e) {
-        error_log('exception bdd');
-        return $e->getMessage();
-     }
-    }else{
-        // retourne tous les joueurs 
-    }
+            $result = $bdd->fetch();
+            error_log('fin traitement bdd');
+              echo $id_joueur;
+            return $result["position"];
+        } catch (PDOException $e) {
+            error_log('exception bdd');
+            return $e->getMessage();
+        }
+    } 
 }
 
 function set_position($id_joueur, $nouvelle_position) {
@@ -99,8 +97,8 @@ function move() {
     if (isset($_POST['new_position'])) {
         $id_joueur = get_current_user_id();
         $new_position = $_POST['new_position'];
-        error_log("joueur : ".$id_joueur, 0);
-        error_log("nex position : ".$new_position, 0);
+        error_log("joueur : " . $id_joueur, 0);
+        error_log("nex position : " . $new_position, 0);
         if (check_move($id_joueur, $new_position)) {
             set_position($id_joueur, $new_position);
             echo 'mouvement effectué!';
@@ -121,9 +119,9 @@ function check_move($id_joueur, $new_position) {
     $old_pos_x = $old_pos[0];
     $old_pos_y = $old_pos[1];
 
-    error_log('pts_besoin: '.abs($new_pos_x - $old_pos_x ).'+'.abs($new_pos_y - $old_pos_y).'  pts_action: '. get_points_action($id_joueur).'   ');
-    
-    if (abs($new_pos_x - $old_pos_x )+abs($new_pos_y - $old_pos_y) <= get_points_action($id_joueur)) {
+    error_log('pts_besoin: ' . abs($new_pos_x - $old_pos_x) . '+' . abs($new_pos_y - $old_pos_y) . '  pts_action: ' . get_points_action($id_joueur) . '   ');
+
+    if (abs($new_pos_x - $old_pos_x) + abs($new_pos_y - $old_pos_y) <= get_points_action($id_joueur)) {
         return true;
     }
     return false;
@@ -139,4 +137,3 @@ function reset_all_points_action($nombre_points) {
         return $e->getMessage();
     }
 }
-

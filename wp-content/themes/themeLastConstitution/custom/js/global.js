@@ -1,5 +1,4 @@
 function move(id) {
-    alert('coucou');
     //alert('x='+ id.className.split(' ')[1] + ' y=' + id.className.split(' ')[3]);
     var x = id.className.split(' ')[1];
     var y = id.className.split(' ')[3];

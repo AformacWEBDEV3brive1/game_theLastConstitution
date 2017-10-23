@@ -2,7 +2,7 @@
 
 /*
 
-Plugin Name: game
+Plugin Name: Insertion des tables
 
 */
 
