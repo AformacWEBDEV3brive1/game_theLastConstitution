@@ -1,11 +1,23 @@
-
-
 /*
 Theme Name: themeLastConstitution
 Author: OmegaZord
 Author URI: http://bidon.com
 Description: Theme last constitution
 */
+
+.ville{
+    border: solid 2px black; 
+    height: 100%;
+}
+
+.batiment{
+    border: solid 2px black;
+    height: 100px;
+    width: 50px;
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
+
 
 .cellule{
     width:28px;
@@ -20,9 +32,9 @@ Description: Theme last constitution
     color:black;
     font-size:20px;
     font-weight:900;
-    
+
 }
-.ville{
+.ville_map{
     background-image: url(images/ville.png);
     background-size: 28px 28px;
     width:28px;
@@ -31,5 +43,5 @@ Description: Theme last constitution
     top:0px;
     left:0px;
     z-index:-1;
-   
+
 }

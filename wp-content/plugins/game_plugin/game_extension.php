@@ -6,7 +6,7 @@ Plugin Name: game
 
 */
 
-include( plugin_dir_path( __FILE__ ) . '/parameters.php');
+include_once( plugin_dir_path( __FILE__ ) . 'plugin_controller/parameters.php');
 
 
 function create_table(){
@@ -55,5 +55,5 @@ function drop_table(){
 register_activation_hook(__FILE__, 'create_table');
 
 
-register_deactivation_hook(__FILE__, 'drop_table');
+//register_deactivation_hook(__FILE__, 'drop_table');
 ?>

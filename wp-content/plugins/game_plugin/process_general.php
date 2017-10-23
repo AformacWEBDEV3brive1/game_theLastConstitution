@@ -1,50 +1,63 @@
+
 <?php
 
 /*
-  Plugin Name: Fonctions de base
-  Description: Les fonctions de base comme get_points_actions, set_position, ...
-  Version: 1.0
-  Author: Benoît et Alexis
+  Plugin Name: game_process
+ 
  */
 
-include 'parameters.php';
+require_once( explode( "wp-content" , __FILE__ )[0] . "wp-load.php" );
+include_once 'plugin_controller/parameters.php';
 
 if (isset($_POST['info'])) {
     $info = $_POST['info'];
     $info();
 }
 
-function get_points_actions($id_joueur) {
+function get_points_action($id_joueur) {
+    error_log(__FUNCTION__);
+    
     try {
+        error_log("debut try __FUNCTION__");
         $db = openBDD(); //fonction pour ouvrir acces BDD
 
-        $bdd = $db->prepare('SELECT points_actions FROM games_data WHERE id_joueur = ?');
+        $bdd = $db->prepare('SELECT points_action FROM games_data WHERE id_joueur = ?');
         $bdd->execute(array($id_joueur));
 
         $result = $bdd->fetch();
-
-        return $result["points_actions"];
+        error_log("fin try __FUNCTION__");
+        return $result["points_action"];
     } catch (PDOException $e) {
+        error_log("exeption __FUNCTION__");
         return $e->getMessage();
     }
 }
 
-function get_position($id_joueur) {
-    try {
-        $db = openBDD(); //fonction pour ouvrir acces BDD
+function get_position($all=false) {
+    if($all == false){
+        $id_joueur = get_current_user_id();
+        error_log("id joueur : ".$id_joueur);
+         
+        try {
+         $db = openBDD(); //fonction pour ouvrir acces BDD
 
-        $bdd = $db->prepare('SELECT position FROM games_data WHERE id_joueur = ?');
-        $bdd->execute(array($id_joueur));
+         $bdd = $db->prepare('SELECT position FROM games_data WHERE id_joueur = ?');
+         $bdd->execute(array($id_joueur));
 
-        $result = $bdd->fetch();
-
-        return $result["position"];
-    } catch (PDOException $e) {
+         $result = $bdd->fetch();
+         error_log('fin traitement bdd');
+         return $result["position"];
+     } catch (PDOException $e) {
+        error_log('exception bdd');
         return $e->getMessage();
+     }
+    }else{
+        // retourne tous les joueurs 
     }
 }
 
 function set_position($id_joueur, $nouvelle_position) {
+    error_log("set position begin", 0);
     try {
         $db = openBDD(); //fonction pour ouvrir acces BDD
 
@@ -82,14 +95,19 @@ function delete_partie($id_partie) {
 }
 
 function move() {
-    if (isset($_POST['joueur']) && isset($_POST['new_position'])) {
-        $id_joueur = $_POST['joueur'];
+    error_log("Je passe ici !!!", 0);
+    if (isset($_POST['new_position'])) {
+        $id_joueur = get_current_user_id();
         $new_position = $_POST['new_position'];
+        error_log("joueur : ".$id_joueur, 0);
+        error_log("nex position : ".$new_position, 0);
         if (check_move($id_joueur, $new_position)) {
             set_position($id_joueur, $new_position);
             echo 'mouvement effectué!';
+            error_log("move ok", 0);
         } else {
             echo 'Pas assez de pts!';
+            error_log("move pas ok", 0);
         }
     }
 }
@@ -99,25 +117,26 @@ function check_move($id_joueur, $new_position) {
     $new_pos_x = $new_pos[0];
     $new_pos_y = $new_pos[1];
 
-    $old_pos = explode(";", get_position($id_joueur));
+    $old_pos = explode(";", get_position());
     $old_pos_x = $old_pos[0];
     $old_pos_y = $old_pos[1];
 
-    if (abs($new_pos_x - $old_pos_x )+abs($new_pos_y - $old_pos_y) <= get_points_actions($id_joueur)) {
-        echo 'pts_besoin: '.abs($new_pos_x - $old_pos_x ).'+'.abs($new_pos_y - $old_pos_y).'  pts_action: '. get_points_actions($id_joueur).'   ';
+    error_log('pts_besoin: '.abs($new_pos_x - $old_pos_x ).'+'.abs($new_pos_y - $old_pos_y).'  pts_action: '. get_points_action($id_joueur).'   ');
+    
+    if (abs($new_pos_x - $old_pos_x )+abs($new_pos_y - $old_pos_y) <= get_points_action($id_joueur)) {
         return true;
     }
     return false;
-    
 }
 
-function reset_all_points_actions($nombre_points) {
+function reset_all_points_action($nombre_points) {
     try {
         $db = openBDD(); //fonction pour ouvrir acces BDD
 
-        $bdd = $db->prepare('UPDATE games_data SET points_actions = ?');
+        $bdd = $db->prepare('UPDATE games_data SET points_action = ?');
         $bdd->execute(array($nombre_points));
     } catch (PDOException $e) {
         return $e->getMessage();
     }
 }
+
