@@ -12,4 +12,14 @@ function move(id) {
         });
 }
 
-
+function reset(){
+    $.ajax({url: 'wp-content/plugins/game_plugin/process_general.php',
+            type: 'post',
+            data: {info: 'reset_all_points_action'},
+            success: function (output) {
+                $('#resultat').html(output);
+                $('#resultat').html("Tout le monde à 25 points");
+            
+            }
+        });
+}

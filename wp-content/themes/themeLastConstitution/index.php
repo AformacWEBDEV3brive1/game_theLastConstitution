@@ -33,27 +33,25 @@
         <script type="text/javascript" src="wp-content/themes/themeLastConstitution/custom/js/global.js"></script>
         <link type="text/css" rel="stylesheet" href="wp-content/themes/themeLastConstitution/style.css" />
 
-
-
     </head>
 
     <body>
 
         <?php
-        get_template_part("../../plugins/game_plugin/process_general.php");
+            get_template_part("../../plugins/game_plugin/process_general.php");
 
-        $position_joueurs = explode(";", get_position());
-     //   echo(get_position());
-        $position_x = $position_joueurs[0];
-        $position_y = $position_joueurs[1];
+            $position_joueurs = explode(";", get_position());
+            //echo(get_position());
+            $position_x = $position_joueurs[0];
+            $position_y = $position_joueurs[1];
 
-        $ma_position1 = explode(";", get_position());
-       // echo get_position();
-        $position_a = $ma_position1[0];
-        $position_b = $ma_position1[1];
-        //print_r(get_id_mate(1, 1));
-       // print_r(get_id_mate(1, 2));
-       echo get_team(get_current_user_id());
+            $ma_position1 = explode(";", get_position());
+            // echo get_position();
+            $position_a = $ma_position1[0];
+            $position_b = $ma_position1[1];
+            //print_r(get_id_mate(1, 1));
+            // print_r(get_id_mate(1, 2));
+            //echo get_team(get_current_user_id());
        
         ?>
 
@@ -61,8 +59,6 @@
 
 
         <h1 class="text-center"> Last Constitution </h1>
-
-
 
         <div class="container">
 
@@ -136,6 +132,11 @@
                             </div>
                         <?php endfor; ?>
                     </div>
+                </div>
+                
+                <div id="admin">
+                    <button type="submit" class="btn btn-secondary" onclick="reset()" > SET LE NBR DE P.A. A 25</button>
+                    <p id="resultat"></p>
                 </div>
 
                 <div id="chat" class="">

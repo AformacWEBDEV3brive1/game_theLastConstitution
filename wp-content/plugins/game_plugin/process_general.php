@@ -120,13 +120,16 @@ function check_move($id_joueur, $new_position) {
 
     error_log('pts_besoin: ' . abs($new_pos_x - $old_pos_x) . '+' . abs($new_pos_y - $old_pos_y) . '  pts_action: ' . get_points_action($id_joueur) . '   ');
 
-    if (abs($new_pos_x - $old_pos_x) + abs($new_pos_y - $old_pos_y) <= get_points_action($id_joueur)) {
+    $pa_joueur = get_points_action($id_joueur);
+    $pa_necessaire = abs($new_pos_x - $old_pos_x) + abs($new_pos_y - $old_pos_y);
+    if ($pa_necessaire <= $pa_joueur) {
+        nouveau_montant_pa($id_joueur, $pa_joueur - $pa_necessaire);
         return true;
     }
     return false;
 }
 
-function reset_all_points_action($nombre_points) {
+function reset_all_points_action($nombre_points = 25) {
     try {
         $db = openBDD(); //fonction pour ouvrir acces BDD
 
@@ -162,6 +165,18 @@ function get_team($id_joueur){
         $result = $bdd->fetch();
        // print_r($result);
         return $result[0];
+    } catch (PDOException $e) {
+        return $e->getMessage();
+    }
+}
+
+
+function nouveau_montant_pa($id_joueur, $points_action){
+    try {
+        $db = openBDD(); //fonction pour ouvrir acces BDD
+
+        $bdd = $db->prepare('UPDATE games_data SET points_action = ? WHERE id_joueur = ?');
+        $bdd->execute(array($points_action, $id_joueur));
     } catch (PDOException $e) {
         return $e->getMessage();
     }
