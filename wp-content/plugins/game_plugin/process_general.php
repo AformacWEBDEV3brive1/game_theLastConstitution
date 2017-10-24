@@ -6,7 +6,7 @@
  */
 
 require_once( explode("wp-content", __FILE__)[0] . "wp-load.php" );
-include_once 'parameters/parameters.php';
+include_once 'parameters.php';
 
 if (isset($_POST['info'])) {
     $info = $_POST['info'];
@@ -45,7 +45,7 @@ function get_position($all = false) {
 
             $result = $bdd->fetch();
             error_log('fin traitement bdd');
-             echo $id_joueur;
+         //   echo $id_joueur;
             return $result["position"];
         } catch (PDOException $e) {
             error_log('exception bdd');
@@ -132,6 +132,36 @@ function reset_all_points_action($nombre_points) {
 
         $bdd = $db->prepare('UPDATE games_data SET points_action = ?');
         $bdd->execute(array($nombre_points));
+    } catch (PDOException $e) {
+        return $e->getMessage();
+    }
+}
+
+function get_id_mate($id_partie, $equipe) {
+    try {
+        $db = openBDD(); //fonction pour ouvrir acces BDD
+
+        $bdd = $db->prepare('SELECT id_joueur, position FROM games_data WHERE id_partie = ? AND equipe = ?');
+        $bdd->execute(array($id_partie, $equipe));
+
+        $result = $bdd->fetchALL();
+       // print_r($result);
+        return $result;
+    } catch (PDOException $e) {
+        return $e->getMessage();
+    }
+}
+
+function get_team($id_joueur){
+    try {
+        $db = openBDD(); //fonction pour ouvrir acces BDD
+
+        $bdd = $db->prepare('SELECT equipe FROM games_data WHERE id_joueur = ?');
+        $bdd->execute(array($id_joueur));
+
+        $result = $bdd->fetch();
+       // print_r($result);
+        return $result[0];
     } catch (PDOException $e) {
         return $e->getMessage();
     }
