@@ -1,7 +1,7 @@
 <?php
 $connexion_string =  "mysql:host=127.0.0.1;dbname=game_last_constitution;charset=utf8";
 $login = "root";
-$mdp = "ezaltar";
+$mdp = "123456789$";
 
 
 function openBDD()

@@ -17,8 +17,9 @@ function create_table(){
     ." (
   `id_joueur` int NOT NULL,
   `id_partie` int NOT NULL,
-  `position` int NOT NULL,
-  `points_action` int NOT NULL
+  `position` VARCHAR(8) NOT NULL,
+  `points_action` int NOT NULL,
+  `equipe` int NOT NULL
  
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -55,5 +56,5 @@ function drop_table(){
 register_activation_hook(__FILE__, 'create_table');
 
 
-//register_deactivation_hook(__FILE__, 'drop_table');
+register_deactivation_hook(__FILE__, 'drop_table');
 ?>
