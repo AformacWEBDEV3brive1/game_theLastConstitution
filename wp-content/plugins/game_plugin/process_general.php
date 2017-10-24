@@ -17,17 +17,17 @@ function get_points_action($id_joueur) {
     error_log(__FUNCTION__);
 
     try {
-        error_log("debut try __FUNCTION__");
+        error_log("debut try get_points_action");
         $db = openBDD(); //fonction pour ouvrir acces BDD
 
         $bdd = $db->prepare('SELECT points_action FROM games_data WHERE id_joueur = ?');
         $bdd->execute(array($id_joueur));
 
         $result = $bdd->fetch();
-        error_log("fin try __FUNCTION__");
+        error_log("fin try get_points_action");
         return $result["points_action"];
     } catch (PDOException $e) {
-        error_log("exeption __FUNCTION__");
+        error_log("exeption get_points_action");
         return $e->getMessage();
     }
 }
@@ -45,13 +45,27 @@ function get_position($all = false) {
 
             $result = $bdd->fetch();
             error_log('fin traitement bdd');
-              echo $id_joueur;
+             echo $id_joueur;
             return $result["position"];
         } catch (PDOException $e) {
             error_log('exception bdd');
             return $e->getMessage();
         }
-    } 
+    } else {
+        try {
+            $db = openBDD(); //fonction pour ouvrir acces BDD
+            $id_partie = "1";
+            $bdd = $db->prepare('SELECT id_joueur, position FROM games_data WHERE id_partie = ?');
+            $bdd->execute(array($id_partie));
+
+            $result = $bdd->fetchALL();
+            //print_r($result);
+
+            return $result;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
 }
 
 function set_position($id_joueur, $nouvelle_position) {
@@ -61,21 +75,6 @@ function set_position($id_joueur, $nouvelle_position) {
 
         $bdd = $db->prepare('UPDATE games_data SET position = ? WHERE id_joueur = ?');
         $bdd->execute(array($nouvelle_position, $id_joueur));
-    } catch (PDOException $e) {
-        return $e->getMessage();
-    }
-}
-
-function get_all_players($id_partie) {
-    try {
-        $db = openBDD(); //fonction pour ouvrir acces BDD
-
-        $bdd = $db->prepare('SELECT id_joueur FROM games_data WHERE id_partie = ?');
-        $bdd->execute(array($id_partie));
-
-        $result = $bdd->fetchALL();
-
-        return $result; //tableau de tableau
     } catch (PDOException $e) {
         return $e->getMessage();
     }
@@ -98,7 +97,7 @@ function move() {
         $id_joueur = get_current_user_id();
         $new_position = $_POST['new_position'];
         error_log("joueur : " . $id_joueur, 0);
-        error_log("nex position : " . $new_position, 0);
+        error_log("next position : " . $new_position, 0);
         if (check_move($id_joueur, $new_position)) {
             set_position($id_joueur, $new_position);
             echo 'mouvement effectué!';
