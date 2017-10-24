@@ -181,3 +181,9 @@ function nouveau_montant_pa($id_joueur, $points_action){
         return $e->getMessage();
     }
 }
+
+function tour_suivant(){
+    reset_all_points_action();
+    
+}
+
