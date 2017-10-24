@@ -38,7 +38,7 @@
   wp-content/plugins/* 
   wp-content/themes/* 
   wp-admin/*
-
+wp-content/plugins/game_plugin/plugin_controller/parameters.php
 wp-activate.php
 wp-blog-header.php
 wp-comments-post.php
