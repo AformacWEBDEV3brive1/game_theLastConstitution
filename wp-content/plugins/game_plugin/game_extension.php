@@ -6,7 +6,7 @@ Plugin Name: Insertion des tables
 
 */
 
-include_once( plugin_dir_path( __FILE__ ) . 'parameters.php');
+include_once( plugin_dir_path( __FILE__ ) . 'parameters/parameters.php');
 
 
 function create_table(){
