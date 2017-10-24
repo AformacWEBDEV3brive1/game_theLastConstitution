@@ -42,7 +42,7 @@
         <?php        
         
         get_template_part("../../plugins/game_plugin/process_general.php");
-    
+        
         $position_joueurs = explode(";", get_position());
        // echo(get_position());
         

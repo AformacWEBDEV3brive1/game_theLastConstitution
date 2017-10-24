@@ -6,7 +6,7 @@
  */
 
 require_once( explode("wp-content", __FILE__)[0] . "wp-load.php" );
-include_once 'plugin_controller/parameters.php';
+include_once 'parameters/parameters.php';
 
 if (isset($_POST['info'])) {
     $info = $_POST['info'];
