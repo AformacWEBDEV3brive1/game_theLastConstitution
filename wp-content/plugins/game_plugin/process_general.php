@@ -231,16 +231,15 @@ function get_ids_from_cell($position) {
     try {
         $db = openBDD(); //fonction pour ouvrir acces BDD
         print_r($position . __FUNCTION__, 0);
-        $bdd = $db->prepare('SELECT position , id_joueur FROM games_data WHERE id_partie = 1 AND position = "1;2"');
+        error_log("position : " . $position, 0);
+        $bdd = $db->prepare('SELECT position , id_joueur FROM games_data WHERE id_partie = 1 AND position = 2;2');
         $bdd->execute();
-
         $tmp = $bdd->fetchAll();
 
         //return $tmp;
-
         foreach ($tmp as $value) {
-            $res[] = $value[1];
         }
+        
         $resultat = get_logins_from_ids($res);
         print_r($resultat);
     } catch (Exception $ex) {
@@ -255,24 +254,4 @@ function get_logins_from_ids($res) {
     }
     return $tab_username;
 }
-//
-//print_r(get_logins_from_ids(get_ids_from_cell("1;2")));
-
-//function get_player_from_cell(){
-//    try{
-//        $db = openBDD(); //fonction pour ouvrir acces BDD
-//        error_log("yolo");
-//        $bdd = $db->prepare('SELECT id_joueur, position FROM game_data WHERE id_partie = 1');
-//        $bdd->execute(array(
-//            ':id_joueur' => $id_joueur,
-//            ':position' => $position
-//        ));
-//        
-//        error_log("yolo",$bdd,$position,$id_joueur);
-//        
-//        return $bdd;
-//       
-//    } catch (Exception $ex) {
-//        return $e->getMessage();
-//    }
-//}
+//print_r(get_ids_from_cell('1;2'));
