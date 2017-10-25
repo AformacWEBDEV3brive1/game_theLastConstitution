@@ -8,11 +8,21 @@
 require_once( explode("wp-content", __FILE__)[0] . "wp-load.php" );
 include_once 'parameters/parameters.php';
 
-if (isset($_POST['info'])) {
+if(isset($_POST['position']) && isset($_POST['info'])){
+        $info = $_POST['info'];
+        $position = $_POST['position'];
+        $info($position);
+    }
+
+
+else if (isset($_POST['info'])) {
     $info = $_POST['info'];
     $info();
+    
 }
 
+    
+    
 function get_points_action($id_joueur) {
     error_log(__FUNCTION__);
 
@@ -45,7 +55,7 @@ function get_position($all = false) {
 
             $result = $bdd->fetch();
             error_log('fin traitement bdd');
-             echo $id_joueur;
+//            echo $id_joueur;
             return $result["position"];
         } catch (PDOException $e) {
             error_log('exception bdd');
@@ -136,3 +146,54 @@ function reset_all_points_action($nombre_points) {
         return $e->getMessage();
     }
 }
+
+function get_ids_from_cell($position) {
+
+    try {
+        $db = openBDD(); //fonction pour ouvrir acces BDD
+        print_r($position . __FUNCTION__, 0);
+        $bdd = $db->prepare('SELECT position , id_joueur FROM games_data WHERE id_partie = 1 AND position = "1;2"');
+        $bdd->execute();
+
+        $tmp = $bdd->fetchAll();
+
+        //return $tmp;
+
+        foreach ($tmp as $value) {
+            $res[] = $value[1];
+        }
+        $resultat = get_logins_from_ids($res);
+        print_r($resultat);
+    } catch (Exception $ex) {
+        return $ex->getMessage();
+    }
+}
+function get_logins_from_ids($res) {
+    foreach ($res as $value) {
+        //$user[] = get_user_by('id', $value)->user_login;
+        $user = get_user_by('id', $value);
+        $tab_username[] = $user->user_login;
+    }
+    return $tab_username;
+}
+//
+//print_r(get_logins_from_ids(get_ids_from_cell("1;2")));
+
+//function get_player_from_cell(){
+//    try{
+//        $db = openBDD(); //fonction pour ouvrir acces BDD
+//        error_log("yolo");
+//        $bdd = $db->prepare('SELECT id_joueur, position FROM game_data WHERE id_partie = 1');
+//        $bdd->execute(array(
+//            ':id_joueur' => $id_joueur,
+//            ':position' => $position
+//        ));
+//        
+//        error_log("yolo",$bdd,$position,$id_joueur);
+//        
+//        return $bdd;
+//       
+//    } catch (Exception $ex) {
+//        return $e->getMessage();
+//    }
+//}

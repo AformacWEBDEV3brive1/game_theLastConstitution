@@ -43,12 +43,12 @@
         get_template_part("../../plugins/game_plugin/process_general.php");
         
         $position_joueurs = explode(";", get_position());
-        echo(get_position());
+        
         $position_x = $position_joueurs[0];
         $position_y = $position_joueurs[1];
 
         $ma_position1 = explode(";", get_position());
-        echo get_position();
+        
         $position_a = $ma_position1[0];
         $position_b = $ma_position1[1];
         
@@ -101,26 +101,22 @@
                 <div class="col-6">
                     <div id="grille" class="">              
                         <?php 
+                        $pos = get_position($all = false);
                         $tableau_position_joueur = get_position(true);
                         for ($y = 0; $y < 20; $y++): ?>
                             <div class=" row ">
                                 <?php for ($x = 0; $x < 20; $x++): ?> 
-                                    <div class="<?php echo 'x= ' . $x ?> <?php echo 'y= ' . $y ?> cellule" onclick="move(this)"> 
+                                    <div class="<?php echo $x ?><?php echo ';' . $y ?> cellule" onclick="move(this)"> 
                                         <?php
                                              foreach ($tableau_position_joueur as $value){
                                                  if($x . ";" . $y == $value[1]){
-                                                     echo '<div class="text-center perso"> X </div>';
+                                                     echo '<div onclick="display_pseudo_oncell(this)"';
+                                                        if ($pos == $x.';'.$y){
+                                                            echo 'id="'.$pos.'"';
+                                                        }
+                                                     echo ' class="joueur text-center perso"> X </div>';
                                                  }
                                              }
-                                                 
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
 //                                        if ($position_x == $x && $position_y == $y) {
 //                                            echo '<div class="text-center perso"> X </div>';
 //                                        }
@@ -135,6 +131,7 @@
                                 <?php endfor; ?>
                             </div>
                         <?php endfor; ?>
+                        
                     </div>
                 </div>
 
