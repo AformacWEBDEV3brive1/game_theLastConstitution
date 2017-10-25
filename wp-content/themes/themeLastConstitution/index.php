@@ -134,10 +134,6 @@
                                 </div>
 
                             </div>
-                            <div id="zone" class="hidden">
-                                <h2 class="text-center"> Zone </h2>
-                                <p>CACA</p>
-                            </div>
 
                             <div id="chat" class="hidden">
                                 <h2 class="text-center"> Chat </h2>
@@ -172,9 +168,9 @@
                                         <?php
                                              foreach ($tableau_position_joueur as $value){
                                                  if($x . ";" . $y == $value[1]){
-                                                     echo '<div onclick="display_pseudo_oncell(this)" id="joueur"';
+                                                     echo '<div onclick="display_pseudo_oncell(this)" id="joueur" class="';
                                                         if ($pos == $x.';'.$y){
-                                                            echo ' class="'.$pos.'';
+                                                            echo $pos;
                                                         }
                                                      echo ' text-center perso"> X </div>';
                                                      break;
