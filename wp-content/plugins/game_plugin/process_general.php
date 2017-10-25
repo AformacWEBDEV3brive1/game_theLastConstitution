@@ -70,7 +70,7 @@ function get_position($all = false) {
     } else {
         try {
             $db = openBDD(); //fonction pour ouvrir acces BDD
-            $id_partie = "1";
+            $id_partie = get_id_mate(get_game(get_current_user_id()));
             $bdd = $db->prepare('SELECT id_joueur, position FROM games_data WHERE id_partie = ?');
             $bdd->execute(array($id_partie));
 
@@ -126,10 +126,12 @@ function move() {
        // error_log("next position : " . $new_position, 0);
         if (check_move($id_joueur, $new_position)) {
             set_position($id_joueur, $new_position);
-            echo 'mouvement effectué!';
+           //return true;
+           // echo "true";
           //  error_log("move ok", 0);
         } else {
-            echo 'Pas assez de pts!';
+           // return false;
+            echo "false";
           //  error_log("move pas ok", 0);
         }
     }
@@ -207,6 +209,20 @@ function get_team($id_joueur) {
     }
 }
 
+function get_game($id_joueur){
+    try {
+        $db = openBDD(); //fonction pour ouvrir acces BDD
+
+        $bdd = $db->prepare('SELECT id_partie FROM games_data WHERE id_joueur = ?');
+        $bdd->execute(array($id_joueur));
+
+        $result = $bdd->fetch(); // retourne sous forme d'un tableau la PREMIERE valeur.
+        return $result[0];
+    } catch (PDOException $e) {
+        return $e->getMessage();
+    }
+}
+
 //Paramètre d'entrée est l'id du joueur et son nouveau montants de P.A
 // Met a jour le montant des P.A d'un joueur.
 // Retourne eventuellement une exception si problème.
@@ -257,4 +273,4 @@ function get_logins_from_ids($res) {
     }
     return $tab_username;
 }
-//print_r(get_ids_from_cell('1;2'));
+

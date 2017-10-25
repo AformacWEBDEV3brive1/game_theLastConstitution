@@ -4,10 +4,13 @@ function move(id) {
         type: 'post',
         data: {info: 'move', new_position: coo},
         success: function (output) {
-            $('#grille').load('index.php #grille');
-            $('#points_action').load('index.php #points_action');
-            $('#position').load('index.php #position');
-
+            if (output.trim() == "false") {
+                alert("Pas assez de points d'action !");
+            } else {
+                $('#grille').load('index.php #grille');
+                $('#points_action').load('index.php #points_action');
+                $('#position').load('index.php #position');
+            }
         }
     });
 }
@@ -22,6 +25,7 @@ function tour_suivant() {
         }
     });
 }
+
 function display_pseudo_oncell(id) {
     var coo = id.className.split(' ')[0];
     $.ajax({url: 'wp-content/plugins/game_plugin/process_general.php',
@@ -33,7 +37,6 @@ function display_pseudo_oncell(id) {
 
     });
 }
-
 
 function show_menu(id_menu) {
     // console.log(id_menu);
@@ -50,6 +53,7 @@ function show_menu(id_menu) {
         $("#chat").addClass("hidden");
         $("#ville").addClass("hidden");
         $("#zone").addClass("hidden");
+
     } else if (id_menu == "chat") {
         // console.log("Click CHAT");
         $("#chat").removeClass("hidden");
