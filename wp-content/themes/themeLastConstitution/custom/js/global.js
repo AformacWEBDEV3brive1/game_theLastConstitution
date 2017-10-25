@@ -28,33 +28,38 @@ function display_pseudo_oncell(id) {
         type: 'post',
         data: {info: 'get_ids_from_cell', position: coo},
         success: function (output) {
-            alert(output);
-            //$('.joueur').popover(output);
-            $('#monJoueur').popover(output);
+            $('#zoneJoueur').html(output);
         }
-        
+
     });
 }
 
 
 function show_menu(id_menu) {
-   // console.log(id_menu);
+    // console.log(id_menu);
     if (id_menu == "ville") {
-     //   console.log("Click VILLE");
+        //   console.log("Click VILLE");
         $("#ville").removeClass("hidden");
         $("#chat").addClass("hidden");
         $("#inventaire").addClass("hidden");
-        
+        $("#zone").addClass("hidden");
+
     } else if (id_menu == "inventaire") {
-       // console.log("Click INVENTAIRE");
+        // console.log("Click INVENTAIRE");
         $("#inventaire").removeClass("hidden");
         $("#chat").addClass("hidden");
         $("#ville").addClass("hidden");
-    }
-
-    else if (id_menu == "chat"){
-       // console.log("Click CHAT");
+        $("#zone").addClass("hidden");
+    } else if (id_menu == "chat") {
+        // console.log("Click CHAT");
         $("#chat").removeClass("hidden");
+        $("#ville").addClass("hidden");
+        $("#inventaire").addClass("hidden");
+        $("#zone").addClass("hidden");
+    } else if (id_menu == "zone") {
+        // console.log("Click ZONE");
+        $("#zone").removeClass("hidden");
+        $("#chat").addClass("hidden");
         $("#ville").addClass("hidden");
         $("#inventaire").addClass("hidden");
     }

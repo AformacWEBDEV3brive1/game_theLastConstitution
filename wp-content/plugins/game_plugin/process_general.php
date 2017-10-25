@@ -230,18 +230,21 @@ function get_ids_from_cell($position) {
 
     try {
         $db = openBDD(); //fonction pour ouvrir acces BDD
-        print_r($position . __FUNCTION__, 0);
-        error_log("position : " . $position, 0);
-        $bdd = $db->prepare('SELECT position , id_joueur FROM games_data WHERE id_partie = 1 AND position = 2;2');
-        $bdd->execute();
+        //print_r($position . __FUNCTION__, 0);
+        $bdd = $db->prepare('SELECT position , id_joueur FROM games_data WHERE id_partie = 1 AND position = ?');
+        $bdd->execute(array($position));
         $tmp = $bdd->fetchAll();
-
         //return $tmp;
         foreach ($tmp as $value) {
+            $res[] = $value[1];
         }
         
         $resultat = get_logins_from_ids($res);
-        print_r($resultat);
+        //print_r($resultat);
+        foreach ($resultat as $value){
+            echo $value."<br/>";
+        
+        }
     } catch (Exception $ex) {
         return $ex->getMessage();
     }

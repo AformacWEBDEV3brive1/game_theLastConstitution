@@ -68,6 +68,7 @@
                         <button type="submit" class="btn" onclick="show_menu('ville')" > Ville </button>
                         <button type="submit" class="btn" onclick="show_menu('inventaire')" > Inventaire </button>
                         <button type="submit" class="btn" onclick="show_menu('chat')" > Chat </button>
+                        <button type="submit" class="btn" onclick="show_menu('zone')" > Zone </button>
                         <div class="container">
 
                             <div id="ville"> 
@@ -130,6 +131,12 @@
                            
 
                             </div>
+                            <div id="zone" class="hidden">
+                                <h2 class="text-center"> Zone  </h2>
+                                <p id="zoneJoueur"></p>
+                                    
+
+                            </div>
                         </div>
 
 
@@ -151,11 +158,11 @@
                                         <?php
                                              foreach ($tableau_position_joueur as $value){
                                                  if($x . ";" . $y == $value[1]){
-                                                     echo '<div onclick="display_pseudo_oncell(this)"';
+                                                     echo '<div onclick="display_pseudo_oncell(this)" id="joueur"';
                                                         if ($pos == $x.';'.$y){
-                                                            echo 'id="'.$pos.'"';
+                                                            echo ' class="'.$pos.'';
                                                         }
-                                                     echo ' class="joueur text-center perso"> X </div>';
+                                                     echo ' text-center perso"> X </div>';
                                                      break;
                                                  }
                                              }
