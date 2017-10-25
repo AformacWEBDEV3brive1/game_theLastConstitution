@@ -51,7 +51,7 @@
 //        $position_b = $ma_position1[1];
 //        //print_r(get_id_mate(1, 1));
 //        // print_r(get_id_mate(1, 2));
-        echo get_game(get_current_user_id());
+       // echo get_game(get_current_user_id());
         ?>
 
 
@@ -65,13 +65,18 @@
                 <div class="col-6">
 
                     <div id="menu" class="menu">
-                        <button type="submit" class="btn" onclick="show_menu('ville')" > Ville </button>
-                        <button type="submit" class="btn" onclick="show_menu('inventaire')" > Inventaire </button>
-                        <button type="submit" class="btn" onclick="show_menu('chat')" > Chat </button>
+                        
+                        <div id="onglets" class="row justify-content-around">
+                            <button type="submit" class="btn col-2" onclick="show_menu('ville')" > Ville </button>
+                            <button type="submit" class="btn col-2" onclick="show_menu('inventaire')" > Etat </button>
+                            <button type="submit" class="btn col-2" onclick="show_menu('zone')" > Zone </button>
+                            <button type="submit" class="btn col-2" onclick="show_menu('chat')" > Chat </button>
+                            
+                        </div>
                         <div class="container">
 
                             <div id="ville"> 
-                                <h2 class="text-center"> VILLE </h2>
+                                <h2 class="text-center"> Ville </h2>
                                 <div class="row justify-content-around">
                                     <div class="batiment col-3"> </div>
                                     <div class="batiment col-3"> </div>
@@ -95,7 +100,7 @@
                             </div>
 
                             <div id="inventaire" class="hidden">
-                                <h2 class="text-center"> Inventaire </h2>
+                                <h2 class="text-center"> Etat </h2>
                                 <div id="pseudo">
                                     <p>Pseudo: 
                                         <?php
@@ -111,7 +116,7 @@
                                         echo get_points_action(get_current_user_id());
                                         ?> points d'action.
                                     </p>
-                                    
+
                                 </div>
                                 <div id="num_team">
                                     <p> Vous êtes dans l'équipe
@@ -128,6 +133,10 @@
                                     </p>
                                 </div>
 
+                            </div>
+                            <div id="zone" class="hidden">
+                                <h2 class="text-center"> Zone </h2>
+                                <p>CACA</p>
                             </div>
 
                             <div id="chat" class="hidden">
@@ -152,7 +161,7 @@
                         for ($y = 0; $y < 20; $y++):
                             ?>
                             <div class=" row ">
-                                    <?php for ($x = 0; $x < 20; $x++): ?> 
+                                <?php for ($x = 0; $x < 20; $x++): ?> 
                                     <div class="<?php echo $x ?><?php echo ';' . $y ?> cellule" onclick="move(this)"> 
                                         <?php
                                         foreach ($tableau_position_joueur as $value) {
@@ -176,20 +185,21 @@
 //                                        }
                                         ?>
                                     </div>
-                            <?php endfor; ?>
+                                <?php endfor; ?>
                             </div>
-<?php endfor; ?>
+                        <?php endfor; ?>
 
                     </div>
                 </div>
 
-                <div id="admin">
-                    <button type="submit" class="btn btn-secondary" onclick="tour_suivant()" > Tour suivant </button>
-                    <p id="resultat"></p>
-                </div>
+                
             </div>
         </div>
-
+        
+        <div id="admin">
+            <button type="submit" class="btn btn-secondary" onclick="tour_suivant()" > Tour suivant </button>
+            <p id="resultat"></p>
+        </div>
     </body>
 
 </html>

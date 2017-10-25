@@ -3,7 +3,7 @@ function move(id) {
     $.ajax({url: 'wp-content/plugins/game_plugin/process_general.php',
         type: 'post',
         data: {info: 'move', new_position: coo},
-        success: function (output) {         
+        success: function (output) {
             if (output.trim() == "false") {
                 alert("Pas assez de points d'action !");
             } else {
@@ -47,16 +47,26 @@ function show_menu(id_menu) {
         $("#ville").removeClass("hidden");
         $("#chat").addClass("hidden");
         $("#inventaire").addClass("hidden");
+        $("#zone").addClass("hidden");
 
     } else if (id_menu == "inventaire") {
         // console.log("Click INVENTAIRE");
         $("#inventaire").removeClass("hidden");
         $("#chat").addClass("hidden");
         $("#ville").addClass("hidden");
+        $("#zone").addClass("hidden");
+
     } else if (id_menu == "chat") {
         // console.log("Click CHAT");
         $("#chat").removeClass("hidden");
         $("#ville").addClass("hidden");
         $("#inventaire").addClass("hidden");
+        $("#zone").addClass("hidden");
+    } else if (id_menu == "zone") {
+        // console.log("Click CHAT");
+        $("#zone").removeClass("hidden");
+        $("#ville").addClass("hidden");
+        $("#inventaire").addClass("hidden");
+        $("#chat").addClass("hidden");
     }
 }
