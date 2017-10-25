@@ -8,6 +8,7 @@ function move(id) {
         success: function (output) {
             $('#grille').load('index.php #grille');
             $('#points_action').load('index.php #points_action');
+            $('#position').load('index.php #position');
 
         }
     });
@@ -19,6 +20,7 @@ function tour_suivant() {
         data: {info: 'tour_suivant'},
         success: function (output) {
             $('#resultat').html("action effectuée !!");
+            $('#points_action').load('index.php #points_action');
         }
     });
 }

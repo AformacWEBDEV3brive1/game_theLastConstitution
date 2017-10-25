@@ -40,18 +40,18 @@
         <?php
         get_template_part("../../plugins/game_plugin/process_general.php");
 
-        $position_joueurs = explode(";", get_position());
-        //echo(get_position());
-        $position_x = $position_joueurs[0];
-        $position_y = $position_joueurs[1];
-
-        $ma_position1 = explode(";", get_position());
-        // echo get_position();
-        $position_a = $ma_position1[0];
-        $position_b = $ma_position1[1];
-        //print_r(get_id_mate(1, 1));
-        // print_r(get_id_mate(1, 2));
-        //echo get_team(get_current_user_id());
+//        $position_joueurs = explode(";", get_position());
+//        //echo(get_position());
+//        $position_x = $position_joueurs[0];
+//        $position_y = $position_joueurs[1];
+//
+//        $ma_position1 = explode(";", get_position());
+//        // echo get_position();
+//        $position_a = $ma_position1[0];
+//        $position_b = $ma_position1[1];
+//        //print_r(get_id_mate(1, 1));
+//        // print_r(get_id_mate(1, 2));
+//        //echo get_team(get_current_user_id());
         ?>
 
 
@@ -127,26 +127,7 @@
 
                             <div id="chat" class="hidden">
                                 <h2 class="text-center"> Chat </h2>
-                                <div class="row justify-content-around">
-                                    <div class="batiment col-3"> </div>
-                                    <div class="batiment col-3"> </div>
-                                    <div class="batiment col-3"> </div>
-
-                                </div>
-
-                                <div class="row justify-content-around">
-                                    <div class="batiment col-3 "> </div>
-                                    <div class="batiment col-3 "> </div>
-                                    <div class="batiment col-3 "> </div>
-
-                                </div>
-
-                                <div class="row justify-content-around">
-                                    <div class="batiment col-3 "> </div>
-                                    <div class="batiment col-3 "> </div>
-                                    <div class="batiment col-3"> </div>
-
-                                </div>
+                           
 
                             </div>
                         </div>

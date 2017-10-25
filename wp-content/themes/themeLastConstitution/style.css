@@ -12,12 +12,11 @@ Description: Theme last constitution
 
 .batiment{
     border: solid 2px black;
-    height: 100px;
+    height: 80px;
     width: 50px;
     margin-bottom: 50px;
     margin-top: 20px;
 }
-
 
 .cellule{
     width:28px;
