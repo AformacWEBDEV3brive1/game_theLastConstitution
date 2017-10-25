@@ -51,7 +51,7 @@
 //        $position_b = $ma_position1[1];
 //        //print_r(get_id_mate(1, 1));
 //        // print_r(get_id_mate(1, 2));
-//        //echo get_team(get_current_user_id());
+        echo get_game(get_current_user_id());
         ?>
 
 
@@ -98,36 +98,41 @@
                                 <h2 class="text-center"> Inventaire </h2>
                                 <div id="pseudo">
                                     <p>Pseudo: 
-                                    <?php
-                                       $current_user = wp_get_current_user();
-                                       echo $current_user-> user_login;
-                                    ?> </p>
-                                    
+                                        <?php
+                                        $current_user = wp_get_current_user();
+                                        echo $current_user->user_login;
+                                        ?> 
+                                    </p>
+
                                 </div>
                                 <div id="points_action">
                                     <p> Vous avez: 
                                         <?php
                                         echo get_points_action(get_current_user_id());
-                                        ?> points d'action.</p>                                 
+                                        ?> points d'action.
+                                    </p>
+                                    
                                 </div>
                                 <div id="num_team">
                                     <p> Vous êtes dans l'équipe
                                         <?php
                                         echo get_team(get_current_user_id());
-                                        ?> </p>
+                                        ?> 
+                                    </p>
                                 </div>
                                 <div id="position">
                                     <p>Vous êtes en: 
-                                    <?php
-                                    echo get_position();
-                                    ?> </p>
+                                        <?php
+                                        echo get_position();
+                                        ?>
+                                    </p>
                                 </div>
 
                             </div>
 
                             <div id="chat" class="hidden">
                                 <h2 class="text-center"> Chat </h2>
-                           
+
 
                             </div>
                         </div>
@@ -140,25 +145,26 @@
 
                 <div class="col-6">
                     <div id="grille" class="">              
-                        <?php 
+                        <?php
                         $pos = get_position($all = false);
-                        $tableau_position_joueur = get_id_mate(1, get_team(get_current_user_id()));  //get_position(true);
+                        $tableau_position_joueur = get_id_mate(get_game(get_current_user_id()), get_team(get_current_user_id()));  //get_position(true);
                         //error_log($tableau_position_joueur);
-                        for ($y = 0; $y < 20; $y++): ?>
+                        for ($y = 0; $y < 20; $y++):
+                            ?>
                             <div class=" row ">
-                                <?php for ($x = 0; $x < 20; $x++): ?> 
+                                    <?php for ($x = 0; $x < 20; $x++): ?> 
                                     <div class="<?php echo $x ?><?php echo ';' . $y ?> cellule" onclick="move(this)"> 
                                         <?php
-                                             foreach ($tableau_position_joueur as $value){
-                                                 if($x . ";" . $y == $value[1]){
-                                                     echo '<div onclick="display_pseudo_oncell(this)"';
-                                                        if ($pos == $x.';'.$y){
-                                                            echo 'id="'.$pos.'"';
-                                                        }
-                                                     echo ' class="joueur text-center perso"> X </div>';
-                                                     break;
-                                                 }
-                                             }
+                                        foreach ($tableau_position_joueur as $value) {
+                                            if ($x . ";" . $y == $value[1]) {
+                                                echo '<div onclick="display_pseudo_oncell(this)"';
+                                                if ($pos == $x . ';' . $y) {
+                                                    echo 'id="' . $pos . '"';
+                                                }
+                                                echo ' class="joueur text-center perso"> X </div>';
+                                                break;
+                                            }
+                                        }
 //                                        if ($position_x == $x && $position_y == $y) {
 //                                            echo '<div class="text-center perso"> X </div>';
 //                                        }
@@ -170,10 +176,10 @@
 //                                        }
                                         ?>
                                     </div>
-                                <?php endfor; ?>
+                            <?php endfor; ?>
                             </div>
-                        <?php endfor; ?>
-                        
+<?php endfor; ?>
+
                     </div>
                 </div>
 
