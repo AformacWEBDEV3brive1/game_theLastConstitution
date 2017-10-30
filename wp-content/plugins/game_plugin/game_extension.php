@@ -56,5 +56,5 @@ function drop_table(){
 register_activation_hook(__FILE__, 'create_table');
 
 
-register_deactivation_hook(__FILE__, 'drop_table');
+//register_deactivation_hook(__FILE__, 'drop_table');
 ?>

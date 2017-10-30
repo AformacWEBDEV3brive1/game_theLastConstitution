@@ -5,19 +5,18 @@ Author URI: http://bidon.com
 Description: Theme last constitution
 */
 
-.ville{
+.menu{
     border: solid 2px black; 
     height: 100%;
 }
 
 .batiment{
     border: solid 2px black;
-    height: 100px;
+    height: 80px;
     width: 50px;
     margin-bottom: 50px;
     margin-top: 20px;
 }
-
 
 .cellule{
     width:28px;
@@ -26,6 +25,7 @@ Description: Theme last constitution
 }
 .cellule:hover{
     background-color:red;
+    cursor:hand;
 }
 
 .perso{
