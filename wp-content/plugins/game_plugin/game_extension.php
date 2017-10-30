@@ -32,6 +32,14 @@ CREATE TABLE `games_metadata` (
   
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE `events` (
+  `id_partie` int NOT NULL,
+  `type` int NOT NULL,
+  `position` VARCHAR(8) NOT NULL,
+  `valeur` int NOT NULL
+  
+  
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 ALTER TABLE `games_data`
@@ -42,8 +50,36 @@ ADD PRIMARY KEY (id_partie);
 
 
 ALTER TABLE `games_data`
-ADD CONSTRAINT `games_data_ibfk_1` FOREIGN KEY (`id_partie`) REFERENCES `games_metadata` (`id_partie`) ON DELETE CASCADE ON UPDATE CASCADE;");
+ADD CONSTRAINT `games_data_ibfk_1` FOREIGN KEY (`id_partie`) REFERENCES `games_metadata` (`id_partie`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+INSERT INTO `games_metadata` (`id_partie`, `start`) VALUES
+(1, CURRENT_TIMESTAMP),
+(2, CURRENT_TIMESTAMP),
+(3, CURRENT_TIMESTAMP),
+(4, CURRENT_TIMESTAMP),
+(5, CURRENT_TIMESTAMP),
+(6, CURRENT_TIMESTAMP),
+(7, CURRENT_TIMESTAMP);
+
+
+INSERT INTO `games_data` (`id_joueur`, `id_partie`, `position`, `points_action`, `equipe`) VALUES
+
+(1, 1, 7.3, 15, 1),
+(2, 2, 8.4, 15, 1),
+(3, 3, 2.0, 12, 1),
+(4, 4, 80.36, 2, 1),
+(5, 5, 78.2, 14, 2),
+(6, 6, 25.2, 15, 2),
+(7, 7, 45.5, 15, 2);
+
+
+
+
+");
+
 }
+
+    
 
 function drop_table(){
     $wpdb = openBDD();
@@ -53,7 +89,10 @@ function drop_table(){
 }
 
 
+
+
 register_activation_hook(__FILE__, 'create_table');
+
 
 
 //register_deactivation_hook(__FILE__, 'drop_table');
