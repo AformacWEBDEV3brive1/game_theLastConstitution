@@ -27,7 +27,9 @@ function tour_suivant() {
 }
 
 function display_pseudo_oncell(id) {
+     
     var coo = id.className.split(' ')[0];
+    console.log(coo);
     $.ajax({url: 'wp-content/plugins/game_plugin/process_general.php',
         type: 'post',
         data: {info: 'get_ids_from_cell', position: coo},
@@ -36,6 +38,7 @@ function display_pseudo_oncell(id) {
         }
 
     });
+   
 }
 
 function show_menu(id_menu) {
