@@ -25,6 +25,7 @@ Description: Theme last constitution
 }
 .cellule:hover{
     background-color:red;
+    cursor:hand;
 }
 
 .perso{
