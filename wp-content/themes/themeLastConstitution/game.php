@@ -20,19 +20,19 @@
         <title> Last Constitution </title>
 
         <!-- libaries css-->
-        <link type="text/css" rel="stylesheet" href="wp-content/themes/themeLastConstitution/libraries/bootstrap/css/bootstrap.css" />
-        <link rel="stylesheet" href="wp-content/themes/themeLastConstitution/libraries/font-awesome/css/font-awesome.css"/>
+        <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/libraries/bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/libraries/font-awesome/css/font-awesome.css"/>
 
         <!-- libraries js -->        
-        <script type="text/javascript" src="wp-content/themes/themeLastConstitution/libraries/jQuery/jquery-3.2.1.js"></script>
-        <script type="text/javascript" src="wp-content/themes/themeLastConstitution/libraries/tether/dist/js/tether.js"></script>
-        <script type="text/javascript" src="wp-content/themes/themeLastConstitution/libraries/bootstrap/js/bootstrap.js"></script>
+        <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/libraries/jQuery/jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/libraries/tether/dist/js/tether.js"></script>
+        <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/libraries/bootstrap/js/bootstrap.js"></script>
 
 
         <!-- custom css & js -->
-        <script type="text/javascript" src="wp-content/themes/themeLastConstitution/custom/js/global.js"></script>
-        <link type="text/css" rel="stylesheet" href="wp-content/themes/themeLastConstitution/style.css" />
-        <link type="text/css" rel="stylesheet" href="wp-content/themes/themeLastConstitution/sass/style.css" />
+        <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/custom/js/global.js"></script>
+        <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/style.css" />
+        <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/sass/style.css" />
     </head>
 
     <body>
