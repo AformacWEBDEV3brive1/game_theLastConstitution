@@ -1,6 +1,6 @@
 function move(id) {
     var coo = id.className.split(' ')[0];
-    $.ajax({url: 'wp-content/plugins/game_plugin/process_general.php',
+    $.ajax({url: '../../wp-content/plugins/game_plugin/process_general.php',
         type: 'post',
         data: {info: 'move', new_position: coo},
         success: function (output) {
@@ -16,7 +16,7 @@ function move(id) {
 }
 
 function tour_suivant() {
-    $.ajax({url: 'wp-content/plugins/game_plugin/process_general.php',
+    $.ajax({url: '../../wp-content/plugins/game_plugin/process_general.php',
         type: 'post',
         data: {info: 'tour_suivant'},
         success: function (output) {
@@ -28,7 +28,7 @@ function tour_suivant() {
 
 function display_pseudo_oncell(id) {
     var coo = id.className.split(' ')[0];
-    $.ajax({url: 'wp-content/plugins/game_plugin/process_general.php',
+    $.ajax({url: '../../wp-content/plugins/game_plugin/process_general.php',
         type: 'post',
         data: {info: 'get_ids_from_cell', position: coo},
         success: function (output) {
