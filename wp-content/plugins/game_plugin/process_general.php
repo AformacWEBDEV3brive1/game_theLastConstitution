@@ -20,6 +20,7 @@ if (isset($_POST['position']) && isset($_POST['info'])) {
     $info();
 }
 
+
 //Prend en entrée l'ID d'un joueur.
 // retourne le nombre de points d'action d'un joueur ou une exception.
 function get_points_action($id_joueur) {
@@ -66,7 +67,12 @@ function get_position($all = false) {
     } else {
         try {
             $db = openBDD(); //fonction pour ouvrir acces BDD
-            $id_partie = get_id_mate(get_game(get_current_user_id()));
+            $current_id_user=get_current_user_id();
+            $id_partie= get_game($current_id_user);
+            $equipe= get_team($current_id_user);
+            $id_mate= get_id_mate($id_partie, $equipe);
+            
+           // $id_partie = get_id_mate(get_game(get_team(get_current_user_id())));
             $bdd = $db->prepare('SELECT id_joueur, position FROM games_data WHERE id_partie = ?');
             $bdd->execute(array($id_partie));
 
@@ -238,24 +244,34 @@ function tour_suivant() {
     reset_all_points_action();
 }
 
+
+
+
 function get_ids_from_cell($position) {
 
     try {
         $db = openBDD(); //fonction pour ouvrir acces BDD
-        //print_r($position . __FUNCTION__, 0);
-        $bdd = $db->prepare('SELECT position , id_joueur FROM games_data WHERE id_partie = 1 AND position = ?');
+        
+        //requete SQL
+        $bdd = $db->prepare('SELECT position , id_joueur FROM games_data WHERE id_partie = 1 AND position = ? ');
         $bdd->execute(array($position));
+        //le resultat objet en tableau
         $tmp = $bdd->fetchAll();
-        //return $tmp;
+        //on créé 2 tableaux à partir du $tmp
         foreach ($tmp as $value) {
             $res[] = $value[1];
+            
         }
-
+        
+       
+        
         $resultat = get_logins_from_ids($res);
-        //print_r($resultat);
-        foreach ($resultat as $value) {
-            echo $value . "<br/>";
+       
+        
+        foreach ($resultat as $value){
+            echo $value."<br/>";
         }
+        
     } catch (Exception $ex) {
         return $ex->getMessage();
     }
@@ -263,27 +279,23 @@ function get_ids_from_cell($position) {
 
 function get_logins_from_ids($res) {
     foreach ($res as $value) {
-        //$user[] = get_user_by('id', $value)->user_login;
+        
         $user = get_user_by('id', $value);
         $tab_username[] = $user->user_login;
     }
+   
     return $tab_username;
+    
 }
 
-//function your_function() {
-//    error_log("fonction redirection");
-//    //error_log(wp_get_current_user()->roles[0]);
-//    $user = new WP_User(get_current_user_id());
-//    //error_log(get_current_user_id());
-//    error_log($user->roles[0]);
-//    //wp_redirect("http://google.fr);
-//    //exit();
-//}
-//add_action('wp_login', 'your_function', 99);
-
-function login_redirection($redirect_to, $request, $user) {
-
-    return "index.php/jeu";
+function login_redirection($redirect_to, $request, $user)
+{
+    if($user->roles[0] != "administrator")
+    {
+        return "index.php/jeu";
+    }
+    return get_dashboard_url();
 }
 
-add_action('login_redirect', 'login_redirection', 10, 3);
+add_filter('login_redirect', 'login_redirection', 10, 3);
+

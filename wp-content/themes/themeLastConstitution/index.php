@@ -48,5 +48,6 @@ die();
 
     		<a href="wp-login.php">Connectez-vous !</a>
     	</div>
+        
     </body>
 </html>
