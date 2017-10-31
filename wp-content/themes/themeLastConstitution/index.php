@@ -14,7 +14,7 @@
  */
 if(is_user_logged_in())
 {
-header("Location: http://localhost/game_last_constitution/index.php/jeu");
+header("Location: index.php/jeu");
 die();
 }
 ?>

@@ -27,7 +27,7 @@ function tour_suivant() {
 }
 
 function display_pseudo_oncell(id) {
-     
+
     var coo = id.className.split(' ')[0];
     $.ajax({url: '../../wp-content/plugins/game_plugin/process_general.php',
         type: 'post',
@@ -35,11 +35,23 @@ function display_pseudo_oncell(id) {
         success: function (output) {
             $('#zoneJoueur').html(output);
         }
-
     });
-   
-}
 
+}
+$(document).ready(function () {
+    name_cell();
+});
+$(document).ajaxComplete(function () {
+    name_cell();
+});
+
+function name_cell() {
+    $(".cellule").click(function () {
+        var coo = this.className.split(' ')[0];
+        $("#nom_position").html(coo);
+    });
+
+}
 function show_menu(id_menu) {
     // console.log(id_menu);
     if (id_menu == "ville") {

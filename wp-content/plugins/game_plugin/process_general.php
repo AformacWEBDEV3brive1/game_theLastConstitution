@@ -292,5 +292,3 @@ function get_logins_from_ids($res) {
     return $tab_username;
     
 }
-
-//get_ids_from_cell("0;0");
