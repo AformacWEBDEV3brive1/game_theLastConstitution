@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-<?php /*
- Template Name: jeu
- */
- 
+
+<?php 
+/* Template Name: jeu */
+
 ?>
 
 <html>
@@ -31,7 +31,6 @@
 
         <?php
         get_template_part("../../plugins/game_plugin/process_general.php");
-
 //        $position_joueurs = explode(";", get_position());
 //        //echo(get_position());
 //        $position_x = $position_joueurs[0];
@@ -43,7 +42,7 @@
 //        $position_b = $ma_position1[1];
 //        //print_r(get_id_mate(1, 1));
 //        // print_r(get_id_mate(1, 2));
-       // echo get_game(get_current_user_id());
+        // echo get_game(get_current_user_id());
         ?>
 
 
@@ -57,13 +56,13 @@
                 <div class="col-6">
 
                     <div id="menu" class="menu">
-                        
+
                         <div id="onglets" class="row justify-content-around">
                             <button type="submit" class="btn col-2" onclick="show_menu('ville')" > Ville </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('inventaire')" > Etat </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('zone')" > Zone </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('chat')" > Chat </button>
-                            
+
                         </div>
                         <div class="container">
 
@@ -75,8 +74,6 @@
                                     <div class="batiment col-3"> </div>
 
                                 </div>
-                                
-                             
 
                                 <div class="row justify-content-around">
                                     <div class="batiment col-3 "> </div>
@@ -114,9 +111,11 @@
                                 </div>
                                 <div id="num_team">
                                     <p> Vous êtes dans l'équipe
-                                        <?php
-                                        echo get_team(get_current_user_id());
-                                        ?> 
+                                        <span class="team">
+                                            <?php
+                                            echo get_team(get_current_user_id());
+                                            ?> 
+                                        </span>
                                     </p>
                                 </div>
                                 <div id="position">
@@ -135,9 +134,9 @@
 
                             </div>
                             <div id="zone" class="hidden">
-                                <h2 class="text-center"> Zone  </h2>
+                                <h2 class="text-center"> Zone  <span id="nom_position"></span></h2>
                                 <p id="zoneJoueur"></p>
-                                    
+
 
                             </div>
                         </div>
@@ -151,35 +150,45 @@
                 <div class="col-6">
                     <div id="grille" class="">              
                         <?php
-                        $pos = get_position($all = false);
+                        $pos = get_position();
+                        $pos_allies = get_position(true);
                         $tableau_position_joueur = get_id_mate(get_game(get_current_user_id()), get_team(get_current_user_id()));  //get_position(true);
                         //error_log($tableau_position_joueur);
+
                         for ($y = 0; $y < 20; $y++):
                             ?>
                             <div class=" row ">
                                 <?php for ($x = 0; $x < 20; $x++): ?> 
                                     <div class="<?php echo $x ?><?php echo ';' . $y ?> cellule" onclick="move(this)"> 
                                         <?php
-                                             foreach ($tableau_position_joueur as $value){
-                                                 if($x . ";" . $y == $value[1]){
-                                                     echo '<div onclick="display_pseudo_oncell(this)" id="joueur" class="';
-                                                        if ($pos == $x.';'.$y){
-                                                            echo $pos;
-                                                        }
-                                                     echo ' text-center perso"> X </div>';
-                                                     break;
-                                                 }
-                                             }
+                                        foreach ($tableau_position_joueur as $value) {
+                                            if ($x . ";" . $y == $value[1]) {
+                                                echo '<div onclick="display_pseudo_oncell(this)" id="';
+
+                                                echo "joueur" . $value[0] . " ";
+
+                                                echo '"class="';
+                                                foreach ($pos_allies as $value) {
+                                                    $all_pos = $value["position"];
+                                                    if ($all_pos == $x . ';' . $y) {
+                                                        echo $all_pos." ";
+                                                    }
+                                                }
+
+
+                                                echo ' text-center perso"> X </div>';
+                                                break;
+                                            }
+                                        }
 //                                        if ($position_x == $x && $position_y == $y) {
 //                                            echo '<div class="text-center perso"> X </div>';
 //                                        }
 //                                             if ($position_a == $x && $position_b == $y) {
 //                                             echo '<div class="text-center perso"> O </div>';
 //                                         } 
-                                        if ($x == 0 && $y == 0) {
-                                           echo "<div class='ville_map'></div>";
-                                        }
-                                             
+//                                        if ($x == 0 && $y == 0) {
+//                                            echo "<div class='ville_map'></div>";
+//                                        }
                                         ?>
                                     </div>
                                 <?php endfor; ?>
@@ -189,10 +198,10 @@
                     </div>
                 </div>
 
-                
+
             </div>
         </div>
-        
+
         <div id="admin">
             <button type="submit" class="btn btn-secondary" onclick="tour_suivant()" > Tour suivant </button>
             <p id="resultat"></p>
