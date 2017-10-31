@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 
-<?php /*
-    Template Name: jeu
- */
+<?php 
+/* Template Name: jeu */
 ?>
 
 <html>

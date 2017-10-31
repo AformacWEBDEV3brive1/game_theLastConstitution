@@ -284,6 +284,17 @@ function get_logins_from_ids($res) {
     return $tab_username;
 }
 
+function login_redirection($redirect_to, $request, $user)
+{
+    if($user->roles[0] != "administrator")
+    {
+        return "index.php/jeu";
+    }
+    return get_dashboard_url();
+}
+
+add_filter('login_redirect', 'login_redirection', 10, 3);
+
 function create_random_event($id_partie) {
     $nb_events = 20;
 
