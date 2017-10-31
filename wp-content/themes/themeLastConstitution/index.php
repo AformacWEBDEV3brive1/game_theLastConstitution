@@ -12,12 +12,16 @@
  * @package Shape
  * @since Shape 1.0
  */
+
+
 if(is_user_logged_in())
 {
-header("Location: http://localhost/gameTheLastConstitution/index.php/jeu");
+header("Location: index.php/jeu");
 die();
 }
+
 ?>
+
 <html>
     <head>
         <meta charset="UTF-8">

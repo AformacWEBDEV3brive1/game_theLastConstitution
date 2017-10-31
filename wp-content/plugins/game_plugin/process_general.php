@@ -11,17 +11,13 @@ include_once 'parameters/parameters.php';
 require_once( explode("wp-content", __FILE__)[0] . "wp-load.php" );
 
 
-if(isset($_POST['position']) && isset($_POST['info'])){
-        $info = $_POST['info'];
-        $position = $_POST['position'];
-        $info($position);
-    }
-
-
-else if (isset($_POST['info'])) {
+if (isset($_POST['position']) && isset($_POST['info'])) {
+    $info = $_POST['info'];
+    $position = $_POST['position'];
+    $info($position);
+} else if (isset($_POST['info'])) {
     $info = $_POST['info'];
     $info();
-    
 }
 
 //Prend en entrée l'ID d'un joueur.
@@ -122,17 +118,17 @@ function move() {
     if (isset($_POST['new_position'])) {
         $id_joueur = get_current_user_id();
         $new_position = $_POST['new_position'];
-       // error_log("joueur : " . $id_joueur, 0);
-       // error_log("next position : " . $new_position, 0);
+        // error_log("joueur : " . $id_joueur, 0);
+        // error_log("next position : " . $new_position, 0);
         if (check_move($id_joueur, $new_position)) {
             set_position($id_joueur, $new_position);
-           //return true;
-           // echo "true";
-          //  error_log("move ok", 0);
+            //return true;
+            // echo "true";
+            //  error_log("move ok", 0);
         } else {
-           // return false;
+            // return false;
             echo "false";
-          //  error_log("move pas ok", 0);
+            //  error_log("move pas ok", 0);
         }
     }
 }
@@ -209,7 +205,7 @@ function get_team($id_joueur) {
     }
 }
 
-function get_game($id_joueur){
+function get_game($id_joueur) {
     try {
         $db = openBDD(); //fonction pour ouvrir acces BDD
 
@@ -237,11 +233,11 @@ function nouveau_montant_pa($id_joueur, $points_action) {
     }
 }
 
-
 //Fonction pour simuler le tour suivant. [ADMIN]
 function tour_suivant() {
     reset_all_points_action();
 }
+
 function get_ids_from_cell($position) {
 
     try {
@@ -254,17 +250,17 @@ function get_ids_from_cell($position) {
         foreach ($tmp as $value) {
             $res[] = $value[1];
         }
-        
+
         $resultat = get_logins_from_ids($res);
         //print_r($resultat);
-        foreach ($resultat as $value){
-            echo $value."<br/>";
-        
+        foreach ($resultat as $value) {
+            echo $value . "<br/>";
         }
     } catch (Exception $ex) {
         return $ex->getMessage();
     }
 }
+
 function get_logins_from_ids($res) {
     foreach ($res as $value) {
         //$user[] = get_user_by('id', $value)->user_login;
@@ -274,3 +270,20 @@ function get_logins_from_ids($res) {
     return $tab_username;
 }
 
+//function your_function() {
+//    error_log("fonction redirection");
+//    //error_log(wp_get_current_user()->roles[0]);
+//    $user = new WP_User(get_current_user_id());
+//    //error_log(get_current_user_id());
+//    error_log($user->roles[0]);
+//    //wp_redirect("http://google.fr);
+//    //exit();
+//}
+//add_action('wp_login', 'your_function', 99);
+
+function login_redirection($redirect_to, $request, $user) {
+
+    return "index.php/jeu";
+}
+
+add_action('login_redirect', 'login_redirection', 10, 3);
