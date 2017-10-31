@@ -335,4 +335,3 @@ function create_random_event($id_partie) {
     }
 }
 
-create_random_event(2);
