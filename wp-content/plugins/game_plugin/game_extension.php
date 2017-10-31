@@ -64,13 +64,13 @@ INSERT INTO `games_metadata` (`id_partie`, `start`) VALUES
 
 INSERT INTO `games_data` (`id_joueur`, `id_partie`, `position`, `points_action`, `equipe`) VALUES
 
-(1, 1, 7.3, 15, 1),
-(2, 2, 8.4, 15, 1),
-(3, 3, 2.0, 12, 1),
-(4, 4, 80.36, 2, 1),
-(5, 5, 78.2, 14, 2),
-(6, 6, 25.2, 15, 2),
-(7, 7, 45.5, 15, 2);
+(1, 1, '7;3', 15, 1),
+(2, 1, '8;4', 15, 1),
+(3, 1, '2;0', 12, 1),
+(4, 1, '19;19', 2, 1),
+(5, 1, '15;2', 14, 2),
+(6, 1, '5;2', 15, 2),
+(7, 1, '0;0', 15, 2);
 
 
 
@@ -85,7 +85,7 @@ function drop_table(){
     $wpdb = openBDD();
 
     
-    $wpdb->query("DROP TABLES IF EXISTS games_data, games_metadata");
+    $wpdb->query("DROP TABLES IF EXISTS games_data, games_metadata, events");
 }
 
 
@@ -95,5 +95,5 @@ register_activation_hook(__FILE__, 'create_table');
 
 
 
-//register_deactivation_hook(__FILE__, 'drop_table');
+register_deactivation_hook(__FILE__, 'drop_table');
 ?>

@@ -185,9 +185,9 @@
 //                                             if ($position_a == $x && $position_b == $y) {
 //                                             echo '<div class="text-center perso"> O </div>';
 //                                         } 
-//                                        if ($x == 0 && $y == 0) {
-//                                            echo "<div class='ville_map'></div>";
-//                                        }
+                                        if ($x == 0 && $y == 0) {
+                                            echo "<div class='ville_map'></div>";
+                                        }
                                         ?>
                                     </div>
                                 <?php endfor; ?>

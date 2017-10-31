@@ -5,7 +5,7 @@ function move(id) {
         data: {info: 'move', new_position: coo},
         success: function (output) {
             if (output.trim() == "false") {
-                alert("Pas assez de points d'action !");
+                $('#resultat').html("Pas assez de points d'action !");
             } else {
                 $('#grille').load('index.php #grille');
                 $('#points_action').load('index.php #points_action');
