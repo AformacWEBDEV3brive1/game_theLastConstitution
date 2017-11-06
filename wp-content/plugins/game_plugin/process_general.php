@@ -1,4 +1,3 @@
-
 <?php
 
 /*
@@ -11,19 +10,14 @@ include_once 'parameters/parameters.php';
 require_once( explode("wp-content", __FILE__)[0] . "wp-load.php" );
 
 
-if(isset($_POST['position']) && isset($_POST['info'])){
-        $info = $_POST['info'];
-        $position = $_POST['position'];
-        $info($position);
-    }
-
-
-else if (isset($_POST['info'])) {
+if (isset($_POST['position']) && isset($_POST['info'])) {
+    $info = $_POST['info'];
+    $position = $_POST['position'];
+    $info($position);
+} else if (isset($_POST['info'])) {
     $info = $_POST['info'];
     $info();
-    
 }
-
 
 //Prend en entrée l'ID d'un joueur.
 // retourne le nombre de points d'action d'un joueur ou une exception.
@@ -71,12 +65,12 @@ function get_position($all = false) {
     } else {
         try {
             $db = openBDD(); //fonction pour ouvrir acces BDD
-            $current_id_user=get_current_user_id();
-            $id_partie= get_game($current_id_user);
-            $equipe= get_team($current_id_user);
-            $id_mate= get_id_mate($id_partie, $equipe);
-            
-           // $id_partie = get_id_mate(get_game(get_team(get_current_user_id())));
+            $current_id_user = get_current_user_id();
+            $id_partie = get_game($current_id_user);
+            $equipe = get_team($current_id_user);
+            $id_mate = get_id_mate($id_partie, $equipe);
+
+            // $id_partie = get_id_mate(get_game(get_team(get_current_user_id())));
             $bdd = $db->prepare('SELECT id_joueur, position FROM games_data WHERE id_partie = ?');
             $bdd->execute(array($id_partie));
 
@@ -128,8 +122,8 @@ function move() {
     if (isset($_POST['new_position'])) {
         $id_joueur = get_current_user_id();
         $new_position = $_POST['new_position'];
-       // error_log("joueur : " . $id_joueur, 0);
-       // error_log("next position : " . $new_position, 0);
+        // error_log("joueur : " . $id_joueur, 0);
+        // error_log("next position : " . $new_position, 0);
         if (check_move($id_joueur, $new_position)) {
             set_position($id_joueur, $new_position);
             event_check_position(1);
@@ -137,9 +131,9 @@ function move() {
            // echo "true";
           //  error_log("move ok", 0);
         } else {
-           // return false;
+            // return false;
             echo "false";
-          //  error_log("move pas ok", 0);
+            //  error_log("move pas ok", 0);
         }
     }
 }
@@ -216,7 +210,8 @@ function get_team($id_joueur) {
     }
 }
 
-function get_game($id_joueur){
+//Si un joueur peut etre dans plusieurs parties, cette fonction ne sert à rien (est utilisé dans game.php).
+function get_game($id_joueur) {
     try {
         $db = openBDD(); //fonction pour ouvrir acces BDD
 
@@ -225,6 +220,20 @@ function get_game($id_joueur){
 
         $result = $bdd->fetch(); // retourne sous forme d'un tableau la PREMIERE valeur.
         return $result[0];
+    } catch (PDOException $e) {
+        return $e->getMessage();
+    }
+}
+
+function get_games($id_joueur) {
+    try {
+        $db = openBDD(); //fonction pour ouvrir acces BDD
+
+        $bdd = $db->prepare('SELECT id_partie FROM games_data WHERE id_joueur = ?');
+        $bdd->execute(array($id_joueur));
+
+        $result = $bdd->fetchAll();
+        return $result;
     } catch (PDOException $e) {
         return $e->getMessage();
     }
@@ -244,20 +253,19 @@ function nouveau_montant_pa($id_joueur, $points_action) {
     }
 }
 
-
 //Fonction pour simuler le tour suivant. [ADMIN]
 function tour_suivant() {
     reset_all_points_action();
 }
 
-
-
+//prend en paramètre une position en #;#
+//va voir voir dans la bdd
+//retourne la liste des logins des joueurs sur la mêmes cellules, et des cellules aliées
 
 function get_ids_from_cell($position) {
 
     try {
         $db = openBDD(); //fonction pour ouvrir acces BDD
-        
         //requete SQL
         $bdd = $db->prepare('SELECT position , id_joueur FROM games_data WHERE id_partie = 1 AND position = ? ');
         $bdd->execute(array($position));
@@ -266,42 +274,82 @@ function get_ids_from_cell($position) {
         //on créé 2 tableaux à partir du $tmp
         foreach ($tmp as $value) {
             $res[] = $value[1];
-            
         }
-        
-       
-        
+
         $resultat = get_logins_from_ids($res);
-       
-        
-        foreach ($resultat as $value){
-            echo $value."<br/>";
+
+        foreach ($resultat as $value) {
+            echo $value . "<br/>";
         }
-        
     } catch (Exception $ex) {
         return $ex->getMessage();
     }
 }
 
+//paramètre tableau d'id de joueurs
+//utilise une fonction wp
+//retourne tableau de login
 function get_logins_from_ids($res) {
     foreach ($res as $value) {
-        
+
         $user = get_user_by('id', $value);
         $tab_username[] = $user->user_login;
     }
-   
+
     return $tab_username;
-    
 }
 
 function login_redirection($redirect_to, $request, $user)
 {
+    if($user->roles != null){
+    //error_log($user->roles[0]);
     if($user->roles[0] != "administrator")
     {
-        return "index.php/jeu";
+        return "index.php/lobby";
     }
     return get_dashboard_url();
 }
+}
 
 add_filter('login_redirect', 'login_redirection', 10, 3);
+
+function create_random_event($id_partie) {
+    $nb_events = 20;
+
+    for ($i = 1; $i < $nb_events; $i++) {
+
+        $db = openBDD();
+        do {
+            $x = rand(0, 19);
+            $y = rand(0, 19);
+
+            $position = $x . ";" . $y;
+
+            $bdd = $db->prepare('SELECT position FROM events WHERE id_partie = ? AND position = ?');
+            $bdd->execute(array($id_partie, $position));
+            
+            $tmp = null;
+            $tmp = $bdd->fetchAll();
+
+            foreach ($tmp as $value) {
+                $res[] = $value[0];
+            }
+            //print_r($tmp);
+            //print_r(isset($res[0]));
+        } while (isset($tmp[0]));
+
+        $type = rand(0, 100);
+
+        if ($type > 50) {
+            $type = "-";
+        } else {
+            $type = "+";
+        }
+
+
+        $bdd = $db->prepare("INSERT INTO `events`( `id_partie`,`type`, `position`,  `valeur`) VALUES (?, ?, ?, 10)");
+        $bdd->execute(array($id_partie, $type, $position));
+
+    }
+}
 
