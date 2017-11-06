@@ -6,7 +6,7 @@
  */
 
 include_once 'parameters/parameters.php';
-
+ include_once 'process_event.php';
 // débeugeur de Wordpress.
 require_once( explode("wp-content", __FILE__)[0] . "wp-load.php" );
 
@@ -52,7 +52,7 @@ function get_points_action($id_joueur) {
 function get_position($all = false) {
     if ($all == false) {
         $id_joueur = get_current_user_id();
-        error_log("id joueur : " . $id_joueur);
+        //error_log("id joueur : " . $id_joueur);
 
         try {
             $db = openBDD(); //fonction pour ouvrir acces BDD
@@ -132,6 +132,7 @@ function move() {
        // error_log("next position : " . $new_position, 0);
         if (check_move($id_joueur, $new_position)) {
             set_position($id_joueur, $new_position);
+            event_check_position(1);
            //return true;
            // echo "true";
           //  error_log("move ok", 0);

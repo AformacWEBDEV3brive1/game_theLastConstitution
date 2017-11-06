@@ -7,6 +7,19 @@
  include_once 'process_general.php';
 require_once( explode("wp-content", __FILE__)[0] . "wp-load.php" );
 
+if(isset($_POST['position']) && isset($_POST['info'])){
+        $info = $_POST['info'];
+        $position = $_POST['position'];
+        $info(1);
+    }
+
+
+else if (isset($_POST['info'])) {
+    $info = $_POST['info'];
+    $info(1);
+    
+}
+
 
 function count_test(){
     $db = openBDD();
@@ -17,11 +30,11 @@ function count_test(){
         
 }
 
-function check_event(){
+function check_event($id_partie){
     $db = openBDD();
-     $bdd = $db->prepare('SELECT position FROM `events` WHERE id_partie = 2 ');
-     $bdd->execute();
-     //print_r($bdd->fetchALL());
+     $bdd = $db->prepare('SELECT position FROM `events` WHERE id_partie = ? ');
+     $bdd->execute(array($id_partie));
+     return $bdd->fetchALL();
 }
 
 /*function delete_event(){
@@ -53,11 +66,20 @@ function event_check_position($id_partie){
     
     
     $position_joueur = get_position();
-    $place_event = check_event();
-    $db = openBDD();
-    $bdd = $db->prepare('SELECT position FROM games_data WHERE id_joueur = ?');
-    $bdd->execute(array($position_joueur)); 
-    echo $position_joueur;
+    $place_event = check_event($id_partie);   
+    foreach($place_event as $value){
+        error_log("VALUE 0: " . $value[0]);
+        error_log(get_current_user_id());
+        error_log("POSITION JOUEUR: " . $position_joueur);
+        if ($value[0] == $position_joueur)
+        {
+            echo "event MORTELOS";
+            error_log("EVENT!!!!!!");
+        }
+       
+    };
+   
+    
 }
 
-event_check_position(2);
+

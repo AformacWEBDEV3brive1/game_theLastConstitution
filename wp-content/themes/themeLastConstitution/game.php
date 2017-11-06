@@ -23,6 +23,7 @@
 
         <!-- custom css & js -->
         <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/custom/js/global.js"></script>
+         <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/custom/js/event_javascript.js"></script>
         <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/style.css" />
         <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/sass/style.css" />
     </head>
@@ -43,8 +44,11 @@
 //        //print_r(get_id_mate(1, 1));
 //        // print_r(get_id_mate(1, 2));
         // echo get_game(get_current_user_id());
+        
+  
+        get_template_part("../../plugins/game_plugin/process_event.php");
+//        
         ?>
-
 
 
 
@@ -206,6 +210,7 @@
             <button type="submit" class="btn btn-secondary" onclick="tour_suivant()" > Tour suivant </button>
             <p id="resultat"></p>
         </div>
+    
     </body>
 
 </html>
