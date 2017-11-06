@@ -1,4 +1,3 @@
-
 <?php
 
 /*
@@ -210,6 +209,7 @@ function get_team($id_joueur) {
     }
 }
 
+//Si un joueur peut etre dans plusieurs parties, cette fonction ne sert à rien (est utilisé dans game.php).
 function get_game($id_joueur) {
     try {
         $db = openBDD(); //fonction pour ouvrir acces BDD
@@ -219,6 +219,20 @@ function get_game($id_joueur) {
 
         $result = $bdd->fetch(); // retourne sous forme d'un tableau la PREMIERE valeur.
         return $result[0];
+    } catch (PDOException $e) {
+        return $e->getMessage();
+    }
+}
+
+function get_games($id_joueur) {
+    try {
+        $db = openBDD(); //fonction pour ouvrir acces BDD
+
+        $bdd = $db->prepare('SELECT id_partie FROM games_data WHERE id_joueur = ?');
+        $bdd->execute(array($id_joueur));
+
+        $result = $bdd->fetchAll();
+        return $result;
     } catch (PDOException $e) {
         return $e->getMessage();
     }
@@ -286,11 +300,14 @@ function get_logins_from_ids($res) {
 
 function login_redirection($redirect_to, $request, $user)
 {
+    if($user->roles != null){
+    //error_log($user->roles[0]);
     if($user->roles[0] != "administrator")
     {
-        return "index.php/jeu";
+        return "index.php/lobby";
     }
     return get_dashboard_url();
+}
 }
 
 add_filter('login_redirect', 'login_redirection', 10, 3);
@@ -334,3 +351,4 @@ function create_random_event($id_partie) {
 
     }
 }
+

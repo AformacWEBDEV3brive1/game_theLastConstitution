@@ -16,7 +16,7 @@
 
 if(is_user_logged_in())
 {
-header("Location: index.php/jeu");
+header("Location: index.php/lobby");
 die();
 }
 
