@@ -4,15 +4,19 @@ function move(id) {
         type: 'post',
         data: {info: 'move', new_position: coo},
         success: function (output) {
+            
             if (output.trim() == "false") {
                 $('#resultat').html("Pas assez de points d'action !");
             } else {
                 $('#grille').load('index.php #grille');
                 $('#points_action').load('index.php #points_action');
                 $('#position').load('index.php #position');
+                event_game(id);
             }
+            
         }
     });
+   
 }
 
 function tour_suivant() {
@@ -81,4 +85,17 @@ function show_menu(id_menu) {
         $("#ville").addClass("hidden");
         $("#inventaire").addClass("hidden");
     }
+}
+function event(id) {
+
+    
+    $.ajax({url: '../../wp-content/plugins/game_plugin/process_event.php',
+        type: 'post',
+        data: {info: 'event_check_position'},
+        success: function (output) {
+            alert(output);
+           
+        }
+    });
+
 }

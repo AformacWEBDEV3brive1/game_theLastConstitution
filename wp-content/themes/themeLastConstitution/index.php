@@ -12,12 +12,16 @@
  * @package Shape
  * @since Shape 1.0
  */
+
+
 if(is_user_logged_in())
 {
-header("Location: index.php/jeu");
+header("Location: index.php/lobby");
 die();
 }
+
 ?>
+
 <html>
     <head>
         <meta charset="UTF-8">
