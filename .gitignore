@@ -39,7 +39,6 @@
   wp-content/plugins/* 
   wp-content/themes/* 
   wp-admin/*
-
 wp-activate.php
 wp-blog-header.php
 wp-comments-post.php
@@ -107,4 +106,5 @@ wp-trackback.php
   # add your own entries here 
   !wp-content/mu-plugins/example-mu-plugin/ 
   !wp-content/plugins/ 
-!wp-content/themes/ 
+!wp-content/themes/
+wp-content/plugins/game_plugin/plugin_controller/parameters.php 

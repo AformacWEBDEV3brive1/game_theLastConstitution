@@ -1,11 +1,11 @@
 function move(id) {
     var coo = id.className.split(' ')[0];
-    $.ajax({url: 'wp-content/plugins/game_plugin/process_general.php',
+    $.ajax({url: '../../wp-content/plugins/game_plugin/process_general.php',
         type: 'post',
         data: {info: 'move', new_position: coo},
         success: function (output) {
             if (output.trim() == "false") {
-                alert("Pas assez de points d'action !");
+                $('#resultat').html("Pas assez de points d'action !");
             } else {
                 $('#grille').load('index.php #grille');
                 $('#points_action').load('index.php #points_action');
@@ -16,7 +16,7 @@ function move(id) {
 }
 
 function tour_suivant() {
-    $.ajax({url: 'wp-content/plugins/game_plugin/process_general.php',
+    $.ajax({url: '../../wp-content/plugins/game_plugin/process_general.php',
         type: 'post',
         data: {info: 'tour_suivant'},
         success: function (output) {
@@ -27,17 +27,31 @@ function tour_suivant() {
 }
 
 function display_pseudo_oncell(id) {
+
     var coo = id.className.split(' ')[0];
-    $.ajax({url: 'wp-content/plugins/game_plugin/process_general.php',
+    $.ajax({url: '../../wp-content/plugins/game_plugin/process_general.php',
         type: 'post',
         data: {info: 'get_ids_from_cell', position: coo},
         success: function (output) {
             $('#zoneJoueur').html(output);
         }
-
     });
-}
 
+}
+$(document).ready(function () {
+    name_cell();
+});
+$(document).ajaxComplete(function () {
+    name_cell();
+});
+
+function name_cell() {
+    $(".cellule").click(function () {
+        var coo = this.className.split(' ')[0];
+        $("#nom_position").html(coo);
+    });
+
+}
 function show_menu(id_menu) {
     // console.log(id_menu);
     if (id_menu == "ville") {
