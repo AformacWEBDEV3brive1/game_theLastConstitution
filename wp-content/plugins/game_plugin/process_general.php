@@ -13,7 +13,8 @@ require_once( explode("wp-content", __FILE__)[0] . "wp-load.php" );
 if (isset($_POST['position']) && isset($_POST['info'])) {
     $info = $_POST['info'];
     $position = $_POST['position'];
-    $info($position);
+    $id_partie = $_POST['id_partie'];
+    $info($position, $id_partie);
 } else if (isset($_POST['info'])) {
     $info = $_POST['info'];
     $info();
@@ -21,15 +22,15 @@ if (isset($_POST['position']) && isset($_POST['info'])) {
 
 //Prend en entrée l'ID d'un joueur.
 // retourne le nombre de points d'action d'un joueur ou une exception.
-function get_points_action($id_joueur) {
-    error_log(__FUNCTION__);
+function get_points_action($id_joueur, $id_partie) {
+    //error_log(__FUNCTION__);
 
     try {
         //error_log("debut try get_points_action");
         $db = openBDD(); //fonction pour ouvrir acces BDD
 
-        $bdd = $db->prepare('SELECT points_action FROM games_data WHERE id_joueur = ?');
-        $bdd->execute(array($id_joueur));
+        $bdd = $db->prepare('SELECT points_action FROM games_data WHERE id_joueur = ? AND id_partie = ?');
+        $bdd->execute(array($id_joueur, $id_partie));
 
         $result = $bdd->fetch(); // retourne sous forme d'un tableau la PREMIERE valeur.
         //error_log("fin try get_points_action");
@@ -43,16 +44,16 @@ function get_points_action($id_joueur) {
 // Paramètre d'entrée est un boolean par défault a "false". Remplacer "false" par "true" pour avoir tous les joueurs.
 // Retoune la position SOIT d'un joueur SOIT de tous les joueurs (sous forme de tableau) ou une exception.
 // l'id du joueur sera le joueur connecté (get_current_user_id()).
-function get_position($all = false) {
+function get_position($all = false, $id_partie) {
     if ($all == false) {
         $id_joueur = get_current_user_id();
-        error_log("id joueur : " . $id_joueur);
+        //error_log("id joueur : " . $id_joueur);
 
         try {
             $db = openBDD(); //fonction pour ouvrir acces BDD
 
-            $bdd = $db->prepare('SELECT position FROM games_data WHERE id_joueur = ?');
-            $bdd->execute(array($id_joueur));
+            $bdd = $db->prepare('SELECT position FROM games_data WHERE id_joueur = ? AND id_partie= ? ');
+            $bdd->execute(array($id_joueur, $id_partie));
 
             $result = $bdd->fetch(); // retourne sous forme d'un tableau la PREMIERE valeur.
             //error_log('fin traitement bdd');
@@ -65,12 +66,10 @@ function get_position($all = false) {
     } else {
         try {
             $db = openBDD(); //fonction pour ouvrir acces BDD
-            $current_id_user = get_current_user_id();
-            $id_partie = get_game($current_id_user);
-            $equipe = get_team($current_id_user);
-            $id_mate = get_id_mate($id_partie, $equipe);
-
-            // $id_partie = get_id_mate(get_game(get_team(get_current_user_id())));
+           // $current_id_user = get_current_user_id();
+            //$id_partie = get_game($current_id_user);
+            //$equipe = get_team($current_id_user);
+            //$id_mate = get_id_mate($id_partie, $equipe);
             $bdd = $db->prepare('SELECT id_joueur, position FROM games_data WHERE id_partie = ?');
             $bdd->execute(array($id_partie));
 
@@ -87,13 +86,13 @@ function get_position($all = false) {
 // Paramètres d'entrée: id_joueur et nouvelle_position (sous la forme x;y)
 // Met a jour la position d'un joueur dans la base.
 // Retourne eventuellement une exception si problème.
-function set_position($id_joueur, $nouvelle_position) {
+function set_position($id_joueur, $nouvelle_position, $id_partie) {
     //error_log("set position begin", 0);
     try {
         $db = openBDD(); //fonction pour ouvrir acces BDD
 
-        $bdd = $db->prepare('UPDATE games_data SET position = ? WHERE id_joueur = ?');
-        $bdd->execute(array($nouvelle_position, $id_joueur));
+        $bdd = $db->prepare('UPDATE games_data SET position = ? WHERE id_joueur = ? AND id_partie = ?');
+        $bdd->execute(array($nouvelle_position, $id_joueur, $id_partie));
     } catch (PDOException $e) {
         return $e->getMessage();
     }
@@ -122,13 +121,16 @@ function move() {
     if (isset($_POST['new_position'])) {
         $id_joueur = get_current_user_id();
         $new_position = $_POST['new_position'];
+        if(isset($_POST['id_partie'])){
+            $id_partie = $_POST['id_partie'];
+        }
         // error_log("joueur : " . $id_joueur, 0);
         // error_log("next position : " . $new_position, 0);
-        if (check_move($id_joueur, $new_position)) {
-            set_position($id_joueur, $new_position);
-            //return true;
-            // echo "true";
-            //  error_log("move ok", 0);
+        if (check_move($id_joueur, $new_position, $id_partie)) {
+            set_position($id_joueur, $new_position, $id_partie);
+            //echo get_position(false, $id_partie);
+            //echo get_points_action($id_joueur, $id_partie);
+            echo $_POST["id_partie"];
         } else {
             // return false;
             echo "false";
@@ -141,21 +143,21 @@ function move() {
 // Vérifie si assez de points d'action sont disponible pour se déplacer grace a la fonction get_points_action
 // Si c'est le cas elle appelle nouveau_montant_pa et retoune "TRUE".
 //Sinon retoune "FALSE"
-function check_move($id_joueur, $new_position) {
+function check_move($id_joueur, $new_position, $id_partie) {
     $new_pos = explode(";", $new_position);
     $new_pos_x = $new_pos[0];
     $new_pos_y = $new_pos[1];
 
-    $old_pos = explode(";", get_position());
+    $old_pos = explode(";", get_position(false, $id_partie));
     $old_pos_x = $old_pos[0];
     $old_pos_y = $old_pos[1];
 
     //error_log('pts_besoin: ' . abs($new_pos_x - $old_pos_x) . '+' . abs($new_pos_y - $old_pos_y) . '  pts_action: ' . get_points_action($id_joueur) . '   ');
 
-    $pa_joueur = get_points_action($id_joueur);
+    $pa_joueur = get_points_action($id_joueur, $id_partie);
     $pa_necessaire = abs($new_pos_x - $old_pos_x) + abs($new_pos_y - $old_pos_y);
     if ($pa_necessaire <= $pa_joueur) {
-        nouveau_montant_pa($id_joueur, $pa_joueur - $pa_necessaire);
+        nouveau_montant_pa($id_joueur, $pa_joueur - $pa_necessaire, $id_partie);
         return true;
     }
     return false;
@@ -195,12 +197,12 @@ function get_id_mate($id_partie, $equipe) {
 //Paramètre d'entrée est l'id du joueur.
 // Obtenir l'id de l'équipe d'un joueur.
 // Retourne eventuellement une exception si problème.
-function get_team($id_joueur) {
+function get_team($id_joueur, $id_partie) {
     try {
         $db = openBDD(); //fonction pour ouvrir acces BDD
 
-        $bdd = $db->prepare('SELECT equipe FROM games_data WHERE id_joueur = ?');
-        $bdd->execute(array($id_joueur));
+        $bdd = $db->prepare('SELECT equipe FROM games_data WHERE id_joueur = ? AND id_partie= ?');
+        $bdd->execute(array($id_joueur, $id_partie));
 
         $result = $bdd->fetch(); // retourne sous forme d'un tableau la PREMIERE valeur.
         return $result[0];
@@ -210,19 +212,19 @@ function get_team($id_joueur) {
 }
 
 //Si un joueur peut etre dans plusieurs parties, cette fonction ne sert à rien (est utilisé dans game.php).
-function get_game($id_joueur) {
-    try {
-        $db = openBDD(); //fonction pour ouvrir acces BDD
-
-        $bdd = $db->prepare('SELECT id_partie FROM games_data WHERE id_joueur = ?');
-        $bdd->execute(array($id_joueur));
-
-        $result = $bdd->fetch(); // retourne sous forme d'un tableau la PREMIERE valeur.
-        return $result[0];
-    } catch (PDOException $e) {
-        return $e->getMessage();
-    }
-}
+//function get_game($id_joueur) {
+//    try {
+//        $db = openBDD(); //fonction pour ouvrir acces BDD
+//
+//        $bdd = $db->prepare('SELECT id_partie FROM games_data WHERE id_joueur = ?');
+//        $bdd->execute(array($id_joueur));
+//
+//        $result = $bdd->fetch(); // retourne sous forme d'un tableau la PREMIERE valeur.
+//        return $result[0];
+//    } catch (PDOException $e) {
+//        return $e->getMessage();
+//    }
+//}
 
 function get_games($id_joueur) {
     try {
@@ -241,12 +243,12 @@ function get_games($id_joueur) {
 //Paramètre d'entrée est l'id du joueur et son nouveau montants de P.A
 // Met a jour le montant des P.A d'un joueur.
 // Retourne eventuellement une exception si problème.
-function nouveau_montant_pa($id_joueur, $points_action) {
+function nouveau_montant_pa($id_joueur, $points_action, $id_partie) {
     try {
         $db = openBDD(); //fonction pour ouvrir acces BDD
 
-        $bdd = $db->prepare('UPDATE games_data SET points_action = ? WHERE id_joueur = ?');
-        $bdd->execute(array($points_action, $id_joueur));
+        $bdd = $db->prepare('UPDATE games_data SET points_action = ? WHERE id_joueur = ? AND id_partie= ?');
+        $bdd->execute(array($points_action, $id_joueur, $id_partie));
     } catch (PDOException $e) {
         return $e->getMessage();
     }
@@ -255,19 +257,20 @@ function nouveau_montant_pa($id_joueur, $points_action) {
 //Fonction pour simuler le tour suivant. [ADMIN]
 function tour_suivant() {
     reset_all_points_action();
+    echo get_points_action(get_current_user_id(), $_POST['id_partie']);
 }
 
 //prend en paramètre une position en #;#
 //va voir voir dans la bdd
 //retourne la liste des logins des joueurs sur la mêmes cellules, et des cellules aliées
 
-function get_ids_from_cell($position) {
+function get_ids_from_cell($position, $id_partie) {
 
     try {
         $db = openBDD(); //fonction pour ouvrir acces BDD
         //requete SQL
-        $bdd = $db->prepare('SELECT position , id_joueur FROM games_data WHERE id_partie = 1 AND position = ? ');
-        $bdd->execute(array($position));
+        $bdd = $db->prepare('SELECT position , id_joueur FROM games_data WHERE id_partie = ? AND position = ? ');
+        $bdd->execute(array($id_partie, $position));
         //le resultat objet en tableau
         $tmp = $bdd->fetchAll();
         //on créé 2 tableaux à partir du $tmp

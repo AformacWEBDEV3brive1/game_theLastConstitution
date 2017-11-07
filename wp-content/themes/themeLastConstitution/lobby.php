@@ -41,11 +41,10 @@
             <?php
             foreach (get_games(get_current_user_id()) as $value) {
                 echo $value[0];
-                ?> <br/>
-            <?php }
+               echo "<a href='index.php/jeu?id=" . $value[0] . "' > CACA </a><br/>";
+             }
             ?>
         </p>
 
-        <a href="index.php/jeu/" class="btn btn-danger" > GO !</a> // Dirigé vers la page UNIQUE du jeu (a changer car il va y avoir plusieurs parties).
     </body>
 </html>
