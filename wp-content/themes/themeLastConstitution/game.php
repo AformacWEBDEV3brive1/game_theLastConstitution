@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 
 
-<?php 
+<?php
 /* Template Name: jeu */
-
 ?>
 
 <html>
@@ -23,7 +22,7 @@
 
         <!-- custom css & js -->
         <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/custom/js/global.js"></script>
-         <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/custom/js/event_javascript.js"></script>
+        <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/custom/js/event_javascript.js"></script>
         <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/style.css" />
         <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/sass/style.css" />
     </head>
@@ -32,22 +31,9 @@
 
         <?php
         get_template_part("../../plugins/game_plugin/process_general.php");
-//        $position_joueurs = explode(";", get_position());
-//        //echo(get_position());
-//        $position_x = $position_joueurs[0];
-//        $position_y = $position_joueurs[1];
-//
-//        $ma_position1 = explode(";", get_position());
-//        // echo get_position();
-//        $position_a = $ma_position1[0];
-//        $position_b = $ma_position1[1];
-//        //print_r(get_id_mate(1, 1));
-//        // print_r(get_id_mate(1, 2));
-        // echo get_game(get_current_user_id());
-        
-  
+
+
         get_template_part("../../plugins/game_plugin/process_event.php");
-//        
         ?>
 
 
@@ -157,7 +143,7 @@
                         $pos = get_position();
                         $pos_allies = get_position(true);
                         $tableau_position_joueur = get_id_mate(get_game(get_current_user_id()), get_team(get_current_user_id()));  //get_position(true);
-                        //error_log($tableau_position_joueur);
+
 
                         for ($y = 0; $y < 20; $y++):
                             ?>
@@ -175,7 +161,7 @@
                                                 foreach ($pos_allies as $value) {
                                                     $all_pos = $value["position"];
                                                     if ($all_pos == $x . ';' . $y) {
-                                                        echo $all_pos." ";
+                                                        echo $all_pos . " ";
                                                     }
                                                 }
 
@@ -184,12 +170,7 @@
                                                 break;
                                             }
                                         }
-//                                        if ($position_x == $x && $position_y == $y) {
-//                                            echo '<div class="text-center perso"> X </div>';
-//                                        }
-//                                             if ($position_a == $x && $position_b == $y) {
-//                                             echo '<div class="text-center perso"> O </div>';
-//                                         } 
+
                                         if ($x == 0 && $y == 0) {
                                             echo "<div class='ville_map'></div>";
                                         }
@@ -210,7 +191,7 @@
             <button type="submit" class="btn btn-secondary" onclick="tour_suivant()" > Tour suivant </button>
             <p id="resultat"></p>
         </div>
-    
+
     </body>
 
 </html>
