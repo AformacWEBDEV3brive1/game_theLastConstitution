@@ -65,7 +65,7 @@ function event_check_position($id_partie) {
     }
 }
 
-;
+
 
 
 
