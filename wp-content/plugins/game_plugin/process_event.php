@@ -14,13 +14,6 @@ if(isset($_POST['position']) && isset($_POST['info'])){
     }
 
 
-else if (isset($_POST['info'])) {
-    $info = $_POST['info'];
-    $info(1);
-    
-}
-
-
 function count_test(){
     $db = openBDD();
      $bdd = $db->prepare('select count(*) from events');

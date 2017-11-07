@@ -4,7 +4,6 @@ function move(id) {
         type: 'post',
         data: {info: 'move', new_position: coo},
         success: function (output) {
-            
             if (output.trim() == "false") {
                 $('#resultat').html("Pas assez de points d'action !");
             } else {
@@ -13,10 +12,10 @@ function move(id) {
                 $('#position').load('index.php #position');
                 event_game(id);
             }
-            
+
         }
     });
-   
+
 }
 
 function tour_suivant() {
@@ -88,13 +87,13 @@ function show_menu(id_menu) {
 }
 function event(id) {
 
-    
+
     $.ajax({url: '../../wp-content/plugins/game_plugin/process_event.php',
         type: 'post',
         data: {info: 'event_check_position'},
         success: function (output) {
             alert(output);
-           
+
         }
     });
 

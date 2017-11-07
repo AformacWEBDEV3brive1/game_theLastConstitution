@@ -18,12 +18,9 @@ if (isset($_POST['position']) && isset($_POST['info'])) {
     $info = $_POST['info'];
     $info();
 }
-
 //Prend en entrée l'ID d'un joueur.
 // retourne le nombre de points d'action d'un joueur ou une exception.
 function get_points_action($id_joueur) {
-    error_log(__FUNCTION__);
-
     try {
         //error_log("debut try get_points_action");
         $db = openBDD(); //fonction pour ouvrir acces BDD
