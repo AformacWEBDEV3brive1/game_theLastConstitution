@@ -5,15 +5,19 @@ function move(id, id_partie) {
         type: 'post',
         data: {info: 'move', new_position: coo, id_partie: id_partie},
         success: function (output) {
+            
             if (output.trim() == "false") {
                 $('#resultat').html("Pas assez de points d'action !");
             } else {
                 $('#grille').load('?id=' + $.trim(output) + ' #grille');
                 $('#points_action').load('?id=' + $.trim(output) + ' #points_action');
                 $('#position').load('?id=' + $.trim(output) + ' #position');
+                event_game(id);
             }
+            
         }
     });
+   
 }
 
 function tour_suivant(id_partie) {
@@ -83,4 +87,17 @@ function show_menu(id_menu) {
         $("#ville").addClass("hidden");
         $("#inventaire").addClass("hidden");
     }
+}
+function event(id) {
+
+    
+    $.ajax({url: '../../wp-content/plugins/game_plugin/process_event.php',
+        type: 'post',
+        data: {info: 'event_check_position'},
+        success: function (output) {
+            alert(output);
+           
+        }
+    });
+
 }

@@ -5,8 +5,9 @@
  */
 
 include_once 'parameters/parameters.php';
+include_once 'process_event.php';
 
-// débeugeur de Wordpress.
+// intégration function wordpress.
 require_once( explode("wp-content", __FILE__)[0] . "wp-load.php" );
 
 
@@ -23,10 +24,7 @@ if (isset($_POST['position']) && isset($_POST['info'])) {
 //Prend en entrée l'ID d'un joueur.
 // retourne le nombre de points d'action d'un joueur ou une exception.
 function get_points_action($id_joueur, $id_partie) {
-    //error_log(__FUNCTION__);
-
     try {
-        //error_log("debut try get_points_action");
         $db = openBDD(); //fonction pour ouvrir acces BDD
 
         $bdd = $db->prepare('SELECT points_action FROM games_data WHERE id_joueur = ? AND id_partie = ?');
@@ -66,7 +64,7 @@ function get_position($all = false, $id_partie) {
     } else {
         try {
             $db = openBDD(); //fonction pour ouvrir acces BDD
-           // $current_id_user = get_current_user_id();
+            // $current_id_user = get_current_user_id();
             //$id_partie = get_game($current_id_user);
             //$equipe = get_team($current_id_user);
             //$id_mate = get_id_mate($id_partie, $equipe);
@@ -121,20 +119,17 @@ function move() {
     if (isset($_POST['new_position'])) {
         $id_joueur = get_current_user_id();
         $new_position = $_POST['new_position'];
-        if(isset($_POST['id_partie'])){
+        if (isset($_POST['id_partie'])) {
             $id_partie = $_POST['id_partie'];
         }
-        // error_log("joueur : " . $id_joueur, 0);
-        // error_log("next position : " . $new_position, 0);
+
         if (check_move($id_joueur, $new_position, $id_partie)) {
             set_position($id_joueur, $new_position, $id_partie);
-            //echo get_position(false, $id_partie);
-            //echo get_points_action($id_joueur, $id_partie);
+            event_check_position(1);
             echo $_POST["id_partie"];
         } else {
-            // return false;
+
             echo "false";
-            //  error_log("move pas ok", 0);
         }
     }
 }
@@ -301,16 +296,14 @@ function get_logins_from_ids($res) {
     return $tab_username;
 }
 
-function login_redirection($redirect_to, $request, $user)
-{
-    if($user->roles != null){
-    //error_log($user->roles[0]);
-    if($user->roles[0] != "administrator")
-    {
-        return "index.php/lobby";
+function login_redirection($redirect_to, $request, $user) {
+    if ($user->roles != null) {
+        //error_log($user->roles[0]);
+        if ($user->roles[0] != "administrator") {
+            return "index.php/lobby";
+        }
+        return get_dashboard_url();
     }
-    return get_dashboard_url();
-}
 }
 
 add_filter('login_redirect', 'login_redirection', 10, 3);
@@ -329,7 +322,7 @@ function create_random_event($id_partie) {
 
             $bdd = $db->prepare('SELECT position FROM events WHERE id_partie = ? AND position = ?');
             $bdd->execute(array($id_partie, $position));
-            
+
             $tmp = null;
             $tmp = $bdd->fetchAll();
 
@@ -351,7 +344,5 @@ function create_random_event($id_partie) {
 
         $bdd = $db->prepare("INSERT INTO `events`( `id_partie`,`type`, `position`,  `valeur`) VALUES (?, ?, ?, 10)");
         $bdd->execute(array($id_partie, $type, $position));
-
     }
 }
-

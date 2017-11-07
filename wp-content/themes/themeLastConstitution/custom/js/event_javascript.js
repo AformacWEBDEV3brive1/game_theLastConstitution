@@ -1,7 +1,31 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//function event_game(id) {
+//
+//    
+//    $.ajax({url: '../../wp-content/plugins/game_plugin/process_event.php',
+//        type: 'post',
+//        data: {info: 'event_check_position', },
+//        success: function (output) {
+//            if(!$.trim(output)){
+//                
+//            }else{
+//                alert(output);
+//            }
+//          
+//        }
+//    });
+//
+//}
 
-
+//jQuery(".cellule").on("click", function(){
+//    alert("caca");
+//    
+//     
+//    $.ajax({url: '../../wp-content/plugins/game_plugin/process_event.php',
+//        type: 'post',
+//        data: {info: 'event_check_position'},
+//        success: function (output) {
+//            alert(output);
+//           
+//        }
+//    });
+//});
