@@ -7,11 +7,6 @@
  include_once 'process_general.php';
 require_once( explode("wp-content", __FILE__)[0] . "wp-load.php" );
 
-if(isset($_POST['position']) && isset($_POST['info'])){
-        $info = $_POST['info'];
-        $position = $_POST['position'];
-        $info(1);
-    }
 
 
 function count_test(){
@@ -56,9 +51,7 @@ function event_delete($id_partie = false, $position = false){
         } 
         
 function event_check_position($id_partie){
-    
-    
-    $position_joueur = get_position();
+    $position_joueur = get_position(false, $id_partie);
     $place_event = check_event($id_partie);   
     foreach($place_event as $value){
         error_log("VALUE 0: " . $value[0]);
@@ -68,9 +61,8 @@ function event_check_position($id_partie){
         {
             echo "event MORTELOS";
             error_log("EVENT!!!!!!");
-        }
-       
-    };
+        }  
+    }
    
     
 }
