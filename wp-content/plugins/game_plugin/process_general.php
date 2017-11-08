@@ -10,21 +10,33 @@ include_once 'parameters/parameters.php';
 // intégration function wordpress.
 require_once( explode("wp-content", __FILE__)[0] . "wp-load.php" );
 
-
-if (isset($_POST['position']) && isset($_POST['id_partie'])) {
+if(isset($_POST["php_function_file"])){
+    if($_POST["php_function_file"] == "process_general.php"){
+        if( $_POST["info"] == "move"){
+           move($_POST["id_partie"], $_POST["new_position"]);
+        }    
+    }else if($_POST["php_function_file"] == "process_event.php"){
+        if( $_POST["info"] == "event_check_position"){
+           event_check_position($_POST["id_partie"]);
+        }   
+    }
+}else if (isset($_POST['position']) && isset($_POST['id_partie'])) {
     $info = $_POST['info'];
     $position = $_POST['position'];
     $id_partie = $_POST['id_partie'];
     $info($position,$id_partie);
+    
 } else if (isset($_POST['id_partie'])) {
     $info = $_POST['info'];
     $id_partie = $_POST['id_partie'];
     $info($id_partie);
+    
 } else if (isset($_POST['position'])) {
     $info = $_POST['info'];
     $position = $_POST['position'];
     $id_partie = $_POST['id_partie'];
     $info($position, $id_partie);
+    
 } else if (isset($_POST['info'])) {
     $info = $_POST['info'];
     $info();
@@ -111,23 +123,16 @@ function delete_partie($id_partie) {
 //alors appelle set_postion.
 // l'id du joueur sera le joueur connecté (get_current_user_id()).
 
-function move() {
-    if (isset($_POST['new_position'])) {
+function move($id_partie, $new_position) {
         $id_joueur = get_current_user_id();
-        $new_position = $_POST['new_position'];
-        if (isset($_POST['id_partie'])) {
-            $id_partie = $_POST['id_partie'];
-        }
 
         if (check_move($id_joueur, $new_position, $id_partie)) {
             set_position($id_joueur, $new_position, $id_partie);
-            event_check_position(1);
             echo $_POST["id_partie"];
         } else {
 
             echo "false";
         }
-    }
 }
 
 // Paramètres d'entrée: id_joueur et nouvelle_position (sous la forme x;y)
@@ -200,21 +205,6 @@ function get_team($id_joueur, $id_partie) {
     }
 }
 
-//Si un joueur peut etre dans plusieurs parties, cette fonction ne sert à rien (est utilisé dans game.php).
-//function get_game($id_joueur) {
-//    try {
-//        $db = openBDD(); //fonction pour ouvrir acces BDD
-//
-//        $bdd = $db->prepare('SELECT id_partie FROM games_data WHERE id_joueur = ?');
-//        $bdd->execute(array($id_joueur));
-//
-//        $result = $bdd->fetch(); // retourne sous forme d'un tableau la PREMIERE valeur.
-//        return $result[0];
-//    } catch (PDOException $e) {
-//        return $e->getMessage();
-//    }
-//}
-
 function get_games($id_joueur) {
     try {
         $db = openBDD(); //fonction pour ouvrir acces BDD
@@ -256,8 +246,6 @@ function tour_suivant() {
 //retourne la liste des logins des joueurs sur la mêmes cellules, et des cellules aliées
 
 function get_ids_from_cell($position, $id_partie) {
-    error_log($position."-------------------------------------".$id_partie);
-    //error_log(debug_backtrace()[1]['function']);
     try {
         $db = openBDD(); //fonction pour ouvrir acces BDD
         //requete SQL

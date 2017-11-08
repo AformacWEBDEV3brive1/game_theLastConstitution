@@ -3,7 +3,7 @@ function move(id, id_partie) {
     var coo = id.className.split(' ')[0];
     $.ajax({url: '../../wp-content/plugins/game_plugin/process_general.php',
         type: 'post',
-        data: {info: 'move', new_position: coo, id_partie: id_partie},
+        data: {info: 'move', new_position: coo, id_partie: id_partie, php_function_file:"process_general.php"},
         success: function (output) {
 
             if (output.trim() == "false") {
@@ -35,7 +35,6 @@ function tour_suivant(id_partie) {
 function display_pseudo_oncell(id, id_partie) {
     var id_partie=1;
     var coo = id.className.split(' ')[0];
-    console.log(coo);
     $.ajax({url: '../../wp-content/plugins/game_plugin/process_general.php',
         type: 'post',
         data: {info: 'get_ids_from_cell', position: coo, id_partie: id_partie},
