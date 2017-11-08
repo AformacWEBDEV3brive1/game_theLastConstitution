@@ -5,13 +5,12 @@ function event_game(id) {
         type: 'post',
         data: {info: 'event_check_position', id_partie: id_partie},
         success: function (output) {
-            if (!$.trim(output)) {
+            if (output=='') {
                 //ne fait rien si pas d'event
             } else {
                 var tab = JSON.parse(output);
                 alert("le résultat de l'event est de " + tab[0]["type"] + tab[0]["valeur"]);
             }
-            var position = id.className.split(' ')[0];
 
         }
     });

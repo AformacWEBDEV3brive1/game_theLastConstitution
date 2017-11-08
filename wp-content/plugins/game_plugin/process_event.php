@@ -39,7 +39,7 @@ function event_delete($id_partie = false, $position = false) {
 
 function event_check_position($id_partie) {
 
-    $position_joueur = get_position();
+    $position_joueur = get_position(false,$id_partie);
     $place_event = check_event($id_partie);
 
     $json = "";
@@ -56,11 +56,11 @@ function event_check_position($id_partie) {
         }
     }
     if ($json != "") {
-        event_delete($id_partie, $position_joueur);
+        //event_delete($id_partie, $position_joueur);
         echo $json;
         
     } else {
-        echo 'test';
+        echo '';
        
     }
 }
