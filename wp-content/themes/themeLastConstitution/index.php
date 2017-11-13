@@ -13,11 +13,10 @@
  * @since Shape 1.0
  */
 
-
 if(is_user_logged_in())
 {
-header("Location: index.php/lobby");
-die();
+    wp_redirect(get_permalink(get_page_by_title('lobby')));
+    exit;
 }
 
 ?>

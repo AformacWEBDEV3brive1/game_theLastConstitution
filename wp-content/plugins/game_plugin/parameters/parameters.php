@@ -3,7 +3,6 @@ $connexion_string = "mysql:dbname=gameTheLastConstitution;host=127.0.0.1;charset
 $login = "root";
 $mdp = "mega6*3zd";
 
-
 function openBDD()
 {
     global $connexion_string;
