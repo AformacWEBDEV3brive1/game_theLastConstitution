@@ -86,16 +86,3 @@ function show_menu(id_menu) {
         $("#inventaire").addClass("hidden");
     }
 }
-function event(id) {
-
-    
-    $.ajax({url: '../../wp-content/plugins/game_plugin/process_event.php',
-        type: 'post',
-        data: {info: 'event_check_position'},
-        success: function (output) {
-            alert(output);
-           
-        }
-    });
-
-}

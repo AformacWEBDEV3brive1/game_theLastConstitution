@@ -68,9 +68,9 @@ function event_check_position($id_partie){
     $position_joueur = get_position();
     $place_event = check_event($id_partie);   
     foreach($place_event as $value){
-        error_log("VALUE 0: " . $value[0]);
-        error_log(get_current_user_id());
-        error_log("POSITION JOUEUR: " . $position_joueur);
+//        error_log("VALUE 0: " . $value[0]);
+//        error_log(get_current_user_id());
+//        error_log("POSITION JOUEUR: " . $position_joueur);
         if ($value[0] == $position_joueur)
         {
             echo "event MORTELOS";

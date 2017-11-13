@@ -10,14 +10,14 @@ include_once 'parameters/parameters.php';
 require_once( explode("wp-content", __FILE__)[0] . "wp-load.php" );
 
 
-if (isset($_POST['position']) && isset($_POST['info'])) {
-    $info = $_POST['info'];
-    $position = $_POST['position'];
-    $info($position);
-} else if (isset($_POST['info'])) {
-    $info = $_POST['info'];
-    $info();
-}
+//if (isset($_POST['position']) && isset($_POST['info'])) {
+//    $info = $_POST['info'];
+//    $position = $_POST['position'];
+//    $info($position);
+//} else if (isset($_POST['info'])) {
+//    $info = $_POST['info'];
+//    $info();
+//}
 
 //Prend en entrée l'ID d'un joueur.
 // retourne le nombre de points d'action d'un joueur ou une exception.
