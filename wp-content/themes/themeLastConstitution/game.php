@@ -29,12 +29,12 @@
 
     <body>
 
-        <?php
-        get_template_part("../../plugins/game_plugin/process_general.php");
-        $id_partie_get;
-        if (isset($_GET['id'])) {
-            $id_partie_get = $_GET['id'];
-        }
+<?php
+    get_template_part("../../plugins/game_plugin/process_general.php");
+    //$id_partie_get;
+    if (isset($_GET['id'])) {
+    $id_partie_get = $_GET['id'];
+}
 
         get_template_part("../../plugins/game_plugin/process_event.php");
         ?>
@@ -82,9 +82,10 @@
                                 <div>
                                     <p> Vous avez: 
                                         <span id="points_action">
-                                            <?php
-                                            echo get_points_action(get_current_user_id(), $id_partie_get);
-                                            ?> 
+                                        <?php
+                                        echo get_points_action(get_current_user_id(), $id_partie_get);
+                                      
+                                        ?> 
                                         </span> points d'action.
                                     </p>
 

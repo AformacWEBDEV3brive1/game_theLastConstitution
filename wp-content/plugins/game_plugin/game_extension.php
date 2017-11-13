@@ -2,16 +2,15 @@
 
 /*
 
-Plugin Name: Insertion des tables
+  Plugin Name: Insertion des tables
 
-*/
+ */
 
-include_once( plugin_dir_path( __FILE__ ) . 'parameters/parameters.php');
+include_once( plugin_dir_path(__FILE__) . 'parameters/parameters.php');
 
+function create_table() {
 
-function create_table(){
-    
-     $wpdb = openBDD();
+    $wpdb = openBDD();
 
     $wpdb->query("CREATE TABLE IF NOT EXISTS games_data (
   `id_joueur` int NOT NULL,
@@ -22,9 +21,6 @@ function create_table(){
  
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
-  
-
 CREATE TABLE `games_metadata` (
   `id_partie` int NOT NULL,
   `start` timestamp NOT NULL
@@ -33,7 +29,7 @@ CREATE TABLE `games_metadata` (
 
 CREATE TABLE `events` (
   `id_partie` int NOT NULL,
-  `type` int NOT NULL,
+  `type`  enum('+','-') NOT NULL,
   `position` VARCHAR(8) NOT NULL,
   `valeur` int NOT NULL
   
@@ -131,24 +127,16 @@ INSERT INTO `batiments` (`id`, `id_partie`, `equipe`, `xp`, `niveau`, `type`) VA
 
 
 ");
-
 }
 
-    
-
-function drop_table(){
+function drop_table() {
     $wpdb = openBDD();
 
     
     $wpdb->query("DROP TABLES IF EXISTS games_data, games_metadata, events, level_batiments, batiments, type_batiments");
 }
 
-
-
-
 register_activation_hook(__FILE__, 'create_table');
-
-
 
 register_deactivation_hook(__FILE__, 'drop_table');
 ?>
