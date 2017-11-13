@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <?php
@@ -30,12 +31,32 @@
 
 <?php
     get_template_part("../../plugins/game_plugin/process_general.php");
-    $id_partie_get;
-    if (isset($_GET['id'])) {
-    $id_partie_get = $_GET['id'];
-}
-
-get_template_part("../../plugins/game_plugin/process_event.php");
+    get_template_part("../../plugins/game_plugin/process_event.php");
+    
+    if(is_user_logged_in())
+    {
+        $id_partie_get;
+        if (isset($_GET['id'])) {
+            $id_partie_get = $_GET['id'];
+            
+            $parties = array();
+            foreach (get_games(get_current_user_id()) as $value) {
+                
+                array_push($parties, $value[0]);
+            }
+            
+            if(!in_array($id_partie_get, $parties))
+            {
+                wp_redirect(get_permalink(get_page_by_title('lobby')));
+                exit;
+            }
+        }
+    }
+    else
+    {
+        wp_redirect(home_url());
+        exit;
+    }
 ?>
 
         <h1 class="text-center"> Last Constitution </h1>
@@ -96,6 +117,7 @@ get_template_part("../../plugins/game_plugin/process_event.php");
                                         <span id="points_action">
                                         <?php
                                         echo get_points_action(get_current_user_id(), $id_partie_get);
+                                      
                                         ?> 
                                         </span> points d'action.
                                     </p>
@@ -146,8 +168,6 @@ get_template_part("../../plugins/game_plugin/process_event.php");
                             $pos = get_position(false, $id_partie_get);
                             $pos_allies = get_position(true, $id_partie_get);
                             $tableau_position_joueur = get_id_mate($id_partie_get, get_team(get_current_user_id(), $id_partie_get));  //get_position(true);
-
-
                             for ($y = 0; $y < 20; $y++):
                                 ?>
                                 <div class=" row ">
@@ -157,9 +177,7 @@ get_template_part("../../plugins/game_plugin/process_event.php");
                                     foreach ($tableau_position_joueur as $value) {
                                         if ($x . ";" . $y == $value[1]) {
                                             echo '<div onclick="display_pseudo_oncell(this, ' . $id_partie_get . ')" id="';
-
                                             echo "joueur" . $value[0] . " ";
-
                                             echo '"class="';
                                             foreach ($pos_allies as $value) {
                                                 $all_pos = $value["position"];
@@ -167,8 +185,6 @@ get_template_part("../../plugins/game_plugin/process_event.php");
                                                     echo $all_pos . " ";
                                                 }
                                             }
-
-
                                             echo ' text-center perso"> X </div>';
                                             break;
                                         }
