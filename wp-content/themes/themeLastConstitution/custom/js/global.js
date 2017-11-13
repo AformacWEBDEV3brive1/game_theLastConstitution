@@ -33,7 +33,6 @@ function tour_suivant(id_partie) {
 }
 
 function display_pseudo_oncell(id, id_partie) {
-    var id_partie=1;
     var coo = id.className.split(' ')[0];
     $.ajax({url: '../../wp-content/plugins/game_plugin/process_general.php',
         type: 'post',

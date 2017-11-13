@@ -292,7 +292,12 @@ function login_redirection($redirect_to, $request, $user) {
 
 add_filter('login_redirect', 'login_redirection', 10, 3);
 
+
+
+//parametre : $id_partie
+//sort des chiffres aleatoires pour les positions et les types
 function create_random_event($id_partie) {
+    //definie le nombre d'event par partie
     $nb_events = 20;
 
     for ($i = 1; $i < $nb_events; $i++) {
@@ -302,6 +307,7 @@ function create_random_event($id_partie) {
             $x = rand(0, 19);
             $y = rand(0, 19);
 
+            //set la position X et Y
             $position = $x . ";" . $y;
 
             $bdd = $db->prepare('SELECT position FROM events WHERE id_partie = ? AND position = ?');
@@ -315,6 +321,7 @@ function create_random_event($id_partie) {
             }
         } while (isset($tmp[0]));
 
+        //definie le % de chance
         $type = rand(0, 100);
 
         if ($type > 50) {
