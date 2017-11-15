@@ -68,6 +68,33 @@ INSERT INTO `games_data` (`id_joueur`, `id_partie`, `position`, `points_action`,
 (6, 1, '5;2', 15, 2),
 (7, 1, '0;0', 15, 2);
 
+CREATE TABLE `game_player` (
+  
+  `id_joueur` int NOT NULL,
+  `id_partie` int NOT NULL,
+  `score_combat`int NOT NULL,
+  `score_rapidite` int NOT NULL
+  
+  
+  
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+
+
+CREATE TABLE `ville` (
+  `id` int NOT NULL
+  `id_partie` int NOT NULL,
+  `id_equipe` int NOT NULL,
+  `position_ville` VARCHAR(8) NOT NULL
+  
+  
+  
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `games_data`
+
+ADD PRIMARY KEY (id_joueur,id_partie);
 ");
 }
 
