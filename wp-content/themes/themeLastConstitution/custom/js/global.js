@@ -1,41 +1,43 @@
-function move(id) {
+
+function move(id, id_partie) {
     var coo = id.className.split(' ')[0];
     $.ajax({url: '../../wp-content/plugins/game_plugin/process_general.php',
         type: 'post',
-        data: {info: 'move', new_position: coo},
+        data: {info: 'move', new_position: coo, id_partie: id_partie, php_function_file:"process_general.php"},
         success: function (output) {
-            
+
             if (output.trim() == "false") {
                 $('#resultat').html("Pas assez de points d'action !");
             } else {
-                $('#grille').load('index.php #grille');
-                $('#points_action').load('index.php #points_action');
-                $('#position').load('index.php #position');
+                $('#grille').load('?id=' + $.trim(output) + ' #grille');
+                $('#points_action').load('?id=' + $.trim(output) + ' #points_action');
+                $('#position').load('?id=' + $.trim(output) + ' #position');
                 event_game(id);
             }
-            
+
         }
     });
-   
+
 }
 
-function tour_suivant() {
+function tour_suivant(id_partie) {
     $.ajax({url: '../../wp-content/plugins/game_plugin/process_general.php',
         type: 'post',
-        data: {info: 'tour_suivant'},
+        data: {info: 'tour_suivant', id_partie: id_partie},
         success: function (output) {
             $('#resultat').html("action effectuée !!");
-            $('#points_action').load('index.php #points_action');
+            $('#points_action').html(output);
+
         }
     });
 }
 
-function display_pseudo_oncell(id) {
-
+function display_pseudo_oncell(id, id_partie) {
+    var id_partie=1;
     var coo = id.className.split(' ')[0];
     $.ajax({url: '../../wp-content/plugins/game_plugin/process_general.php',
         type: 'post',
-        data: {info: 'get_ids_from_cell', position: coo},
+        data: {info: 'get_ids_from_cell', position: coo, id_partie: id_partie},
         success: function (output) {
             $('#zoneJoueur').html(output);
         }
@@ -57,45 +59,39 @@ function name_cell() {
 
 }
 function show_menu(id_menu) {
-    // console.log(id_menu);
     if (id_menu == "ville") {
-        //   console.log("Click VILLE");
         $("#ville").removeClass("hidden");
         $("#chat").addClass("hidden");
         $("#inventaire").addClass("hidden");
         $("#zone").addClass("hidden");
 
     } else if (id_menu == "inventaire") {
-        // console.log("Click INVENTAIRE");
         $("#inventaire").removeClass("hidden");
         $("#chat").addClass("hidden");
         $("#ville").addClass("hidden");
         $("#zone").addClass("hidden");
 
     } else if (id_menu == "chat") {
-        // console.log("Click CHAT");
         $("#chat").removeClass("hidden");
         $("#ville").addClass("hidden");
         $("#inventaire").addClass("hidden");
         $("#zone").addClass("hidden");
     } else if (id_menu == "zone") {
-        // console.log("Click ZONE");
         $("#zone").removeClass("hidden");
         $("#chat").addClass("hidden");
         $("#ville").addClass("hidden");
         $("#inventaire").addClass("hidden");
     }
 }
-function event(id) {
 
-    
-    $.ajax({url: '../../wp-content/plugins/game_plugin/process_event.php',
+function delete_partie(id_partie) {
+    $.ajax({url: '../../wp-content/plugins/game_plugin/process_general.php',
         type: 'post',
-        data: {info: 'event_check_position'},
+        data: {info: 'delete_partie', id_partie: id_partie},
         success: function (output) {
-            alert(output);
-           
+            $('#resultat').html("action effectuée !!");
+            $('#points_action').html(output);
+
         }
     });
-
 }

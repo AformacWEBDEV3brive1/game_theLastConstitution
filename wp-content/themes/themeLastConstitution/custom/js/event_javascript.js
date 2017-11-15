@@ -1,31 +1,19 @@
 function event_game(id) {
-
-    
-    $.ajax({url: '../../wp-content/plugins/game_plugin/process_event.php',
+    var position = id.className.split(' ')[0];
+    var id_partie = 1;
+    $.ajax({url: '../../wp-content/plugins/game_plugin/process_general.php',
         type: 'post',
-        data: {info: 'event_check_position'},
+        data: {info: 'event_check_position', id_partie: id_partie, php_function_file: "process_event.php"},
         success: function (output) {
-            if(!$.trim(output)){
-                
-            }else{
-                alert(output);
+            if (output=='') {
+                //ne fait rien si pas d'event
+            } else {
+                var tab = JSON.parse(output);
+                alert("le résultat de l'event est de " + tab[0]["type"] + tab[0]["valeur"]);   
             }
-          
         }
     });
 
 }
 
-//jQuery(".cellule").on("click", function(){
-//    alert("caca");
-//    
-//     
-//    $.ajax({url: '../../wp-content/plugins/game_plugin/process_event.php',
-//        type: 'post',
-//        data: {info: 'event_check_position'},
-//        success: function (output) {
-//            alert(output);
-//           
-//        }
-//    });
-//});
+
