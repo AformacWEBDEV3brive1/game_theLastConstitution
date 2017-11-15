@@ -211,7 +211,12 @@
         </div>
 
         <div id="admin">
-            <button type="submit" class="btn btn-secondary" onclick="tour_suivant(<?php echo $id_partie_get ?>)" > Tour suivant </button>
+            <button type="submit" class="btn btn-secondary" onclick="tour_suivant(<?php echo $id_partie_get ?>)" > Partie suivante </button>
+            <p id="resultat"></p>
+        </div>
+        
+        <div id="admin2">
+            <button type="submit" class="btn btn-secondary" onclick="delete_partie(<?php echo $id_partie_get ?>)" > Supprime partie </button>
             <p id="resultat"></p>
         </div>
 

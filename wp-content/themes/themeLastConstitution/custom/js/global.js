@@ -33,7 +33,6 @@ function tour_suivant(id_partie) {
 }
 
 function display_pseudo_oncell(id, id_partie) {
-    var id_partie=1;
     var coo = id.className.split(' ')[0];
     $.ajax({url: '../../wp-content/plugins/game_plugin/process_general.php',
         type: 'post',
@@ -82,4 +81,16 @@ function show_menu(id_menu) {
         $("#ville").addClass("hidden");
         $("#inventaire").addClass("hidden");
     }
+}
+
+function delete_partie(id_partie) {
+    $.ajax({url: '../../wp-content/plugins/game_plugin/process_general.php',
+        type: 'post',
+        data: {info: 'delete_partie', id_partie: id_partie},
+        success: function (output) {
+            $('#resultat').html("action effectuée !!");
+            $('#points_action').html(output);
+
+        }
+    });
 }
