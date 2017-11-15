@@ -12,7 +12,7 @@ function move(id, id_partie) {
                 $('#grille').load('?id=' + $.trim(output) + ' #grille');
                 $('#points_action').load('?id=' + $.trim(output) + ' #points_action');
                 $('#position').load('?id=' + $.trim(output) + ' #position');
-//                event_game(id);
+                event_game(id);
             }
 
         }
