@@ -3,6 +3,9 @@ $connexion_string = "mysql:dbname=game_theLastConstitution_wp;host=127.0.0.1;cha
 $login = "root";
 $mdp = "limogescsp";
 
+
+
+
 function openBDD()
 {
     global $connexion_string;
