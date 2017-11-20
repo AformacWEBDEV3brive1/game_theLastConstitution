@@ -23,42 +23,39 @@
         <!-- custom css & js -->
         <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/custom/js/global.js"></script>
         <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/custom/js/event_javascript.js"></script>
+        <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/custom/js/building_javascript.js"></script>
         <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/style.css" />
         <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/sass/style.css" />
     </head>
 
-    <body>
 
-<?php
+
+    <?php
     get_template_part("../../plugins/game_plugin/process_general.php");
     get_template_part("../../plugins/game_plugin/process_event.php");
-    
-    if(is_user_logged_in())
-    {
+
+    if (is_user_logged_in()) {
         $id_partie_get;
         if (isset($_GET['id'])) {
             $id_partie_get = $_GET['id'];
-            
+
             $parties = array();
             foreach (get_games(get_current_user_id()) as $value) {
-                
+
                 array_push($parties, $value[0]);
             }
-            
-            if(!in_array($id_partie_get, $parties))
-            {
+
+            if (!in_array($id_partie_get, $parties)) {
                 wp_redirect(get_permalink(get_page_by_title('lobby')));
                 exit;
             }
         }
-    }
-    else
-    {
+    } else {
         wp_redirect(home_url());
         exit;
     }
-?>
-
+    ?>
+    <body onload="display_info_bat(<?php echo $id_partie_get ?>)">
         <h1 class="text-center"> Last Constitution </h1>
 
         <div class="container">
@@ -80,24 +77,30 @@
                             <div id="ville"> 
                                 <h2 class="text-center"> Ville </h2>
                                 <div class="row justify-content-around">
-                                    <div class="batiment col-3"> </div>
-                                    <div class="batiment col-3"> </div>
-                                    <div class="batiment col-3"> </div>
-
-                                </div>
-
-                                <div class="row justify-content-around">
-                                    <div class="batiment col-3 "> </div>
-                                    <div class="batiment col-3 "> </div>
-                                    <div class="batiment col-3 "> </div>
-
-                                </div>
-
-                                <div class="row justify-content-around">
-                                    <div class="batiment col-3 "> </div>
-                                    <div class="batiment col-3 "> </div>
-                                    <div class="batiment col-3"> </div>
-
+                                    <div class="batiment caserne col-6">
+                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <p>xp = <span class="xp"></span></p>
+                                        <p>type = <span class="type"></span></p>
+                                        <p>niveau = <span class="level"></span></p>
+                                    </div>
+                                    <div class="batiment banque col-6">
+                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <p>xp = <span class="xp"></span></p>
+                                        <p>type = <span class="type"></span></p>
+                                        <p>niveau = <span class="level"></span></p>
+                                    </div>
+                                    <div class="batiment maison col-6">
+                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <p>xp = <span class="xp"></span></p>
+                                        <p>type = <span class="type"></span></p>
+                                        <p>niveau = <span class="level"></span></p>
+                                    </div>
+                                    <div class="batiment hopital col-6">
+                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <p>xp = <span class="xp"></span></p>
+                                        <p>type = <span class="type"></span></p>
+                                        <p>niveau = <span class="level"></span></p>
+                                    </div>
                                 </div>
                             </div>
 
@@ -105,20 +108,19 @@
                                 <h2 class="text-center"> Etat </h2>
                                 <div id="pseudo">
                                     <p>Pseudo:
-                                    <?php
-                                    $current_user = wp_get_current_user();
-                                    echo $current_user->user_login;
-                                    ?> 
+                                        <?php
+                                        $current_user = wp_get_current_user();
+                                        echo $current_user->user_login;
+                                        ?> 
                                     </p>
 
                                 </div>
                                 <div>
                                     <p> Vous avez: 
                                         <span id="points_action">
-                                        <?php
-                                        echo get_points_action(get_current_user_id(), $id_partie_get);
-                                      
-                                        ?> 
+                                            <?php
+                                            echo get_points_action(get_current_user_id(), $id_partie_get);
+                                            ?> 
                                         </span> points d'action.
                                     </p>
 
@@ -126,17 +128,17 @@
                                 <div id="num_team">
                                     <p> Vous êtes dans l'équipe
                                         <span class="team">
-                                        <?php
-                                        echo get_team(get_current_user_id(), $id_partie_get);
-                                        ?> 
+                                            <?php
+                                            echo get_team(get_current_user_id(), $id_partie_get);
+                                            ?> 
                                         </span>
                                     </p>
                                 </div>
                                 <div id="position">
                                     <p>Vous êtes en: 
-                                <?php
-                                echo get_position(false, $id_partie_get);
-                                ?>
+                                        <?php
+                                        echo get_position(false, $id_partie_get);
+                                        ?>
                                     </p>
                                 </div>
 
@@ -171,35 +173,35 @@
                             for ($y = 0; $y < 20; $y++):
                                 ?>
                                 <div class=" row ">
-                                <?php for ($x = 0; $x < 20; $x++): ?> 
+                                    <?php for ($x = 0; $x < 20; $x++): ?> 
                                         <div class="<?php echo $x ?><?php echo ';' . $y ?> cellule" onclick="move(this, <?php echo $id_partie_get ?>)">
-                                    <?php
-                                    foreach ($tableau_position_joueur as $value) {
-                                        if ($x . ";" . $y == $value[1]) {
-                                            echo '<div onclick="display_pseudo_oncell(this, ' . $id_partie_get . ')" id="';
-                                            echo "joueur" . $value[0] . " ";
-                                            echo '"class="';
-                                            foreach ($pos_allies as $value) {
-                                                $all_pos = $value["position"];
-                                                if ($all_pos == $x . ';' . $y) {
-                                                    echo $all_pos . " ";
+                                            <?php
+                                            foreach ($tableau_position_joueur as $value) {
+                                                if ($x . ";" . $y == $value[1]) {
+                                                    echo '<div onclick="display_pseudo_oncell(this, ' . $id_partie_get . ')" id="';
+                                                    echo "joueur" . $value[0] . " ";
+                                                    echo '"class="';
+                                                    foreach ($pos_allies as $value) {
+                                                        $all_pos = $value["position"];
+                                                        if ($all_pos == $x . ';' . $y) {
+                                                            echo $all_pos . " ";
+                                                        }
+                                                    }
+                                                    echo ' text-center perso"> X </div>';
+                                                    break;
                                                 }
                                             }
-                                            echo ' text-center perso"> X </div>';
-                                            break;
-                                        }
-                                    }
-                                    if ($x == 0 && $y == 0) {
-                                        echo "<div class='ville_map'></div>";
-                                    }
-                                    ?>
+                                            if ($x == 0 && $y == 0) {
+                                                echo "<div class='ville_map'></div>";
+                                            }
+                                            ?>
                                         </div>
-                                        <?php endfor; ?>
+                                    <?php endfor; ?>
                                 </div>
-                                        <?php
-                                    endfor;
-                                }
-                                ?>
+                                <?php
+                            endfor;
+                        }
+                        ?>
 
                     </div>
                 </div>
@@ -209,7 +211,12 @@
         </div>
 
         <div id="admin">
-            <button type="submit" class="btn btn-secondary" onclick="tour_suivant(<?php echo $id_partie_get ?>)" > Tour suivant </button>
+            <button type="submit" class="btn btn-secondary" onclick="tour_suivant(<?php echo $id_partie_get ?>)" > Partie suivante </button>
+            <p id="resultat"></p>
+        </div>
+        
+        <div id="admin2">
+            <button type="submit" class="btn btn-secondary" onclick="delete_partie(<?php echo $id_partie_get ?>)" > Supprime partie </button>
             <p id="resultat"></p>
         </div>
 

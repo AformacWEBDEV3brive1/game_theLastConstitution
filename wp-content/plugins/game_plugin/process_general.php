@@ -112,7 +112,7 @@ function delete_partie($id_partie) {
     try {
         $db = openBDD(); //fonction pour ouvrir acces BDD
 
-        $bdd = $db->prepare('DELETE FROM games_metadata WHERE id = ?');
+        $bdd = $db->prepare('DELETE FROM games_metadata WHERE id_partie = ?');
         $bdd->execute(array($id_partie));
     } catch (PDOException $e) {
         return $e->getMessage();
