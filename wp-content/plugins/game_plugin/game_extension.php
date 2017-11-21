@@ -156,7 +156,9 @@ CREATE TABLE `type_objet` (
 CREATE TABLE `class_objet` (
   
   `id_class` int NOT NULL,
-  `class_objet` VARCHAR(250) NOT NULL
+  `class_objet` VARCHAR(250) NOT NULL,
+  `id_type` int(11) NOT NULL,
+  `proba` int(11) DEFAULT NULL
  
   
   
@@ -167,7 +169,8 @@ CREATE TABLE `class_objet` (
 ALTER TABLE `class_objet`
 ADD PRIMARY KEY (class_objet),
 ADD KEY `class_objet` (`class_objet`),
-ADD KEY `id_class` (`id_class`);
+ADD KEY `id_class` (`id_class`),
+ADD KEY `id_type` (`id_type`);
 
 ALTER TABLE `coffre_ville`
 ADD PRIMARY KEY (id_objet);
@@ -175,19 +178,79 @@ ADD PRIMARY KEY (id_objet);
 ALTER TABLE `objet`
 ADD PRIMARY KEY (`id_objet`),
 ADD KEY `id_type` (`id_type`),
-ADD KEY `id_class` (`id_class`);
+ADD KEY `id_class` (`id_class`),
+MODIFY `id_objet` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `type_objet`
 ADD PRIMARY KEY (id_type);
 
-ALTER TABLE `class_objet`
-  ADD CONSTRAINT `class_objet_ibfk_1` FOREIGN KEY (`id_class`) REFERENCES `objet` (`id_class`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+  
+ALTER TABLE `objet`
+  ADD CONSTRAINT `objet_ibfk_1` FOREIGN KEY (`id_type`) REFERENCES `type_objet` (`id_type`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `objet_ibfk_2` FOREIGN KEY (`id_class`) REFERENCES `class_objet` (`id_class`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `coffre_ville`
-  ADD CONSTRAINT `coffreville_ibfk_1` FOREIGN KEY (`id_objet`) REFERENCES `objet` (`id_objet`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `coffre_ville_ibfk_1` FOREIGN KEY (`id_objet`) REFERENCES `objet` (`id_objet`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+ALTER TABLE `class_objet`
+  ADD CONSTRAINT `class_objet_ibfk_1` FOREIGN KEY (`id_type`) REFERENCES `type_objet` (`id_type`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+
+
+INSERT INTO `type_objet` (`id_type`, `type_objet`) VALUES
+(1, 'arme'),
+(2, 'protection'),
+(3, 'véhicule'),
+(4, 'nourriture');
   
-ALTER TABLE `type_objet`
-  ADD CONSTRAINT `type_objet_ibfk_1` FOREIGN KEY (`id_type`) REFERENCES `objet` (`id_type`) ON DELETE CASCADE ON UPDATE CASCADE;
+INSERT INTO `class_objet` (`id_class`, `class_objet`, `id_type`, `proba`) VALUES
+(1, 'pierre', 1, 50),
+(2, 'fer', 1, 70),
+(3, 'poudre noir', 1, 85),
+(4, 'laser', 1, 90),
+(5, 'atomique', 1, 95),
+(6, 'bois', 2, 50),
+(7, 'acier', 2, 70),
+(8, 'kevlar', 2, 85),
+(9, 'composite', 2, 90),
+(10, 'champ de force energetique', 2, 95),
+(11, 'vélo', 3, 50),
+(12, 'scooter', 3, 70),
+(13, 'voiture', 3, 85),
+(14, '4x4', 3, 90),
+(15, 'hélicoptère', 3, 95),
+(16, 'simple', 4, 50),
+(17, 'basique', 4, 70),
+(18, 'de bonne qualité', 4, 85),
+(19, 'de survie', 4, 90),
+(20, 'dopant', 4, 95);
+
+
+
+INSERT INTO `objet` (`id_objet`, `nom_objet`, `id_type`, `id_class`, `valeur_objet`) VALUES
+(1, 'masse', 1, 1, 10),
+(2, 'épée', 1, 2, 20),
+(3, 'fusil artisanal ', 1, 3, 30),
+(4, 'sabre', 1, 4, 40),
+(5, 'canon', 1, 5, 50),
+(6, 'bouclier', 2, 1, 10),
+(7, 'armure', 2, 2, 20),
+(8, 'plastron', 2, 3, 30),
+(9, 'combinaison', 2, 4, 40),
+(10, 'bouclier', 2, 5, 50),
+(11, 'nakamura', 3, 1, 10),
+(12, 'vespa', 3, 2, 20),
+(13, 'delorean', 3, 3, 30),
+(14, 'monster truck', 3, 4, 40),
+(15, 'apache', 3, 5, 50),
+(16, 'fruit', 4, 1, 10),
+(17, 'légume', 4, 2, 20),
+(18, 'viande', 4, 3, 30),
+(19, 'ration', 4, 4, 40),
+(20, 'capsule', 4, 5, 50);
 
 INSERT INTO `level_batiments` (`limite_xp`, `niveau`) VALUES 
 
