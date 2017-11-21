@@ -39,7 +39,7 @@
         <h1>C'EST LE LOBBY, ET TOI ?</h1>
 
 
-        <p> Votre DIVIN nom: 
+        <p> Votre ENORME nom: 
             <?php echo wp_get_current_user()->user_login; ?>
         </p>
 

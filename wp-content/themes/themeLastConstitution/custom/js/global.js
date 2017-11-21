@@ -82,3 +82,15 @@ function show_menu(id_menu) {
         $("#inventaire").addClass("hidden");
     }
 }
+
+function delete_partie(id_partie) {
+    $.ajax({url: '../../wp-content/plugins/game_plugin/process_general.php',
+        type: 'post',
+        data: {info: 'delete_partie', id_partie: id_partie},
+        success: function (output) {
+            $('#resultat').html("action effectuée !!");
+            $('#points_action').html(output);
+
+        }
+    });
+}

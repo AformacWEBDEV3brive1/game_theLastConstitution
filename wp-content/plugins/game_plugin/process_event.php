@@ -85,7 +85,7 @@ function event_check_position($id_partie) {
         event_delete($id_partie, $position_joueur);
         echo $json;
         
-    } else {
+            }else {
         echo '';
        
     }

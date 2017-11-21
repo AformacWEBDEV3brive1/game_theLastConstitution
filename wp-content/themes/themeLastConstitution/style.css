@@ -12,10 +12,10 @@ Description: Theme last constitution
 
 .batiment{
     border: solid 2px black;
-    height: 80px;
+    /*height: 80px;
     width: 50px;
     margin-bottom: 50px;
-    margin-top: 20px;
+    margin-top: 20px;*/
 }
 
 .cellule{
@@ -44,4 +44,9 @@ Description: Theme last constitution
     left:0px;
     z-index:-1;
 
+}
+.potition_button
+{
+    margin-left:  150px;
+    margin-top: -105px;
 }
