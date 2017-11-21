@@ -211,7 +211,7 @@
         </div>
 
         <div id="admin">
-            <button type="submit" class="btn btn-secondary" onclick="tour_suivant(<?php echo $id_partie_get ?>)" > Partie suivante </button>
+            <button type="submit" class="btn btn-secondary" onclick="tour_suivant(<?php echo $id_partie_get ?>)" > Tour suivant </button>
             <p id="resultat"></p>
         </div>
         
