@@ -12,7 +12,7 @@ function create_table() {
 
     $wpdb = openBDD();
 
-    $wpdb->query("CREATE TABLE IF NOT EXISTS games_data (
+    $wpdb->query("CREATE TABLE games_data (
   `id_joueur` int NOT NULL,
   `id_partie` int NOT NULL,
   `position` VARCHAR(8) NOT NULL,
@@ -115,22 +115,79 @@ CREATE TABLE `game_player` (
   
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
-
-
-
-CREATE TABLE `ville` (
-  `id` int NOT NULL
-  `id_partie` int NOT NULL,
+CREATE TABLE `coffre_ville` (
+  
   `id_equipe` int NOT NULL,
-  `position_ville` VARCHAR(8) NOT NULL
+  `id_partie` int NOT NULL,
+  `id_objet` int NOT NULL,
+  `quantite_objet` int NOT NULL
+  
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+
+CREATE TABLE `objet` (
+  
+  `id_objet` int NOT NULL,
+  `nom_objet` VARCHAR (250) NOT NULL,
+  `id_type`int NOT NULL,
+  `id_class` int NOT NULL,
+  `valeur_objet` int NOT NULL
   
   
   
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
-ALTER TABLE `games_data`
 
-ADD PRIMARY KEY (id_joueur,id_partie);
+
+
+CREATE TABLE `type_objet` (
+  
+  `id_type` int NOT NULL,
+  `type_objet` VARCHAR(250) NOT NULL
+ 
+  
+  
+  
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+CREATE TABLE `class_objet` (
+  
+  `id_class` int NOT NULL,
+  `class_objet` VARCHAR(250) NOT NULL
+ 
+  
+  
+  
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+ALTER TABLE `class_objet`
+ADD PRIMARY KEY (class_objet),
+ADD KEY `class_objet` (`class_objet`),
+ADD KEY `id_class` (`id_class`);
+
+ALTER TABLE `coffre_ville`
+ADD PRIMARY KEY (id_objet);
+
+ALTER TABLE `objet`
+ADD PRIMARY KEY (`id_objet`),
+ADD KEY `id_type` (`id_type`),
+ADD KEY `id_class` (`id_class`);
+
+ALTER TABLE `type_objet`
+ADD PRIMARY KEY (id_type);
+
+ALTER TABLE `class_objet`
+  ADD CONSTRAINT `class_objet_ibfk_1` FOREIGN KEY (`id_class`) REFERENCES `objet` (`id_class`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `coffre_ville`
+  ADD CONSTRAINT `coffreville_ibfk_1` FOREIGN KEY (`id_objet`) REFERENCES `objet` (`id_objet`) ON DELETE CASCADE ON UPDATE CASCADE;
+  
+ALTER TABLE `type_objet`
+  ADD CONSTRAINT `type_objet_ibfk_1` FOREIGN KEY (`id_type`) REFERENCES `objet` (`id_type`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 INSERT INTO `level_batiments` (`limite_xp`, `niveau`) VALUES 
 
@@ -157,13 +214,16 @@ INSERT INTO `batiments` (`id`, `id_partie`, `equipe`, `xp`, `niveau`, `type`) VA
 
 
 ");
+    
+   error_log( var_dump( $wpdb->last_query ) );
 }
+
 
 function drop_table() {
     $wpdb = openBDD();
 
     
-    $wpdb->query("DROP TABLES IF EXISTS games_data, games_metadata, events, level_batiments, batiments, type_batiments");
+    $wpdb->query("DROP TABLE IF EXISTS games_data, games_metadata, events, batiments, level_batiments, type_batiments, coffre_ville, objet, game_player, type_objet, class_objet");
 }
 
 register_activation_hook(__FILE__, 'create_table');
