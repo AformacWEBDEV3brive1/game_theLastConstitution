@@ -236,7 +236,7 @@ function nouveau_montant_pa($id_joueur, $points_action, $id_partie) {
 //Fonction pour simuler le tour suivant. [ADMIN]
 function tour_suivant() {
     reset_all_points_action();
-    echo get_points_action(get_current_user_id(), $_POST['id_partie']);
+    //echo get_points_action(get_current_user_id(), $_POST['id_partie']);
     event_delete($_POST['id_partie']);
     create_random_event($_POST['id_partie']);
 }
