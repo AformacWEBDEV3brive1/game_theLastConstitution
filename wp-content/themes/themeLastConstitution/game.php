@@ -66,11 +66,11 @@
                     <div id="menu" class="menu">
 
                         <div id="onglets" class="row justify-content-around">
-                            <button type="submit" class="btn col-2" onclick="show_menu('ville')" > Ville </button>
-                            <button type="submit" class="btn col-2" onclick="show_menu('inventaire')" > Etat </button>
+                          <button type="submit" class="btn col-2" onclick="show_menu('ville')" > Ville </button>
+                            <button type="submit" class="btn col-2" onclick="show_menu('etat')" > Etat </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('zone')" > Zone </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('chat')" > Chat </button>
-
+                            <button type="submit" class="btn col-2" onclick="show_menu('coffre')" > Coffre </button>
                         </div>
                         <div class="container">
 
@@ -104,7 +104,7 @@
                                 </div>
                             </div>
 
-                            <div id="inventaire" class="hidden">
+                            <div id="etat" class="hidden">
                                 <h2 class="text-center"> Etat </h2>
                                 <div id="pseudo">
                                     <p>Pseudo:
@@ -154,6 +154,68 @@
                                 <p id="zoneJoueur"></p>
 
 
+                            </div>
+                            
+                            
+                            <div id="coffre" class="hidden">
+                                <h2 class="text-center"> Coffre de Ville </h2>
+                                
+                                <div id="arme_list" class="row invent">
+                                    <p>Armes : 
+                                        <?php echo "120" ;?>
+                                    </p>
+                                        <div>
+                                            <?php
+                                                for($i=0;$i<50;$i++){
+                                                    echo '<div class="arme item_list"></div>';
+                                                }
+                                            ?>
+                                        </div>
+                                </div>
+                                
+                                
+                                <div id="vehicule_list" class="row invent">
+                                    <p>Véhicules : 
+                                        <?php echo "60" ;?>
+                                    </p>
+                                        <div>
+                                            <?php
+                                                for($i=0;$i<20;$i++){
+                                                    echo '<div class="vehicule item_list"></div>';
+                                                }
+                                            ?>
+                                        </div>
+                                </div>
+                                
+                                
+                                <div id="prot_list" class="row invent">
+                                <p>Protection : 
+                                    <?php echo "50" ;?>
+                                </p>
+                                    <div>
+                                        <?php
+                                            for($i=0;$i<30;$i++){
+                                                echo '<div class="prot item_list"></div>';
+                                            }
+                                        ?>
+                                    </div>
+                                
+                                </div>
+                                
+                                
+                                
+                                <div id="food_list" class="row invent">
+                                    <p>Nourritures : 
+                                        <?php echo "230" ;?>
+                                    </p>
+                                        <div>
+                                            <?php
+                                                for($i=0;$i<40;$i++){
+                                                    echo '<div class="food item_list"></div>';
+                                                }
+                                            ?>
+                                        </div>
+                                </div>
                             </div>
                         </div>
 

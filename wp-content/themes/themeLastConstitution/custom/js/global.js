@@ -61,25 +61,33 @@ function show_menu(id_menu) {
     if (id_menu == "ville") {
         $("#ville").removeClass("hidden");
         $("#chat").addClass("hidden");
-        $("#inventaire").addClass("hidden");
+        $("#etat").addClass("hidden");
         $("#zone").addClass("hidden");
-
-    } else if (id_menu == "inventaire") {
-        $("#inventaire").removeClass("hidden");
+        $("#coffre").addClass("hidden");
+    } else if (id_menu == "etat") {
+        $("#etat").removeClass("hidden");
         $("#chat").addClass("hidden");
         $("#ville").addClass("hidden");
         $("#zone").addClass("hidden");
-
+        $("#coffre").addClass("hidden");
     } else if (id_menu == "chat") {
         $("#chat").removeClass("hidden");
         $("#ville").addClass("hidden");
-        $("#inventaire").addClass("hidden");
+        $("#etat").addClass("hidden");
         $("#zone").addClass("hidden");
+        $("#coffre").addClass("hidden");
     } else if (id_menu == "zone") {
         $("#zone").removeClass("hidden");
         $("#chat").addClass("hidden");
         $("#ville").addClass("hidden");
-        $("#inventaire").addClass("hidden");
+        $("#etat").addClass("hidden");
+        $("#coffre").addClass("hidden");
+    }else if (id_menu == "coffre") {
+        $("#coffre").removeClass("hidden");
+        $("#chat").addClass("hidden");
+        $("#ville").addClass("hidden");
+        $("#etat").addClass("hidden");
+        $("#zone").addClass("hidden");
     }
 }
 
