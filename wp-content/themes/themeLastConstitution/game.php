@@ -66,90 +66,59 @@
     }
     ?>
     <body onload="display_info_bat(<?php echo $id_partie_get ?>)">
-	<h1 class="text-center">Last Constitution</h1>
 
-	<div class="container">
+        <h1 class="text-center"> Last Constitution </h1>
 
-		<div class="row">
-			<div class="col-6">
+        <div class="container">
 
-				<div id="menu" class="menu">
+            <div class="row">
+                <div class="col-6">
 
-					<div id="onglets" class="row justify-content-around">
-						<button type="submit" class="btn col-2"
-							onclick="show_menu('ville')">Ville</button>
-						<button type="submit" class="btn col-2"
-							onclick="show_menu('inventaire')">Etat</button>
-						<button type="submit" class="btn col-2"
-							onclick="show_menu('zone')">Zone</button>
-						<button type="submit" class="btn col-2"
-							onclick="show_menu('chat')">Chat</button>
+                    <div id="menu" class="menu">
 
-					</div>
-					<div class="container">
+                        <div id="onglets" class="row justify-content-around">
+                          <button type="submit" class="btn col-2" onclick="show_menu('ville')" > Ville </button>
+                            <button type="submit" class="btn col-2" onclick="show_menu('etat')" > Etat </button>
+                            <button type="submit" class="btn col-2" onclick="show_menu('zone')" > Zone </button>
+                            <button type="submit" class="btn col-2" onclick="show_menu('chat')" > Chat </button>
+                            <button type="submit" class="btn col-2" onclick="show_menu('coffre')" > Coffre </button>
+                        </div>
+                        <div class="container">
 
-						<div id="ville">
-							<h2 class="text-center">Ville</h2>
-							<div class="row justify-content-around">
-								<div class="batiment caserne col-6">
-									<button
-										onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
-									<p>
-										xp = <span class="xp"></span>
-									</p>
-									<p>
-										type = <span class="type"></span>
-									</p>
-									<p>
-										niveau = <span class="level"></span>
-									</p>
-								</div>
-								<div class="batiment banque col-6">
-									<button
-										onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
-									<p>
-										xp = <span class="xp"></span>
-									</p>
-									<p>
-										type = <span class="type"></span>
-									</p>
-									<p>
-										niveau = <span class="level"></span>
-									</p>
-								</div>
-								<div class="batiment maison col-6">
-									<button
-										onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
-									<p>
-										xp = <span class="xp"></span>
-									</p>
-									<p>
-										type = <span class="type"></span>
-									</p>
-									<p>
-										niveau = <span class="level"></span>
-									</p>
-								</div>
-								<div class="batiment hopital col-6">
-									<button
-										onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
-									<p>
-										xp = <span class="xp"></span>
-									</p>
-									<p>
-										type = <span class="type"></span>
-									</p>
-									<p>
-										niveau = <span class="level"></span>
-									</p>
-								</div>
-							</div>
-						</div>
+                            <div id="ville"> 
+                                <h2 class="text-center"> Ville </h2>
+                                <div class="row justify-content-around">
+                                    <div class="batiment caserne col-6">
+                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <p>xp = <span class="xp"></span></p>
+                                        <p>type = <span class="type"></span></p>
+                                        <p>niveau = <span class="level"></span></p>
+                                    </div>
+                                    <div class="batiment banque col-6">
+                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <p>xp = <span class="xp"></span></p>
+                                        <p>type = <span class="type"></span></p>
+                                        <p>niveau = <span class="level"></span></p>
+                                    </div>
+                                    <div class="batiment maison col-6">
+                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <p>xp = <span class="xp"></span></p>
+                                        <p>type = <span class="type"></span></p>
+                                        <p>niveau = <span class="level"></span></p>
+                                    </div>
+                                    <div class="batiment hopital col-6">
+                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <p>xp = <span class="xp"></span></p>
+                                        <p>type = <span class="type"></span></p>
+                                        <p>niveau = <span class="level"></span></p>
+                                    </div>
+                                </div>
+                            </div>
 
-						<div id="inventaire" class="hidden">
-							<h2 class="text-center">Etat</h2>
-							<div id="pseudo">
-								<p>Pseudo:
+                            <div id="etat" class="hidden">
+                                <h2 class="text-center"> Etat </h2>
+                                <div id="pseudo">
+                                    <p>Pseudo:
                                         <?php
                                         $current_user = wp_get_current_user();
                                         echo $current_user->user_login;
@@ -270,16 +239,73 @@
 					</div>
 
 
-				</div>
-				<div id="zone" class="hidden">
-					<h2 class="text-center">
-						Zone <span id="nom_position"></span>
-					</h2>
-					<p id="zoneJoueur"></p>
+                            </div>
+                            
+                            
+                            <div id="coffre" class="hidden">
+                                <h2 class="text-center"> Coffre de Ville </h2>
+                                
+                                <div id="arme_list" class="row invent">
+                                    <p>Armes : 
+                                        <?php echo "120" ;?>
+                                    </p>
+                                        <div>
+                                            <?php
+                                                for($i=0;$i<50;$i++){
+                                                    echo '<div class="arme item_list"></div>';
+                                                }
+                                            ?>
+                                        </div>
+                                </div>
+                                
+                                
+                                <div id="vehicule_list" class="row invent">
+                                    <p>Véhicules : 
+                                        <?php echo "60" ;?>
+                                    </p>
+                                        <div>
+                                            <?php
+                                                for($i=0;$i<20;$i++){
+                                                    echo '<div class="vehicule item_list"></div>';
+                                                }
+                                            ?>
+                                        </div>
+                                </div>
+                                
+                                
+                                <div id="prot_list" class="row invent">
+                                <p>Protection : 
+                                    <?php echo "50" ;?>
+                                </p>
+                                    <div>
+                                        <?php
+                                            for($i=0;$i<30;$i++){
+                                                echo '<div class="prot item_list"></div>';
+                                            }
+                                        ?>
+                                    </div>
+                                
+                                </div>
+                                
+                                
+                                
+                                <div id="food_list" class="row invent">
+                                    <p>Nourritures : 
+                                        <?php echo "230" ;?>
+                                    </p>
+                                        <div>
+                                            <?php
+                                                for($i=0;$i<40;$i++){
+                                                    echo '<div class="food item_list"></div>';
+                                                }
+                                            ?>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
 
 
-				</div>
-			</div>
+	
 
 
 

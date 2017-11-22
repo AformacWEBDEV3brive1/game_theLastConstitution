@@ -47,3 +47,25 @@
 .chat_spe{
     border:1px solid black;
 }
+
+.arme{
+    background-image: url(images/arme.jpeg);
+}
+.vehicule{
+    background-image: url(images/vehicule.jpeg); 
+}
+.prot{
+    background-image: url(images/prot.png);
+}
+.food{
+    background-image: url(images/food.png);
+}
+.item_list{
+    background-size: 45px 45px;
+    width:45px;
+    height:45px;
+    float:left;
+}
+.invent{
+    margin-top: 50px;
+}
