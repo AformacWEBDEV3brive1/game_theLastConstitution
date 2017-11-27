@@ -26,16 +26,12 @@
 
 
         <!-- custom css & js -->
-        <script type="text/javascript"
-        src="../../wp-content/themes/themeLastConstitution/custom/js/global.js"></script>
-        <script type="text/javascript"
-        src="../../wp-content/themes/themeLastConstitution/custom/js/event_javascript.js"></script>
-        <script type="text/javascript"
-        src="../../wp-content/themes/themeLastConstitution/custom/js/building_javascript.js"></script>
-        <link type="text/css" rel="stylesheet"
-              href="../../wp-content/themes/themeLastConstitution/style.css" />
-        <link type="text/css" rel="stylesheet"
-              href="../../wp-content/themes/themeLastConstitution/sass/style.css" />
+        <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/custom/js/global.js"></script>
+        <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/custom/js/event_javascript.js"></script>
+        <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/custom/js/loot.js"></script>
+        <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/custom/js/building_javascript.js"></script>
+        <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/style.css" />
+        <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/sass/style.css" />
     </head>
 
 
@@ -81,7 +77,7 @@
                             <button type="submit" class="btn col-2" onclick="show_menu('etat')" > Etat </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('zone')" > Zone </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('chat')" > Chat </button>
-                            <button type="submit" class="btn col-2" onclick="show_menu('coffre')" > Coffre </button>
+                            <button type="submit" class="btn col-2" onclick="show_menu('coffre'),loot_from_coffre_ville()" > Coffre </button>
                         </div>
                         <div class="container">
 
@@ -237,6 +233,68 @@
                                 <p id="zoneJoueur"></p>
 
 
+                            </div>
+                            
+                            
+                            <div id="coffre" class="hidden">
+                                <h2 class="text-center"> Coffre de Ville </h2>
+                                
+                                <div id="arme_list" class="row invent">
+                                    <p>Armes : 
+                                        <?php echo "120" ;?>
+                                    </p>
+                                        <div>
+                                            <?php
+                                                
+                                                    echo '<div class="arme item_list"></div>';
+                                                
+                                            ?>
+                                        </div>
+                                </div>
+                                
+                                
+                                <div id="vehicule_list" class="row invent">
+                                    <p>Véhicules : 
+                                        <?php echo "60" ;?>
+                                    </p>
+                                        <div>
+                                            <?php
+                                                
+                                                    echo '<div class="vehicule item_list"></div>';
+                                                
+                                            ?>
+                                        </div>
+                                </div>
+                                
+                                
+                                <div id="prot_list" class="row invent">
+                                <p>Protection : 
+                                    <?php echo "50" ;?>
+                                </p>
+                                    <div>
+                                        <?php
+                                            
+                                                echo '<div class="prot item_list"></div>';
+                                            
+                                        ?>
+                                    </div>
+                                
+                                </div>
+                                
+                                
+                                
+                                <div id="food_list" class="row invent">
+                                    <p>Nourritures : 
+                                        <?php echo "230" ;?>
+                                    </p>
+                                        <div>
+                                            <?php
+                                                
+                                                    echo '<div class="food item_list"></div>';
+                                                
+                                            ?>
+                                        </div>
+                                </div>
                             </div>
                         </div>
 
