@@ -168,7 +168,7 @@
                                             <?php
                                             // error_log("idpartieget: " . $id_partie_get);
 
-                                            $chat_ville = load_chat_by_tag("ville", $id_partie_get);
+//                                            $chat_ville = load_chat_by_tag("ville", $id_partie_get);
 
                                             // error_log("chat ville: " . $chat_ville);
 
@@ -197,7 +197,7 @@
                                     <div class="chat">
                                         <div id="chat_case">
                                             <?php
-                                            $chat_case = load_chat_by_tag("case", $id_partie_get);
+//                                            $chat_case = load_chat_by_tag("case", $id_partie_get);
 
                                             // error_log("chat case: " . $chat_case);
 
