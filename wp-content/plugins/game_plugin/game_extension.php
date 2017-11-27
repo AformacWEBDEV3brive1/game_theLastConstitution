@@ -56,6 +56,17 @@ CREATE TABLE `type_batiments` (
   `nom` VARCHAR(255) NOT NULL
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE `chat` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `id_joueur` int NOT NULL,
+  `position` VARCHAR(8) NOT NULL,
+  `equipe` int NOT NULL,
+  `id_partie` int NOT NULL,
+  `tag` VARCHAR(255) NOT NULL,
+  `message` VARCHAR(255) NOT NULL,
+  `heure` TIMESTAMP NOT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 ALTER TABLE `batiments`
 ADD PRIMARY KEY (id);
 
@@ -82,6 +93,12 @@ ADD CONSTRAINT `batiments_frgn` FOREIGN KEY (`niveau`) REFERENCES `level_batimen
 
 ALTER TABLE `batiments` 
 ADD CONSTRAINT `batiments_zdeg` FOREIGN KEY (`type`) REFERENCES `type_batiments` (`type`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `chat` 
+ADD CONSTRAINT `chat_ibfk_1` FOREIGN KEY (`id_joueur`) REFERENCES `games_data` (`id_joueur`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `chat` 
+ADD CONSTRAINT `chat_ibfk_2` FOREIGN KEY (`id_partie`) REFERENCES `games_metadata` (`id_partie`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 INSERT INTO `games_metadata` (`id_partie`, `start`) VALUES
 (1, CURRENT_TIMESTAMP),
@@ -275,6 +292,12 @@ INSERT INTO `batiments` (`id`, `id_partie`, `equipe`, `xp`, `niveau`, `type`) VA
 (4, 1, 1, 30, 5, 4);
 
 
+INSERT INTO `chat` (`id`, `id_joueur`, `position`, `equipe`, `id_partie`, `tag`, `message`, `heure`) VALUES
+
+(1, 1, '0;0', 1, 1, 'ville', 'bonjour', '1511172044'),
+(2, 2, '0;0', 1, 1, 'ville', 'yo', '1511172046'),
+(3, 3, '19;19', 2, 1, 'ville', 'salut', '1511172046'),
+(4, 1, '2;3', 1, 1, 'case', 'hey', '1511172050');
 
 ");
     
@@ -286,7 +309,7 @@ function drop_table() {
     $wpdb = openBDD();
 
     
-   // $wpdb->query("DROP TABLE IF EXISTS games_data, games_metadata, events, batiments, level_batiments, type_batiments, coffre_ville, objet, game_player, type_objet, class_objet");
+    $wpdb->query("DROP TABLE IF EXISTS chat, games_data, games_metadata, events, batiments, level_batiments, type_batiments, coffre_ville, objet, game_player, type_objet, class_objet");
 }
 
 register_activation_hook(__FILE__, 'create_table');
