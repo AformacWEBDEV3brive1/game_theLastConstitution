@@ -93,15 +93,59 @@ function loot_insert_coffre_ville($butin, $id_equipe, $id_partie) {
     }
 }
 
-function loot_get_coffre_ville($id_equipe) {
+//function loot_get_coffre_ville($id_equipe) {
+//
+//    global $wpdb;
+//
+//    try {
+//        $query = $wpdb->prepare("SELECT nom_objet, valeur_objet, quantite_objet FROM coffre_ville AS c, objet AS o WHERE c.id_objet=o.id_objet AND id_equipe='%d' AND id_partie='%d'", '1', '1');
+//        print_r($wpdb->get_results($query));
+//    } catch (Exception $ex) {
+//        return $e->getMessage();
+//    }
+//}
+
+
+function looted($id_partie) {
+//    echo "blavlzlflasfalf " .get_position_by_id($id_partie, get_current_user_id()). " qdsfsdgsdgsdgsd";
+ 
+//loot_get_coffre_ville(1);
 
     global $wpdb;
-
     try {
-        $query = $wpdb->prepare("SELECT nom_objet, valeur_objet, quantite_objet FROM coffre_ville AS c, objet AS o WHERE c.id_objet=o.id_objet AND id_equipe='%d' AND id_partie='%d'", '1', '1');
-        print_r($wpdb->get_results($query));
-    } catch (Exception $ex) {
+        //check si ça marche mon frere
+        $query = $wpdb->insert(
+                'looted', //table name
+                array(
+            'id_partie'=> $id_partie,
+            'position' => get_position_by_id($id_partie, get_current_user_id()),
+                ), //columns
+                array(
+            '%d',
+            '%s',
+            
+                )
+        ); //explicit formating
+    } catch (Exception $e) {
         return $e->getMessage();
     }
 }
 
+function check_looted($id_partie) {
+
+    global $wpdb;
+    try {
+        $resultats = $wpdb->get_results(
+                $wpdb->prepare(
+                        "SELECT * FROM looted WHERE position = %s AND id_partie = %d", get_position_by_id($id_partie, get_current_user_id()), $id_partie
+                )
+        );
+       echo"blabalbalgzsf " . count($resultats);
+    } catch (Exception $e) {
+        return $e->getMessage();
+    }
+}
+//check_looted(1);
+//looted(1,2);
+//$plop = loot_get_random_type();
+//loot_get_random_class($plop);
