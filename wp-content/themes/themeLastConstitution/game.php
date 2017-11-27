@@ -23,6 +23,7 @@
         <!-- custom css & js -->
         <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/custom/js/global.js"></script>
         <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/custom/js/event_javascript.js"></script>
+        <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/custom/js/loot.js"></script>
         <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/custom/js/building_javascript.js"></script>
         <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/style.css" />
         <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/sass/style.css" />
@@ -70,7 +71,7 @@
                             <button type="submit" class="btn col-2" onclick="show_menu('etat')" > Etat </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('zone')" > Zone </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('chat')" > Chat </button>
-                            <button type="submit" class="btn col-2" onclick="show_menu('coffre')" > Coffre </button>
+                            <button type="submit" class="btn col-2" onclick="show_menu('coffre'),loot_from_coffre_ville()" > Coffre </button>
                         </div>
                         <div class="container">
 
@@ -166,9 +167,9 @@
                                     </p>
                                         <div>
                                             <?php
-                                                for($i=0;$i<50;$i++){
+                                                
                                                     echo '<div class="arme item_list"></div>';
-                                                }
+                                                
                                             ?>
                                         </div>
                                 </div>
@@ -180,9 +181,9 @@
                                     </p>
                                         <div>
                                             <?php
-                                                for($i=0;$i<20;$i++){
+                                                
                                                     echo '<div class="vehicule item_list"></div>';
-                                                }
+                                                
                                             ?>
                                         </div>
                                 </div>
@@ -194,9 +195,9 @@
                                 </p>
                                     <div>
                                         <?php
-                                            for($i=0;$i<30;$i++){
+                                            
                                                 echo '<div class="prot item_list"></div>';
-                                            }
+                                            
                                         ?>
                                     </div>
                                 
@@ -210,9 +211,9 @@
                                     </p>
                                         <div>
                                             <?php
-                                                for($i=0;$i<40;$i++){
+                                                
                                                     echo '<div class="food item_list"></div>';
-                                                }
+                                                
                                             ?>
                                         </div>
                                 </div>

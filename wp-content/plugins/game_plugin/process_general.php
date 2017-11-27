@@ -5,6 +5,7 @@
  */
 
 include_once 'parameters/parameters.php';
+include_once 'process_loot.php';
 
 
 // intégration function wordpress.
@@ -18,6 +19,11 @@ if(isset($_POST["php_function_file"])){
     }else if($_POST["php_function_file"] == "process_event.php"){
         if( $_POST["info"] == "event_check_position"){
            event_check_position($_POST["id_partie"]);
+        }   
+    }else if($_POST["php_function_file"] == "process_loot.php"){
+        if( $_POST["info"] == 'loot_get_loot_from_coffre_ville'){
+           loot_get_loot_from_coffre_ville($_POST["id_equipe"], $_POST["id_partie"]);
+           error_log($tab_ressources);
         }   
     }
 }else if (isset($_POST['position']) && isset($_POST['id_partie'])) {
