@@ -78,25 +78,25 @@
                                 <h2 class="text-center"> Ville </h2>
                                 <div class="row justify-content-around">
                                     <div class="batiment caserne col-6">
-                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <button class="btn" onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
                                         <p>xp = <span class="xp"></span></p>
                                         <p>type = <span class="type"></span></p>
                                         <p>niveau = <span class="level"></span></p>
                                     </div>
                                     <div class="batiment banque col-6">
-                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <button class="btn" onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
                                         <p>xp = <span class="xp"></span></p>
                                         <p>type = <span class="type"></span></p>
                                         <p>niveau = <span class="level"></span></p>
                                     </div>
                                     <div class="batiment maison col-6">
-                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <button class="btn" onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
                                         <p>xp = <span class="xp"></span></p>
                                         <p>type = <span class="type"></span></p>
                                         <p>niveau = <span class="level"></span></p>
                                     </div>
                                     <div class="batiment hopital col-6">
-                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <button class="btn" onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
                                         <p>xp = <span class="xp"></span></p>
                                         <p>type = <span class="type"></span></p>
                                         <p>niveau = <span class="level"></span></p>
