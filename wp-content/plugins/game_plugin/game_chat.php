@@ -18,36 +18,6 @@ if ($_POST["called_ajax_php"] == "game_chat.php") {
 
 // Prend en entrée l'ID d'un joueur, l'ID de la partie et le tag du chat (ville/case).
 // retourne les messages dans un tableau (tous si c'est la ville, tois si c'est la case).
-/* function load_chat()
-  {
-  try {
-
-  global $wpdb;
-  $id_joueur = get_current_user_id();
-  global $id_partie;
-  global $tag;
-  $equipe = get_team($id_joueur, $id_partie);
-
-  if ($tag == "ville" && player_in_his_city($id_partie, $equipe)) {
-  // if player_in_his_city == true
-  $resultats = $wpdb->get_results($wpdb->prepare("SELECT id_joueur, message, heure FROM chat WHERE id_partie = %d AND equipe = %d AND tag = %s", $id_partie, $equipe, $tag));
-  } else if ($tag == "case") {
-  $position = get_position(false, $id_partie);
-
-  $resultats = $wpdb->get_results($wpdb->prepare("SELECT id_joueur, message, heure FROM chat WHERE id_partie = %d AND equipe = %d AND tag = %s AND position = %s", $id_partie, $equipe, $tag, $position));
-
-  //$resultats = array_slice($resultats, 0, 3);
-  }
-
-  foreach ($resultats as $value) {
-  $value->id_joueur = get_login_by_id($value->id_joueur);
-  }
-
-  echo json_encode($resultats);
-  } catch (PDOException $e) {
-  return $e->getMessage();
-  }
-  } */
 
 function load_chat_by_tag($tag, $id_partie) {
     try {
@@ -76,7 +46,6 @@ function refresh_chat($id_partie) {
         global $wpdb;
         $id_joueur = get_current_user_id();
         date_default_timezone_set("Europe/Paris");
-        //error_log(date('Y-m-d H:i:s', time() - 5));
 
         $equipe = get_team($id_joueur, $id_partie);
 
@@ -89,11 +58,9 @@ function refresh_chat($id_partie) {
         }
 
         foreach ($resultats as $value) {
-            //$value->id_joueur = get_login_by_id($value->id_joueur);
             $user = get_user_by('id', $value->id_joueur);
             $value->id_joueur = $user->login;
         }
-        //error_log("RESULTATS: " . $resultats);
         echo json_encode($resultats);
     } catch (PDOException $e) {
         return $e->getMessage();
@@ -107,7 +74,7 @@ function player_in_his_city($id_partie, $equipe) {
     }
     return false;
 }
-//
+
 function send_message($id_partie, $tag, $message) {
     try {
         global $wpdb;
@@ -169,8 +136,6 @@ function send_message($id_partie, $tag, $message) {
 function check_message($id_joueur, $id_partie, $message, $equipe, $tag) {
     try {
         if (strlen($message) < 100) {
-            error_log($tag);
-            error_log(player_in_his_city($id_partie, $equipe));
             if ($tag == "ville" && !player_in_his_city($id_partie, $equipe)) {
                 return "Vous devez être en ville pour écrire dans le chat Ville";
             } else {
