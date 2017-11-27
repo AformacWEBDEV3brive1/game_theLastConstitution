@@ -267,6 +267,7 @@ function get_ids_from_cell($position, $id_partie) {
     }
 }
 
+
 //paramètre tableau d'id de joueurs
 //utilise une fonction wp
 //retourne tableau de login
