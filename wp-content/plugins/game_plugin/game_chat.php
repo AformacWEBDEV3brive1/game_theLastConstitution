@@ -7,22 +7,10 @@ include_once 'process_general.php';
 
 if ($_POST["called_ajax_php"] == "game_chat.php") {
     if (isset($_POST['php_function_file'])) {
-        /*if ($_POST["php_function_file"] == 'refresh_chat' || $_POST["php_function_file"] == 'send_message') {
-            /*
-            if (isset($_POST['id_partie'])) {
-                $id_partie = $_POST['id_partie'];
-            }
-            if (isset($_POST['tag'])) {
-                $tag = $_POST['tag'];
-            }
-            if (isset($_POST['message'])) {
-                $message = $_POST['message'];
-            }
-            $info_chat = $_POST['php_function_file'];
-            $info_chat();
-        }*/
+        if ($_POST["php_function_file"] == 'refresh_chat') {
+            refresh_chat($_POST['id_partie']);
+        }
         if ($_POST["php_function_file"] == 'send_message'){
-            error_log("coucouuu");
             send_message($_POST['id_partie'], $_POST['tag'], $_POST['message']);
         }
     }
@@ -82,13 +70,11 @@ function load_chat_by_tag($tag, $id_partie) {
     }
 }
 
-function refresh_chat() {
+function refresh_chat($id_partie) {
     try {
 
         global $wpdb;
         $id_joueur = get_current_user_id();
-        global $id_partie;
-        global $time;
         date_default_timezone_set("Europe/Paris");
         //error_log(date('Y-m-d H:i:s', time() - 5));
 
