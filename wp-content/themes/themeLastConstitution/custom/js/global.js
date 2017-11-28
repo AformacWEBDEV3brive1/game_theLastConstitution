@@ -168,7 +168,9 @@ window.setInterval(function(){
         	
         	if(output != "[]")
         	{
+        		console.log(output);
         		output = JSON.parse(output);
+        		
                 for (var i = 0, len = output.length; i < len; i++) {
                 	if(output[i].tag == "ville")
 	        		{

@@ -8,8 +8,10 @@
 
 include_once( plugin_dir_path(__FILE__) . 'parameters/parameters.php');
 
-function create_table() {
 
+
+function create_table() {    
+    
     $wpdb = openBDD();
 
     $wpdb->query("CREATE TABLE games_data (
