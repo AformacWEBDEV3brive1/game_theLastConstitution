@@ -70,7 +70,6 @@ function event_check_position($id_partie) {
             $type=$type[0];
             $valeur=$valeur[0];
             
-            
             //affecte la base donnée
             event_effect_to_database($type, $valeur);
             //encode le resultat de la requete en format jSon;

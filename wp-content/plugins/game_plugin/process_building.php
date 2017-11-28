@@ -5,7 +5,6 @@
  */
 
 include_once 'parameters/parameters.php';
-
 include_once 'process_general.php';
 
 if ($_POST["called_ajax_php"] == "process_building.php") {

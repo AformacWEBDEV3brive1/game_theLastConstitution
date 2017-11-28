@@ -9,6 +9,13 @@
 include_once 'process_general.php';
 require_once( explode("wp-content", __FILE__)[0] . "wp-load.php" );
 
+//$wpdb->show_errors();
+//print_r($wpdb->show_errors());
+
+function loot_cell($id_equipe, $id_partie) {
+    
+}
+
 // renvoie aléatoirement un type 
 function loot_get_random_type() {
 
@@ -93,14 +100,16 @@ function loot_insert_coffre_ville($butin, $id_equipe, $id_partie) {
     }
 }
 
-//Affiche les loot du coffre de ville
-function loot_get_coffre_ville($id_equipe) {
+function loot_get_coffre_ville($id_equipe, $id_partie) {
 
     global $wpdb;
 
     try {
-        $query = $wpdb->prepare("SELECT nom_objet, valeur_objet, quantite_objet FROM coffre_ville AS c, objet AS o WHERE c.id_objet=o.id_objet AND id_equipe='%d' AND id_partie='%d'", '1', '1');
-        print_r($wpdb->get_results($query));
+        $query = $wpdb->prepare("SELECT nom_objet, valeur_objet, quantite_objet, type_objet, class_objet FROM coffre_ville AS c, objet AS o, type_objet AS t, class_objet AS co WHERE co.id_class = o.id_class AND c.id_objet=o.id_objet AND o.id_type = t.id_type AND id_equipe='%d' AND id_partie='%d'",'1','1');
+        $tmp = ($wpdb->get_results($query));
+        echo json_encode($tmp);
+        
+        
     } catch (Exception $ex) {
         return $e->getMessage();
     }

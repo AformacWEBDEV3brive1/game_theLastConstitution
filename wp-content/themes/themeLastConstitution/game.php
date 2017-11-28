@@ -219,45 +219,30 @@
                             </div>
                             <div id="coffre" class="hidden">
                                 <h2 class="text-center"> Coffre de Ville </h2>
+
                                 <div id="arme_list" class="row invent">
-                                    <p>Armes : 
-                                        <?php echo "120"; ?>
-                                    </p>
-                                    <div>
-                                        <?php
-                                        echo '<div class="arme item_list"></div>';
-                                        ?>
-                                    </div>
+                                    <p> Arme  </p>
+                                    <p class="result_arme"></p>
+                                    <p class="nom_arme">       
                                 </div>
+
+
                                 <div id="vehicule_list" class="row invent">
-                                    <p>Véhicules : 
-                                        <?php echo "60"; ?>
-                                    </p>
-                                    <div>
-                                        <?php
-                                        echo '<div class="vehicule item_list"></div>';
-                                        ?>
-                                    </div>
+                                    <p> Véhicules  </p>
+                                    <p class="result_vehicule"></p>
+                                    <p class="nom_vehicule"> </p>
                                 </div>
+
                                 <div id="prot_list" class="row invent">
-                                    <p>Protection : 
-                                        <?php echo "50"; ?>
-                                    </p>
-                                    <div>
-                                        <?php
-                                        echo '<div class="prot item_list"></div>';
-                                        ?>
-                                    </div>
+                                    <p> Protection </p>
+                                    <p class="result_protection"></p>
+                                    <p class="nom_protection"> </p>
                                 </div>
+
                                 <div id="food_list" class="row invent">
-                                    <p>Nourritures : 
-                                        <?php echo "230"; ?>
-                                    </p>
-                                    <div>
-                                        <?php
-                                        echo '<div class="food item_list"></div>';
-                                        ?>
-                                    </div>
+                                    <p> Nourritures  </p>
+                                    <p class="result_food"></p>
+                                    <p class="nom_food"> </p>
                                 </div>
                             </div>
                         </div>
@@ -266,7 +251,7 @@
                         <h2 class="text-center"> Coffre de Ville </h2>
                         <div id="arme_list" class="row invent">
                             <p>Armes : 
-                                <?php echo "120"; ?>
+
                             </p>
                             <div>
                                 <?php

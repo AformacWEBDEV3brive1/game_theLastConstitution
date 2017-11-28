@@ -22,7 +22,8 @@ if(isset($_POST["php_function_file"])){
         }   
     }else if($_POST["php_function_file"] == "process_loot.php"){
         if( $_POST["info"] == 'loot_get_loot_from_coffre_ville'){
-           loot_get_loot_from_coffre_ville($_POST["id_equipe"], $_POST["id_partie"]);
+            
+           loot_get_coffre_ville($_POST["id_equipe"], $_POST["id_partie"]);
            error_log($tab_ressources);
         }   
     }
@@ -86,9 +87,6 @@ function get_position_by_id($id_partie, $id_joueur) {
         }
     
 }
-
-
-
 
 
 function get_position($all = false, $id_partie) {
