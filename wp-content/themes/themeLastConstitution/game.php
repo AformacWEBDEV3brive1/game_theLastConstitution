@@ -77,7 +77,7 @@
                             <button type="submit" class="btn col-2" onclick="show_menu('etat')" > Etat </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('zone')" > Zone </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('chat')" > Chat </button>
-                            <button type="submit" class="btn col-2" onclick="show_menu('coffre'),loot_from_coffre_ville()" > Coffre </button>
+                            <button type="submit" class="btn col-2" onclick="show_menu('coffre'), loot_from_coffre_ville()" > Coffre </button>
                         </div>
                         <div class="container">
 
@@ -177,9 +177,10 @@
                                                     ?> 
                                                     <div class="row">
                                                         <div class="col-3"><?php echo $value->heure ?></div>
-                                                        <!-- <div class="col-2"><?php //echo get_login_by_id($value->id_joueur); ?></div> -->
+                                                        <!-- <div class="col-2"><?php //echo get_login_by_id($value->id_joueur);  ?></div> -->
                                                         <div class="col-2"><?php get_user_by('id', $value->id_joueur);
-                                            echo $user->login ?></div>
+                                            echo $user->login
+                                                    ?></div>
                                                         <div class="col-7"><?php echo $value->message; ?></div>
                                                     </div>
                                                     <hr />
@@ -206,9 +207,10 @@
                                                     ?> 
                                                     <div class="row">
                                                         <div class="col-3"><?php echo $value->heure ?></div>
-                                                        <!--  <div class="col-2"><?php //echo get_login_by_id($value->id_joueur); ?></div>-->
+                                                        <!--  <div class="col-2"><?php //echo get_login_by_id($value->id_joueur);  ?></div>-->
                                                         <div class="col-2"><?php $user = get_user_by('id', $value->id_joueur);
-                                                    echo $user->login ?></div>
+                                                    echo $user->login
+                                                    ?></div>
                                                         <div class="col-7"><?php echo $value->message; ?></div>
                                                     </div>
                                                     <hr />
@@ -234,66 +236,36 @@
 
 
                             </div>
-                            
-                            
+
+
                             <div id="coffre" class="hidden">
                                 <h2 class="text-center"> Coffre de Ville </h2>
-                                
+
                                 <div id="arme_list" class="row invent">
-                                    <p>Armes : 
-                                        <?php echo "120" ;?>
-                                    </p>
-                                        <div>
-                                            <?php
-                                                
-                                                    echo '<div class="arme item_list"></div>';
-                                                
-                                            ?>
-                                        </div>
+                                    <p> Arme  </p>
+                                    <p class="result_arme"></p>
+                                    <p class="nom_arme">       
                                 </div>
-                                
-                                
+
+
                                 <div id="vehicule_list" class="row invent">
-                                    <p>Véhicules : 
-                                        <?php echo "60" ;?>
-                                    </p>
-                                        <div>
-                                            <?php
-                                                
-                                                    echo '<div class="vehicule item_list"></div>';
-                                                
-                                            ?>
-                                        </div>
+                                    <p> Véhicules  </p>
+                                    <p class="result_vehicule"></p>
+                                    <p class="nom_vehicule"> </p>
                                 </div>
-                                
-                                
+
                                 <div id="prot_list" class="row invent">
-                                <p>Protection : 
-                                    <?php echo "50" ;?>
-                                </p>
-                                    <div>
-                                        <?php
-                                            
-                                                echo '<div class="prot item_list"></div>';
-                                            
-                                        ?>
-                                    </div>
-                                
+                                    <p> Protection </p>
+                                    <p class="result_protection"></p>
+                                    <p class="nom_protection"> </p>
                                 </div>
-                                
-                                
-                                
+
+
+
                                 <div id="food_list" class="row invent">
-                                    <p>Nourritures : 
-                                        <?php echo "230" ;?>
-                                    </p>
-                                        <div>
-                                            <?php
-                                                
-                                                    echo '<div class="food item_list"></div>';
-                                                
-                                            ?>
-                                        </div>
+                                    <p> Nourritures  </p>
+                                    <p class="result_food"></p>
+                                    <p class="nom_food"> </p>
                                 </div>
                             </div>
                         </div>
@@ -307,7 +279,7 @@
 
                         <div id="arme_list" class="row invent">
                             <p>Armes : 
-                                <?php echo "120"; ?>
+
                             </p>
                             <div>
                                 <?php

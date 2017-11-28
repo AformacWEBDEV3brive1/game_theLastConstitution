@@ -184,7 +184,7 @@ window.setInterval(function(){
         	}
         }
     });
-}, 5000);
+}, 100000);
 
 function send_message(tag)
 {

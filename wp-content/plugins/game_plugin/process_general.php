@@ -22,7 +22,8 @@ if(isset($_POST["php_function_file"])){
         }   
     }else if($_POST["php_function_file"] == "process_loot.php"){
         if( $_POST["info"] == 'loot_get_loot_from_coffre_ville'){
-           loot_get_loot_from_coffre_ville($_POST["id_equipe"], $_POST["id_partie"]);
+            
+           loot_get_coffre_ville($_POST["id_equipe"], $_POST["id_partie"]);
            error_log($tab_ressources);
         }   
     }
@@ -86,9 +87,6 @@ function get_position_by_id($id_partie, $id_joueur) {
         }
     
 }
-
-
-
 
 
 function get_position($all = false, $id_partie) {
@@ -160,9 +158,9 @@ function move($id_partie, $new_position) {
 
         if (check_move($id_joueur, $new_position, $id_partie)) {
             set_position($id_joueur, $new_position, $id_partie);
-//            echo $_POST["id_partie"];
+            echo $_POST["id_partie"];
            
-            echo array(id_partie => $_POST['id_partie'],check_looted=>check_looted($id_partie));
+//            echo array(id_partie => $_POST['id_partie'],check_looted=>check_looted($id_partie));
 //            check_looted($id_partie);
 //            looted($id_partie,$id_joueur);
         } else {
