@@ -6,7 +6,7 @@ function move(id, id_partie) {
         data: {info: 'move', new_position: coo, id_partie: id_partie, php_function_file:"process_general.php"},
         success: function (output) {
             output = JSON.parse(output);
-console.log(output);
+
             if (output["id_partie"].trim() == "false") {
                 $('#resultat').html("Pas assez de points d'action !");
             } else {
@@ -18,11 +18,11 @@ console.log(output);
                 event_game(id);
             }
             if(!output["looted"]){
-                console.log("premier");
+                //console.log("premier");
                   $('#zone_joueur').html('');
                   $('#button_fouiller').prop('disabled', false);
             }else{
-                console.log("deuxieme");
+                //console.log("deuxieme");
                 $('#zone_joueur').html('Zone LOOTé DEGAGE!');
                 $('#button_fouiller').prop('disabled', true);
                 
@@ -180,7 +180,7 @@ window.setInterval(function(){
         	
         	if(output != "[]")
         	{
-        		console.log(output);
+        		//console.log(output);
         		output = JSON.parse(output);
         		
                 for (var i = 0, len = output.length; i < len; i++) {

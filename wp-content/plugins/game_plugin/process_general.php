@@ -170,7 +170,7 @@ function move($id_partie, $new_position) {
 
         } else {
 
-            echo "false";
+            echo json_encode();
         }
 }
 
