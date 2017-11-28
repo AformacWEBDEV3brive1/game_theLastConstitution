@@ -9,7 +9,7 @@ function loot_from_coffre_ville() {
                 //ne fait rien si pas d'event
             } else {
                 var tab = JSON.parse(output);
-                console.log(" il y a  "+tab[1]["quantite_objet"]+" "+tab[1]["nom_objet"]+" "+tab[1]["class_objet"]+" de valeur "+tab[1]["valeur_objet"]);   
+                //console.log(" il y a  "+tab[1]["quantite_objet"]+" "+tab[1]["nom_objet"]+" "+tab[1]["class_objet"]+" de valeur "+tab[1]["valeur_objet"]);   
             }
         }
     });
@@ -22,7 +22,7 @@ function loot_zone(id_partie){
     type: 'post',
      data: {info: 'looted', id_partie : id_partie},
      success: function (output){
-         console.log(output);
+         //console.log(output);
          $('#zone_joueur').html(output);
          $('#button_fouiller').prop('disabled', true);
      }

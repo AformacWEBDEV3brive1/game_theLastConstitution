@@ -69,6 +69,13 @@ CREATE TABLE `chat` (
   `heure` TIMESTAMP NOT NULL
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE `looted` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `id_partie` int NOT NULL,
+  `position` VARCHAR(255) NOT NULL
+  
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 ALTER TABLE `batiments`
 ADD PRIMARY KEY (id);
 
@@ -309,7 +316,7 @@ INSERT INTO `chat` (`id`, `id_joueur`, `position`, `equipe`, `id_partie`, `tag`,
 function drop_table() {
     $wpdb = openBDD();
     
-    $wpdb->query("DROP TABLE IF EXISTS chat, games_data, games_metadata, events, batiments, level_batiments, type_batiments, coffre_ville, objet, game_player, type_objet, class_objet");
+    $wpdb->query("DROP TABLE IF EXISTS looted, chat, games_data, games_metadata, events, batiments, level_batiments, type_batiments, coffre_ville, objet, game_player, type_objet, class_objet");
 }
 
 register_activation_hook(__FILE__, 'create_table');

@@ -5,9 +5,9 @@ function event_game(id) {
         type: 'post',
         data: {info: 'event_check_position', id_partie: id_partie, php_function_file: "process_event.php"},
         success: function (output) {
-            if (output=='') {
-                //ne fait rien si pas d'event
+            if (output.trim()=='') {
             } else {
+
                 var tab = JSON.parse(output);
                 alert("le résultat de l'event est de " + tab[0]["type"] + tab[0]["valeur"]);   
             }
