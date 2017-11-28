@@ -104,4 +104,3 @@ function loot_get_coffre_ville($id_equipe) {
         return $e->getMessage();
     }
 }
-

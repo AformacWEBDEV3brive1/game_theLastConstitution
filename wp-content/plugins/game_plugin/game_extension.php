@@ -112,7 +112,7 @@ INSERT INTO `games_metadata` (`id_partie`, `start`) VALUES
 
 INSERT INTO `games_data` (`id_joueur`, `id_partie`, `position`, `points_action`, `equipe`) VALUES
 
-(1, 1, '7;3', 15, 1),
+(1, 1, '7;3', 15000, 1),
 (2, 1, '8;4', 15, 1),
 (3, 1, '2;0', 12, 1),
 (4, 1, '19;19', 2, 1),
@@ -286,10 +286,10 @@ INSERT INTO `type_batiments` (`type`, `nom`) VALUES
 
 INSERT INTO `batiments` (`id`, `id_partie`, `equipe`, `xp`, `niveau`, `type`) VALUES
 
-(1, 1, 1, 11, 1, 1),
-(2, 1, 1, 15, 2, 2),
-(3, 1, 1, 20, 3, 3),
-(4, 1, 1, 30, 5, 4);
+(1, 1, 1, 0, 0, 1),
+(2, 1, 1, 0, 0, 2),
+(3, 1, 1, 0, 0, 3),
+(4, 1, 1, 0, 0, 4);
 
 
 INSERT INTO `chat` (`id`, `id_joueur`, `position`, `equipe`, `id_partie`, `tag`, `message`, `heure`) VALUES
