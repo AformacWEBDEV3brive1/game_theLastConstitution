@@ -159,18 +159,14 @@ function move($id_partie, $new_position) {
         $id_joueur = get_current_user_id();
 
         if (check_move($id_joueur, $new_position, $id_partie)) {
-            set_position($id_joueur, $new_position, $id_partie);
-            //echo $_POST["id_partie"];
-           
+            set_position($id_joueur, $new_position, $id_partie);       
          
-
- echo json_encode(array(id_partie => $_POST['id_partie'],looted=>check_looted_current_player($id_partie)));
+            echo json_encode(array(id_partie => $_POST['id_partie'],looted=>check_looted_current_player($id_partie)));
          
        
 
         } else {
-
-            echo "false";
+            echo json_encode(array(id_partie => "false"));
         }
 }
 
