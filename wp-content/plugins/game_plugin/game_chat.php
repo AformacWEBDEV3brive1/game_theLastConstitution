@@ -67,12 +67,36 @@ function refresh_chat($id_partie) {
     }
 }
 
-function player_in_his_city($id_partie, $equipe) {
-    $position = get_position(false, $id_partie);
-    if (($position == "0;0" && $equipe == 1) || ($position == "19;19" && $equipe == 2)) {
-        return true;
+function player_in_his_city($id_partie, $equipe, $all = false) {
+    
+    if($all == "true"){
+        global $wpdb;
+         //error_log($wpdb->prepare("SELECT `position` FROM `games_data` WHERE id_partie = '%d' AND equipe = '%d' ", $id_partie, $equipe));
+//        $positions = get_position("myteam", $id_partie);
+            $team_position_joueur = $wpdb->get_results($wpdb->prepare("SELECT `position` FROM `games_data` WHERE id_partie = '%d' AND equipe = '%d' ", $id_partie, $equipe));
+           
+//      $team_position_joueur = $wpdb->get_results($query_team_position_joueur);
+//        error_log($positions);
+      $i = 0;
+      error_log(serialize($team_position_joueur));
+      foreach ($team_position_joueur as $value[$i]){
+          error_log("aaaaaaaaaaaaaaa" . $i);
+//          error_log("cccccccccccccccccccccccccccc" . $value[$i]);
+          if (($value == "0;0" && $equipe == 1) || ($value == "19;19" && $equipe == 2)){
+             $i++;  
+             error_log("bbbbbbbbbbbbbbbbb" . $i);
+          }
+         
+      }
+      echo $i;
+        // compter nombre personne dans 0,0 ou 16,16
+    }elseif($all == false){
+        $position = get_position(false, $id_partie);
+        if (($position == "0;0" && $equipe == 1) || ($position == "19;19" && $equipe == 2)) {
+            return true;
+        }
+        return false;
     }
-    return false;
 }
 
 function send_message($id_partie, $tag, $message) {
@@ -166,3 +190,4 @@ function check_message($id_joueur, $id_partie, $message, $equipe, $tag) {
         return $e->getMessage();
     }
 }
+player_in_his_city(1, 1, $all = true);

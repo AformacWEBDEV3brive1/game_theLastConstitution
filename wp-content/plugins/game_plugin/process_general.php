@@ -107,7 +107,7 @@ function get_position($all = false, $id_partie) {
         } catch (PDOException $e) {
             return $e->getMessage();
         }
-    } else {
+    } elseif($all == true) {
         try {
             $db = openBDD(); //fonction pour ouvrir acces BDD
             $bdd = $db->prepare('SELECT id_joueur, position FROM games_data WHERE id_partie = ?');
@@ -119,6 +119,10 @@ function get_position($all = false, $id_partie) {
         } catch (PDOException $e) {
             return $e->getMessage();
         }
+    } elseif($all == "myteam)"){
+     
+//      return $team_position_joueur;
+        //retourne tableau contenant id joueurs de ma team
     }
 }
 
@@ -159,18 +163,14 @@ function move($id_partie, $new_position) {
         $id_joueur = get_current_user_id();
 
         if (check_move($id_joueur, $new_position, $id_partie)) {
-            set_position($id_joueur, $new_position, $id_partie);
-            //echo $_POST["id_partie"];
-           
+            set_position($id_joueur, $new_position, $id_partie);       
          
-
- echo json_encode(array(id_partie => $_POST['id_partie'],looted=>check_looted_current_player($id_partie)));
+            echo json_encode(array(id_partie => $_POST['id_partie'],looted=>check_looted_current_player($id_partie)));
          
        
 
         } else {
-
-            echo "false";
+            echo json_encode(array(id_partie => "false"));
         }
 }
 
@@ -253,6 +253,7 @@ function get_games($id_joueur) {
 
         $result = $bdd->fetchAll();
         return $result;
+       
     } catch (PDOException $e) {
         return $e->getMessage();
     }

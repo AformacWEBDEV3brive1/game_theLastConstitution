@@ -47,7 +47,7 @@
             <?php
             foreach (get_games(get_current_user_id()) as $value) {
                 echo $value[0];
-               echo "<a href='index.php/jeu?id=" . $value[0] . "' > CACA </a><br/>";
+               echo "<a href='index.php/jeu?id=" . $value[0] . "' >-->rejoindre partie<--</a><br/>";
              }
             ?>
         </p>
