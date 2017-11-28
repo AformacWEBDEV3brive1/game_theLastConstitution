@@ -31,14 +31,3 @@ function loot_zone(id_partie){
 }
 
 
-function loot_recup(){
-    
-    $.ajax({url: '../../wp-content/plugins/game_plugin/process_loot.php',
-    type: 'post',
-     data: {info: 'loot_get_random_type'},
-     success: function (output){
-         console.log($type);
-     }
-});
-
-}

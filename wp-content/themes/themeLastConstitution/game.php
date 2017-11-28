@@ -434,6 +434,19 @@
             </button>
             <p id="resultat"></p>
         </div>
+        
+        <?php 
+            if($id_partie_get == 99)
+            {
+               
+                ?>
+                	<form method="post" action="../../wp-content/plugins/game_plugin/game_demo.php">
+                		<input type="submit" value="Reset démo" name="reset_demo"></input>
+                	</form>
+						
+                <?php                 
+            }
+        ?>
 
     </body>
 
