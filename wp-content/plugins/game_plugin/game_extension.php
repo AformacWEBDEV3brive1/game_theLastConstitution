@@ -191,8 +191,7 @@ ADD KEY `class_objet` (`class_objet`),
 ADD KEY `id_class` (`id_class`),
 ADD KEY `id_type` (`id_type`);
 
-ALTER TABLE `coffre_ville`
-ADD PRIMARY KEY (id_objet);
+
 
 ALTER TABLE `objet`
 ADD PRIMARY KEY (`id_objet`),
@@ -255,21 +254,21 @@ INSERT INTO `objet` (`id_objet`, `nom_objet`, `id_type`, `id_class`, `valeur_obj
 (3, 'fusil artisanal ', 1, 3, 30),
 (4, 'sabre', 1, 4, 40),
 (5, 'canon', 1, 5, 50),
-(6, 'bouclier', 2, 1, 10),
-(7, 'armure', 2, 2, 20),
-(8, 'plastron', 2, 3, 30),
-(9, 'combinaison', 2, 4, 40),
-(10, 'bouclier', 2, 5, 50),
-(11, 'nakamura', 3, 1, 10),
-(12, 'vespa', 3, 2, 20),
-(13, 'delorean', 3, 3, 30),
-(14, 'monster truck', 3, 4, 40),
-(15, 'apache', 3, 5, 50),
-(16, 'fruit', 4, 1, 10),
-(17, 'légume', 4, 2, 20),
-(18, 'viande', 4, 3, 30),
-(19, 'ration', 4, 4, 40),
-(20, 'capsule', 4, 5, 50);
+(6, 'bouclier', 2, 6, 10),
+(7, 'armure', 2, 7, 20),
+(8, 'plastron', 2, 8, 30),
+(9, 'combinaison', 2, 9, 40),
+(10, 'bouclier', 2, 10, 50),
+(11, 'nakamura', 3, 11, 10),
+(12, 'vespa', 3, 12, 20),
+(13, 'delorean', 3, 13, 30),
+(14, 'monster truck', 3, 14, 40),
+(15, 'apache', 3, 15, 50),
+(16, 'fruit', 4, 16, 10),
+(17, 'légume', 4, 17, 20),
+(18, 'viande', 4, 18, 30),
+(19, 'ration', 4, 19, 40),
+(20, 'capsule', 4, 20, 50);
 
 INSERT INTO `level_batiments` (`limite_xp`, `niveau`) VALUES 
 

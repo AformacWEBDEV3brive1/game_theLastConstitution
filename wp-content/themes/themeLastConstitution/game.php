@@ -34,6 +34,7 @@
     <?php
     get_template_part("../../plugins/game_plugin/process_general.php");
     get_template_part("../../plugins/game_plugin/process_event.php");
+    get_template_part("../../plugins/game_plugin/process_loot.php");
 
     if (is_user_logged_in()) {
         $id_partie_get;
@@ -179,7 +180,8 @@
                                     <div class="chat">
                                         <div id="chat_case">
                                             <?php
-                                            $chat_case = load_chat_by_tag("case", $id_partie_get);
+                                           $chat_case = load_chat_by_tag("case", $id_partie_get);
+
                                             // error_log("chat case: " . $chat_case);
                                             if ($chat_case != null) {
                                                 foreach ($chat_case as $value) {
@@ -210,7 +212,10 @@
                                 <h2 class="text-center">
                                     Zone <span id="nom_position"></span>
                                 </h2>
-                                <p id="zoneJoueur"></p>
+                                <button id="button_fouiller" onclick="loot_zone(<?php echo $id_partie_get ?>)" >FOUILLER ZONE</button>
+                                <p id="zone_joueur"></p>
+
+
                             </div>
                             <div id="coffre" class="hidden">
                                 <h2 class="text-center"> Coffre de Ville </h2>
