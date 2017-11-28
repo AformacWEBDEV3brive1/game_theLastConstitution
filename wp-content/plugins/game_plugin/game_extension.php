@@ -287,10 +287,10 @@ INSERT INTO `type_batiments` (`type`, `nom`) VALUES
 
 INSERT INTO `batiments` (`id`, `id_partie`, `equipe`, `xp`, `niveau`, `type`) VALUES
 
-(1, 1, 1, 0, 0, 1),
-(2, 1, 1, 0, 0, 2),
-(3, 1, 1, 0, 0, 3),
-(4, 1, 1, 0, 0, 4);
+(1, 1, 1, 10, 1, 1),
+(2, 1, 1, 10, 1, 2),
+(3, 1, 1, 10, 1, 3),
+(4, 1, 1, 10, 1, 4);
 
 
 INSERT INTO `chat` (`id`, `id_joueur`, `position`, `equipe`, `id_partie`, `tag`, `message`, `heure`) VALUES
