@@ -8,8 +8,10 @@
 
 include_once( plugin_dir_path(__FILE__) . 'parameters/parameters.php');
 
-function create_table() {
 
+
+function create_table() {    
+    
     $wpdb = openBDD();
 
     $wpdb->query("CREATE TABLE games_data (
@@ -307,7 +309,6 @@ INSERT INTO `chat` (`id`, `id_joueur`, `position`, `equipe`, `id_partie`, `tag`,
 
 function drop_table() {
     $wpdb = openBDD();
-
     
     $wpdb->query("DROP TABLE IF EXISTS chat, games_data, games_metadata, events, batiments, level_batiments, type_batiments, coffre_ville, objet, game_player, type_objet, class_objet");
 }

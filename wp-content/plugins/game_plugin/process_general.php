@@ -160,7 +160,7 @@ function move($id_partie, $new_position) {
 
         if (check_move($id_joueur, $new_position, $id_partie)) {
             set_position($id_joueur, $new_position, $id_partie);
-            echo $_POST["id_partie"];
+           echo $_POST["id_partie"];
            
             //echo array(id_partie => $_POST['id_partie'],check_looted=>check_looted($id_partie));
 //            check_looted($id_partie);
