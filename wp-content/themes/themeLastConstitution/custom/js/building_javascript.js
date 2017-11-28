@@ -1,7 +1,6 @@
 function display_info_bat(id_partie) {
     //ajoute les id au batiments
-    console.log('display_info id_partie = '+id_partie);
-    $.ajax({url: '../../wp-content/plugins/game_plugin/process_building.php',
+       $.ajax({url: '../../wp-content/plugins/game_plugin/process_building.php',
         type: 'post',
         data: {php_function_file: 'get_ids_building', id_partie: id_partie, called_ajax_php: "process_building.php"},
         success: function (output) {
