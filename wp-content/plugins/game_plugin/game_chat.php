@@ -7,11 +7,11 @@ include_once 'process_general.php';
 
 if ($_POST["called_ajax_php"] == "game_chat.php") {
     if (isset($_POST['php_function_file'])) {
+        if ($_POST["php_function_file"] == 'refresh_chat') {
+            refresh_chat($_POST['id_partie']);
+        }
         if ($_POST["php_function_file"] == 'send_message'){
             send_message($_POST['id_partie'], $_POST['tag'], $_POST['message']);
-        }
-        if ($_POST["php_function_file"] == 'refresh_chat'){
-            refresh_chat($_POST['id_partie']);
         }
     }
 }

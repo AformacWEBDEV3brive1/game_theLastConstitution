@@ -5,10 +5,12 @@ function loot_from_coffre_ville() {
         type: 'post',
         data: {info: 'loot_get_loot_from_coffre_ville', id_partie: id_partie, id_equipe: id_equipe, php_function_file: "process_loot.php"},
         success: function (output) {
+            console.log(output);
             if (output == '') {
                 //ne fait rien si pas d'event
             } else {
                 var tab = JSON.parse(output);
+                console.log(tab);
                 var long_tab = tab.length;
 
                 var val_arme = 0;
@@ -47,7 +49,7 @@ function loot_from_coffre_ville() {
                         }
 
 
-                    } else if (tab[i]["type_objet"] == "vehicule") {
+                    } else if (tab[i]["type_objet"] == "véhicule") {
                         tab_vehicule_tmp = {'quantite': tab[i]["quantite_objet"], 'nom': tab[i]["nom_objet"], 'valeur': tab[i]["valeur_objet"], 'class': tab[i]["class_objet"]};
                         tab_vehicule.push(tab_vehicule_tmp);
                         var val_vehicule = val_vehicule + tab[i]["valeur_objet"] * tab[i]["quantite_objet"];
@@ -77,4 +79,19 @@ function loot_from_coffre_ville() {
     });
 
 }
+
+function loot_zone(id_partie){
+    
+    $.ajax({url: '../../wp-content/plugins/game_plugin/process_loot.php',
+    type: 'post',
+     data: {info: 'looted', id_partie : id_partie},
+     success: function (output){
+         //console.log(output);
+         $('#zone_joueur').html(output);
+         $('#button_fouiller').prop('disabled', true);
+     }
+});
+
+}
+
 
