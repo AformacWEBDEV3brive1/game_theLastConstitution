@@ -121,7 +121,8 @@ INSERT INTO `games_metadata` (`id_partie`, `start`) VALUES
 
 INSERT INTO `games_data` (`id_joueur`, `id_partie`, `position`, `points_action`, `equipe`) VALUES
 
-(1, 1, '7;3', 25, 1),
+
+(1, 1, '7;3', 15, 1),
 (2, 1, '8;4', 15, 1),
 (3, 1, '2;0', 12, 1),
 (4, 1, '19;19', 2, 1),
