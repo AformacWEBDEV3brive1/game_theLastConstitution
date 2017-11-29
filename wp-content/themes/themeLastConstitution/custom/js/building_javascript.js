@@ -1,7 +1,6 @@
 function display_info_bat(id_partie) {
     //ajoute les id au batiments
-    console.log('display_info id_partie = '+id_partie);
-    $.ajax({url: '../../wp-content/plugins/game_plugin/process_building.php',
+       $.ajax({url: '../../wp-content/plugins/game_plugin/process_building.php',
         type: 'post',
         data: {php_function_file: 'get_ids_building', id_partie: id_partie, called_ajax_php: "process_building.php"},
         success: function (output) {
@@ -39,7 +38,7 @@ function upgrade_building(id, id_partie) {
         type: 'post',
         data: {php_function_file: 'add_xp_to_bat', id_building: id.substring(4), id_partie: id_partie, xp: 1, called_ajax_php: "process_building.php"},
         success: function (output) {
-            console.log(output);
+            //console.log(output);
             display_info_bat(location.search.substring(4));
             $('#points_action').load('?id=' + location.search.substring(4) + ' #points_action');
         }
