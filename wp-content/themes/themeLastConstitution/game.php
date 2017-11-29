@@ -1,3 +1,8 @@
+
+<!DOCTYPE html>
+<?php
+/* Template Name: jeu */
+?>
 <html>
     <head>
         <meta charset="UTF-8">

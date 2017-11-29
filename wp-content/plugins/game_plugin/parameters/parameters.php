@@ -3,8 +3,8 @@
 
 $connexion_string = "mysql:dbname=last_constitution_wp;host=127.0.0.1;charset=utf8";
 
+$login = "root";
 $mdp = "123456";
-
 
 function openBDD()
 {
