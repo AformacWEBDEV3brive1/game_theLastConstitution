@@ -69,3 +69,29 @@
 .invent{
     margin-top: 50px;
 }
+
+.coordonnées
+{
+    margin-left:  970px;
+    word-spacing:  14.5px;
+    white-space: nowrap;
+}
+
+.coordonnées3
+{
+    left: 7px;
+    word-spacing: 6.3px;
+    position: relative;
+    margin: 0 auto 2em;
+}
+
+#coordonnées2
+{
+    vertical-align: middle;
+    line-height: 28px;
+    margin: 0;
+    position: absolute;
+    top: 36%;
+    transform: translate(0, -50%);
+    left: 1525px;
+}

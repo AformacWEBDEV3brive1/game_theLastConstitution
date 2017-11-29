@@ -5,6 +5,7 @@
  */
 
 include_once 'parameters/parameters.php';
+include_once 'process_loot.php';
 
 
 // intégration function wordpress.
@@ -18,6 +19,11 @@ if(isset($_POST["php_function_file"])){
     }else if($_POST["php_function_file"] == "process_event.php"){
         if( $_POST["info"] == "event_check_position"){
            event_check_position($_POST["id_partie"]);
+        }   
+    }else if($_POST["php_function_file"] == "process_loot.php"){
+        if( $_POST["info"] == 'loot_get_loot_from_coffre_ville'){
+           loot_get_loot_from_coffre_ville($_POST["id_equipe"], $_POST["id_partie"]);
+           error_log($tab_ressources);
         }   
     }
 }else if (isset($_POST['position']) && isset($_POST['id_partie'])) {
@@ -61,9 +67,35 @@ function get_points_action($id_joueur, $id_partie) {
 // Paramètre d'entrée est un boolean par défault a "false". Remplacer "false" par "true" pour avoir tous les joueurs.
 // Retoune la position SOIT d'un joueur SOIT de tous les joueurs (sous forme de tableau) ou une exception.
 // l'id du joueur sera le joueur connecté (get_current_user_id()).
-function get_position($all = false, $id_partie) {
-    if ($all == false) {
+function get_position_by_id($id_partie, $id_joueur) {
+    
+//    echo $id_joueur;
+        if($id_joueur == null){
         $id_joueur = get_current_user_id();
+        }
+        try {
+            $db = openBDD(); //fonction pour ouvrir acces BDD
+
+            $bdd = $db->prepare('SELECT position FROM games_data WHERE id_joueur = ? AND id_partie= ? ');
+            $bdd->execute(array($id_joueur, $id_partie));
+
+            $result = $bdd->fetch(); // retourne sous forme d'un tableau la PREMIERE valeur.
+            return $result["position"];
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    
+}
+
+
+
+
+
+function get_position($all = false, $id_partie) {
+    if ($all == false){
+        
+        $id_joueur = get_current_user_id();
+    
         try {
             $db = openBDD(); //fonction pour ouvrir acces BDD
 
@@ -128,7 +160,11 @@ function move($id_partie, $new_position) {
 
         if (check_move($id_joueur, $new_position, $id_partie)) {
             set_position($id_joueur, $new_position, $id_partie);
-            echo $_POST["id_partie"];
+           echo $_POST["id_partie"];
+           
+          //  echo array(id_partie => $_POST['id_partie'],check_looted=>check_looted($id_partie));
+//            check_looted($id_partie);
+//            looted($id_partie,$id_joueur);
         } else {
 
             echo "false";

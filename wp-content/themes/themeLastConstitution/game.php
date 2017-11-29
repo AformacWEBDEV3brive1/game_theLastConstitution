@@ -1,6 +1,3 @@
-
-<!DOCTYPE html>
-
 <?php
 /* Template Name: jeu */
 ?>
@@ -26,20 +23,27 @@
 
 
         <!-- custom css & js -->
-        <script type="text/javascript"
-        src="../../wp-content/themes/themeLastConstitution/custom/js/global.js"></script>
-        <script type="text/javascript"
-        src="../../wp-content/themes/themeLastConstitution/custom/js/event_javascript.js"></script>
-        <script type="text/javascript"
-        src="../../wp-content/themes/themeLastConstitution/custom/js/building_javascript.js"></script>
-        <link type="text/css" rel="stylesheet"
-              href="../../wp-content/themes/themeLastConstitution/style.css" />
-        <link type="text/css" rel="stylesheet"
-              href="../../wp-content/themes/themeLastConstitution/sass/style.css" />
+        <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/custom/js/global.js"></script>
+        <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/custom/js/event_javascript.js"></script>
+        <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/custom/js/loot.js"></script>
+        <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/custom/js/building_javascript.js"></script>
+        <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/style.css" />
+        <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/sass/style.css" />
     </head>
 
-
-
+      <p id="coordonnées2"></p>
+   
+    <script>
+       var text = "";
+       var $y;
+       for ($y = 0; $y < 20; $y++) 
+       {
+           text += "" + $y + "<br>";
+       }
+       document.getElementById("coordonnées2").innerHTML = text;
+    </script>
+    
+    
     <?php
     get_template_part("../../plugins/game_plugin/process_general.php");
     get_template_part("../../plugins/game_plugin/process_event.php");
@@ -65,24 +69,35 @@
         exit();
     }
     ?>
+    
+   
+    
     <body onload="display_info_bat(<?php echo $id_partie_get ?>)">
 
-        <h1 class="text-center"> Last Constitution </h1>
-
+        <h1 class="text-center"> Last Constitution </h1> 
+        
+         <html>
+             
         <div class="container">
-
+           
+           
             <div class="row">
                 <div class="col-6">
 
                     <div id="menu" class="menu">
-
+                        
+                        
+                        
                         <div id="onglets" class="row justify-content-around">
                             <button type="submit" class="btn col-2" onclick="show_menu('ville')" > Ville </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('etat')" > Etat </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('zone')" > Zone </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('chat')" > Chat </button>
-                            <button type="submit" class="btn col-2" onclick="show_menu('coffre')" > Coffre </button>
+                            <button type="submit" class="btn col-2" onclick="show_menu('coffre'),loot_from_coffre_ville()" > Coffre </button>
                         </div>
+                        
+                        
+                        
                         <div class="container">
 
                             <div id="ville"> 
@@ -114,7 +129,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                           
                             <div id="etat" class="hidden">
                                 <h2 class="text-center"> Etat </h2>
                                 <div id="pseudo">
@@ -157,7 +172,7 @@
 
                             <div id="chat" class="hidden">
                                 <h2 class="text-center">
-                                    Chat <span id="switch_chat">: ville</span>
+                                    Chat <span id="switch_chat">: ville</span> 
                                 </h2>
                                 <div id="onglets" class="row justify-content-around">
                                     <button type="submit" class="btn col-2"
@@ -222,13 +237,26 @@
                                             ?>
                                         </div>
                                     </div>
-                                    <input type="text" id="message_case">
+                                    <input type="text" id="message_case" onkeypress="handle(event)" >
+
                                     <button type="submit" class="btn btn-secondary"
-                                            onclick="send_message('case')">Envoyer</button>
+                                            onclick="send_message('case')">Envoyer
+                                    </button>
+                        
+                         <!--           
+                                <script>
+                                    function handle(e){
+                                        if(e.keyCode === 13)
+                                        {                                      
+                                            document.getElementById("message_case").style.backgroundColor = "black";
+                                        }
+                                    }
+                                </script> 
+                         -->                          
                                 </div>
                                 <p id="message_reponse"></p>
                             </div>
-
+                            
 
                             <div id="zone" class="hidden">
                                 <h2 class="text-center">
@@ -237,6 +265,68 @@
                                 <p id="zoneJoueur"></p>
 
 
+                            </div>
+                            
+                            
+                            <div id="coffre" class="hidden">
+                                <h2 class="text-center"> Coffre de Ville </h2>
+                                
+                                <div id="arme_list" class="row invent">
+                                    <p>Armes : 
+                                        <?php echo "120" ;?>
+                                    </p>
+                                        <div>
+                                            <?php
+                                                
+                                                    echo '<div class="arme item_list"></div>';
+                                                
+                                            ?>
+                                        </div>
+                                </div>
+                                
+                                
+                                <div id="vehicule_list" class="row invent">
+                                    <p>Véhicules : 
+                                        <?php echo "60" ;?>
+                                    </p>
+                                        <div>
+                                            <?php
+                                                
+                                                    echo '<div class="vehicule item_list"></div>';
+                                                
+                                            ?>
+                                        </div>
+                                </div>
+                                
+                                
+                                <div id="prot_list" class="row invent">
+                                <p>Protection : 
+                                    <?php echo "50" ;?>
+                                </p>
+                                    <div>
+                                        <?php
+                                            
+                                                echo '<div class="prot item_list"></div>';
+                                            
+                                        ?>
+                                    </div>
+                                
+                                </div>
+                                
+                                
+                                
+                                <div id="food_list" class="row invent">
+                                    <p>Nourritures : 
+                                        <?php echo "230" ;?>
+                                    </p>
+                                        <div>
+                                            <?php
+                                                
+                                                    echo '<div class="food item_list"></div>';
+                                                
+                                            ?>
+                                        </div>
+                                </div>
                             </div>
                         </div>
 
@@ -357,11 +447,12 @@
 
                     </div>
                 </div>
-
-
             </div>
         </div>
-
+        
+        <a class="coordonnées"> 0 1 2 3 4 5 6 7 8  9</a>        
+        <a class="coordonnées3"> 10 11 12 13 14 15 16 17 18 19</a>
+        
         <div id="admin">
             <button type="submit" class="btn btn-secondary"
                     onclick="tour_suivant(<?php echo $id_partie_get ?>)">Tour suivant</button>
