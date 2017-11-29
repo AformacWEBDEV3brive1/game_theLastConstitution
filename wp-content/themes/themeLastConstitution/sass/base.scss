@@ -1,0 +1,13 @@
+// $ sass --watch sass/base.scss:../style.css
+
+@import "color.scss";
+@import "global.scss";
+
+@media screen and (min-width: 768px){
+    @import "tablette/tablette_global.scss";
+
+}
+
+@media screen and (min-width: 992px){
+    @import "desktop/desktop_global.scss";
+}
