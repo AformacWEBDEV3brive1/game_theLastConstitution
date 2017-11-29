@@ -7,17 +7,29 @@ function move(id, id_partie) {
         type: 'post',
         data: {info: 'move', new_position: coo, id_partie: id_partie, php_function_file:"process_general.php"},
         success: function (output) {
+            output = JSON.parse(output);
 
-            if (output.trim() == "false") {
+            if (output["id_partie"].trim() == "false") {
                 $('#resultat').html("Pas assez de points d'action !");
             } else {
-                $('#grille').load('?id=' + $.trim(output) + ' #grille');
-                $('#points_action').load('?id=' + $.trim(output) + ' #points_action');
-                $('#position').load('?id=' + $.trim(output) + ' #position');
-                $('#chat_ville').load('?id=' + $.trim(output) + ' #chat_ville');
-                $('#chat_case').load('?id=' + $.trim(output) + ' #chat_case');
+                $('#grille').load('?id=' + output["id_partie"] + ' #grille');
+                $('#points_action').load('?id=' + output["id_partie"] + ' #points_action');
+                $('#position').load('?id=' + output["id_partie"] + ' #position');
+                $('#chat_ville').load('?id=' + output["id_partie"] + ' #chat_ville');
+                $('#chat_case').load('?id=' + output["id_partie"] + ' #chat_case');
                 event_game(id);
             }
+            if(!output["looted"]){
+                //console.log("premier");
+                  $('#zone_joueur').html('');
+                  $('#button_fouiller').prop('disabled', false);
+            }else{
+                //console.log("deuxieme");
+                $('#zone_joueur').html('Zone LOOTé DEGAGE!');
+                $('#button_fouiller').prop('disabled', true);
+                
+            }
+            
 
         }
     });
@@ -170,7 +182,9 @@ window.setInterval(function(){
         	
         	if(output != "[]")
         	{
+        		//console.log(output);
         		output = JSON.parse(output);
+        		
                 for (var i = 0, len = output.length; i < len; i++) {
                 	if(output[i].tag == "ville")
 	        		{
@@ -211,4 +225,3 @@ function send_message(tag)
 	    });
 	}
 }
-

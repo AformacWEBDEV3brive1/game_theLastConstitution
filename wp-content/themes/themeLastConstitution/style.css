@@ -95,3 +95,18 @@
     transform: translate(0, -50%);
     left: 1525px;
 }
+.img1{
+    background-image: url(images/herbe1.png);
+}
+.img2{
+    background-image: url(images/herbe2.png);
+}
+.img3{
+    background-image: url(images/herbe3.png);
+}
+.img4{
+    background-image: url(images/herbe1.png);
+}
+.img_map{
+    background-size:100%;
+}
