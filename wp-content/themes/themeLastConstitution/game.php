@@ -31,6 +31,19 @@
         <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/sass/style.css" />
     </head>
 
+      <p id="coordonnées2"></p>
+   
+    <script>
+       var text = "";
+       var $y;
+       for ($y = 0; $y < 20; $y++) 
+       {
+           text += "" + $y + "<br>";
+       }
+       document.getElementById("coordonnées2").innerHTML = text;
+    </script>
+    
+    
     <?php
     get_template_part("../../plugins/game_plugin/process_general.php");
     get_template_part("../../plugins/game_plugin/process_event.php");
@@ -57,6 +70,9 @@
         exit();
     }
     ?>
+    
+   
+    
     <body onload="display_info_bat(<?php echo $id_partie_get ?>)">
         <h1 class="text-center"> Last Constitution </h1>
         <div class="container">
@@ -70,6 +86,9 @@
                             <button type="submit" class="btn col-2" onclick="show_menu('chat')" > Chat </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('coffre'), loot_from_coffre_ville()" > Coffre </button>
                         </div>
+                        
+                        
+                        
                         <div class="container">
                             <div id="ville"> 
                                 <h2 class="text-center"> Ville </h2>
@@ -138,7 +157,7 @@
                             </div>
                             <div id="chat" class="hidden">
                                 <h2 class="text-center">
-                                    Chat <span id="switch_chat">: ville</span>
+                                    Chat <span id="switch_chat">: ville</span> 
                                 </h2>
                                 <div id="onglets" class="row justify-content-around">
                                     <button type="submit" class="btn col-2"
@@ -202,9 +221,22 @@
                                             ?>
                                         </div>
                                     </div>
-                                    <input type="text" id="message_case">
+                                    <input type="text" id="message_case" onkeypress="handle(event)" >
+
                                     <button type="submit" class="btn btn-secondary"
-                                            onclick="send_message('case')">Envoyer</button>
+                                            onclick="send_message('case')">Envoyer
+                                    </button>
+                        
+                         <!--           
+                                <script>
+                                    function handle(e){
+                                        if(e.keyCode === 13)
+                                        {                                      
+                                            document.getElementById("message_case").style.backgroundColor = "black";
+                                        }
+                                    }
+                                </script> 
+                         -->                          
                                 </div>
                                 <p id="message_reponse"></p>
                             </div>
@@ -356,6 +388,10 @@
                 </div>
             </div>
         </div>
+        
+        <a class="coordonnées"> 0 1 2 3 4 5 6 7 8  9</a>        
+        <a class="coordonnées3"> 10 11 12 13 14 15 16 17 18 19</a>
+        
         <div id="admin">
             <button type="submit" class="btn btn-secondary"
                     onclick="tour_suivant(<?php echo $id_partie_get ?>)">Tour suivant</button>
