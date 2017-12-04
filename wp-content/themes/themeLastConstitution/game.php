@@ -212,8 +212,12 @@
                                 <h2 class="text-center">
                                     Zone <span id="nom_position"></span>
                                 </h2>
+                               
                                 <button id="button_fouiller" onclick="loot_zone(<?php echo $id_partie_get ?>)" >FOUILLER ZONE</button>
                                 <p id="zone_joueur"></p>
+                                
+                                 <p id="zone_list_player" ></p>
+                                
 
 
                             </div>
