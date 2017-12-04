@@ -1,4 +1,6 @@
 
+
+
 function move(id, id_partie) {
     var coo = id.className.split(' ')[0];
     $.ajax({url: '../../wp-content/plugins/game_plugin/process_general.php',
