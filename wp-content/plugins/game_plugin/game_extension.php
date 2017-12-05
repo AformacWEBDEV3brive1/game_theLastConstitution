@@ -24,7 +24,7 @@ function create_table() {
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `games_metadata` (
-  `id_partie` int NOT NULL,
+  `id_partie` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `start` timestamp NOT NULL
   
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -88,8 +88,7 @@ ADD PRIMARY KEY (type);
 ALTER TABLE `games_data`
 ADD PRIMARY KEY (id_joueur,id_partie);
 
-ALTER TABLE `games_metadata`
-ADD PRIMARY KEY (id_partie);
+
 
 ALTER TABLE `games_data`
 ADD CONSTRAINT `games_data_ibfk_1` FOREIGN KEY (`id_partie`) REFERENCES `games_metadata` (`id_partie`) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -316,7 +315,7 @@ INSERT INTO `chat` (`id`, `id_joueur`, `position`, `equipe`, `id_partie`, `tag`,
 function drop_table() {
     $wpdb = openBDD();
     
-    $wpdb->query("DROP TABLE IF EXISTS coffre_ville, objet, class_objet, type_objet, looted, events, game_player, chat, games_data, batiments, level_batiments, type_batiments, games_metadata");
+    $wpdb->query("DROP TABLE IF EXISTS lobby ,coffre_ville, objet, class_objet, type_objet, looted, events, game_player, chat, games_data, batiments, level_batiments, type_batiments, games_metadata");
 }
 
 register_activation_hook(__FILE__, 'create_table');
