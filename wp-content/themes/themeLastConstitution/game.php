@@ -30,20 +30,7 @@
         <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/style.css" />
         <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/sass/style.css" />
     </head>
-
-      <p id="coordonnées2"></p>
-   
-    <script>
-       var text = "";
-       var $y;
-       for ($y = 0; $y < 20; $y++) 
-       {
-           text += "" + $y + "<br>";
-       }
-       document.getElementById("coordonnées2").innerHTML = text;
-    </script>
-    
-    
+        
     <?php
     get_template_part("../../plugins/game_plugin/process_general.php");
     get_template_part("../../plugins/game_plugin/process_event.php");
@@ -73,7 +60,7 @@
     
    
     
-    <body onload="display_info_bat(<?php echo $id_partie_get ?>)">
+    <body>
         <h1 class="text-center"> Last Constitution </h1>
         <div class="container">
             <div class="row">
@@ -389,8 +376,6 @@
             </div>
         </div>
         
-        <a class="coordonnées"> 0 1 2 3 4 5 6 7 8  9</a>        
-        <a class="coordonnées3"> 10 11 12 13 14 15 16 17 18 19</a>
         
         <div id="admin">
             <button type="submit" class="btn btn-secondary"
