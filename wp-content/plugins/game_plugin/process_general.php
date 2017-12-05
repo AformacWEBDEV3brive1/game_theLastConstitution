@@ -6,44 +6,51 @@
 
 include_once 'parameters/parameters.php';
 include_once 'process_loot.php';
+include_once 'process_lobby.php';
 
 
 // intégration function wordpress.
 require_once( explode("wp-content", __FILE__)[0] . "wp-load.php" );
 
-if(isset($_POST["php_function_file"])){
-    if($_POST["php_function_file"] == "process_general.php"){
-        if( $_POST["info"] == "move"){
-           move($_POST["id_partie"], $_POST["new_position"]);
-        }    
-    }else if($_POST["php_function_file"] == "process_event.php"){
-        if( $_POST["info"] == "event_check_position"){
-           event_check_position($_POST["id_partie"]);
-        }   
-    }else if($_POST["php_function_file"] == "process_loot.php"){
-        if( $_POST["info"] == 'loot_get_loot_from_coffre_ville'){
-            
-           loot_get_coffre_ville($_POST["id_equipe"], $_POST["id_partie"]);
-           error_log($tab_ressources);
-        }   
+if (isset($_POST["php_function_file"])) {
+    if ($_POST["php_function_file"] == "process_general.php") {
+        error.log("coucou");
+        if ($_POST["info"] == "move") {
+            move($_POST["id_partie"], $_POST["new_position"]);
+        }
+    } else if ($_POST["php_function_file"] == "process_event.php") {
+        error.log("coucou1");
+        if ($_POST["info"] == "event_check_position") {
+            event_check_position($_POST["id_partie"]);
+        }
+    } else if ($_POST["php_function_file"] == "process_loot.php") {
+        error.log("coucou2");
+        if ($_POST["info"] == 'loot_get_loot_from_coffre_ville') {
+
+            loot_get_coffre_ville($_POST["id_equipe"], $_POST["id_partie"]);
+            error_log($tab_ressources);
+        }
+    } else if ($_POST["php_function_file"] == "process_lobby.php") {
+        error.log("coucou3");
+        if ($_POST["info"] == "find_game") {
+            find_game
+            ($_POST["info"]);
+        }
     }
-}else if (isset($_POST['position']) && isset($_POST['id_partie'])) {
+} else if (isset($_POST['position']) && isset($_POST['id_partie'])) {
     $info = $_POST['info'];
     $position = $_POST['position'];
     $id_partie = $_POST['id_partie'];
-    $info($position,$id_partie);
-    
+    $info($position, $id_partie);
 } else if (isset($_POST['id_partie'])) {
     $info = $_POST['info'];
     $id_partie = $_POST['id_partie'];
     $info($id_partie);
-    
 } else if (isset($_POST['position'])) {
     $info = $_POST['info'];
     $position = $_POST['position'];
     $id_partie = $_POST['id_partie'];
     $info($position, $id_partie);
-    
 } else if (isset($_POST['info'])) {
     $info = $_POST['info'];
     $info();
@@ -69,31 +76,29 @@ function get_points_action($id_joueur, $id_partie) {
 // Retoune la position SOIT d'un joueur SOIT de tous les joueurs (sous forme de tableau) ou une exception.
 // l'id du joueur sera le joueur connecté (get_current_user_id()).
 function get_position_by_id($id_partie, $id_joueur) {
-    
+
 //    echo $id_joueur;
-        if($id_joueur == null){
+    if ($id_joueur == null) {
         $id_joueur = get_current_user_id();
-        }
-        try {
-            $db = openBDD(); //fonction pour ouvrir acces BDD
+    }
+    try {
+        $db = openBDD(); //fonction pour ouvrir acces BDD
 
-            $bdd = $db->prepare('SELECT position FROM games_data WHERE id_joueur = ? AND id_partie= ? ');
-            $bdd->execute(array($id_joueur, $id_partie));
+        $bdd = $db->prepare('SELECT position FROM games_data WHERE id_joueur = ? AND id_partie= ? ');
+        $bdd->execute(array($id_joueur, $id_partie));
 
-            $result = $bdd->fetch(); // retourne sous forme d'un tableau la PREMIERE valeur.
-            return $result["position"];
-        } catch (PDOException $e) {
-            return $e->getMessage();
-        }
-    
+        $result = $bdd->fetch(); // retourne sous forme d'un tableau la PREMIERE valeur.
+        return $result["position"];
+    } catch (PDOException $e) {
+        return $e->getMessage();
+    }
 }
 
-
 function get_position($all = false, $id_partie) {
-    if ($all == false){
-        
+    if ($all == false) {
+
         $id_joueur = get_current_user_id();
-    
+
         try {
             $db = openBDD(); //fonction pour ouvrir acces BDD
 
@@ -105,7 +110,7 @@ function get_position($all = false, $id_partie) {
         } catch (PDOException $e) {
             return $e->getMessage();
         }
-    } elseif($all == true) {
+    } elseif ($all == true) {
         try {
             $db = openBDD(); //fonction pour ouvrir acces BDD
             $bdd = $db->prepare('SELECT id_joueur, position FROM games_data WHERE id_partie = ?');
@@ -117,8 +122,8 @@ function get_position($all = false, $id_partie) {
         } catch (PDOException $e) {
             return $e->getMessage();
         }
-    } elseif($all == "myteam)"){
-     
+    } elseif ($all == "myteam)") {
+
 //      return $team_position_joueur;
         //retourne tableau contenant id joueurs de ma team
     }
@@ -158,18 +163,15 @@ function delete_partie($id_partie) {
 // l'id du joueur sera le joueur connecté (get_current_user_id()).
 
 function move($id_partie, $new_position) {
-        $id_joueur = get_current_user_id();
+    $id_joueur = get_current_user_id();
 
-        if (check_move($id_joueur, $new_position, $id_partie)) {
-            set_position($id_joueur, $new_position, $id_partie);       
-         
-            echo json_encode(array(id_partie => $_POST['id_partie'],looted=>check_looted_current_player($id_partie)));
-         
-       
+    if (check_move($id_joueur, $new_position, $id_partie)) {
+        set_position($id_joueur, $new_position, $id_partie);
 
-        } else {
-            echo json_encode(array(id_partie => "false"));
-        }
+        echo json_encode(array(id_partie => $_POST['id_partie'], looted => check_looted_current_player($id_partie)));
+    } else {
+        echo json_encode(array(id_partie => "false"));
+    }
 }
 
 // Paramètres d'entrée: id_joueur et nouvelle_position (sous la forme x;y)
@@ -251,7 +253,6 @@ function get_games($id_joueur) {
 
         $result = $bdd->fetchAll();
         return $result;
-       
     } catch (PDOException $e) {
         return $e->getMessage();
     }
@@ -305,7 +306,6 @@ function get_ids_from_cell($position, $id_partie) {
     }
 }
 
-
 //paramètre tableau d'id de joueurs
 //utilise une fonction wp
 //retourne tableau de login
@@ -330,8 +330,6 @@ function login_redirection($redirect_to, $request, $user) {
 }
 
 add_filter('login_redirect', 'login_redirection', 10, 3);
-
-
 
 //parametre : $id_partie
 //sort des chiffres aleatoires pour les positions et les types

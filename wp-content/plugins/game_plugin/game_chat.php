@@ -88,7 +88,7 @@ function player_in_his_city($id_partie, $equipe, $all = false) {
           }
          
       }
-      echo $i;
+//      echo $i;
         // compter nombre personne dans 0,0 ou 16,16
     }elseif($all == false){
         $position = get_position(false, $id_partie);
@@ -190,4 +190,4 @@ function check_message($id_joueur, $id_partie, $message, $equipe, $tag) {
         return $e->getMessage();
     }
 }
-player_in_his_city(1, 1, $all = true);
+//player_in_his_city(1, 1, $all = true);
