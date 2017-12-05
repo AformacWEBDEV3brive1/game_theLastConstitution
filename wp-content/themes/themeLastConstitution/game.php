@@ -31,18 +31,7 @@
         <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/sass/style.css" />
     </head>
 
-      <p id="coordonnées2"></p>
    
-    <script>
-       var text = "";
-       var $y;
-       for ($y = 0; $y < 20; $y++) 
-       {
-           text += "" + $y + "<br>";
-       }
-       document.getElementById("coordonnées2").innerHTML = text;
-    </script>
-    
     
     <?php
     get_template_part("../../plugins/game_plugin/process_general.php");
@@ -77,7 +66,7 @@
         <h1 class="text-center"> Last Constitution </h1>
         <div class="container">
             <div class="row">
-                <div class="col-6">
+                <div class="col-5">
                     <div id="menu" class="menu">
                         <div id="onglets" class="row justify-content-around">
                             <button type="submit" class="btn col-2" onclick="show_menu('ville')" > Ville </button>
@@ -226,17 +215,18 @@
                                     <button type="submit" class="btn btn-secondary"
                                             onclick="send_message('case')">Envoyer
                                     </button>
-                        
-                         <!--           
+                   <!--     
+                                    
                                 <script>
-                                    function handle(e){
-                                        if(e.keyCode === 13)
-                                        {                                      
-                                            document.getElementById("message_case").style.backgroundColor = "black";
-                                        }
+                                  $(document).unbind("message_case").keyup(function(e){ 
+                                    var code = e.which; 
+                                    if(code==13)
+                                    {
+                                        $("button").click();
                                     }
-                                </script> 
-                         -->                          
+                                });
+                                </script> -->
+                                                  
                                 </div>
                                 <p id="message_reponse"></p>
                             </div>
@@ -331,8 +321,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
-                    <div id="grille" class="">    
+                <div class="col-7">
+                    <div id="grille " class="">    
                         <?php
                         if (isset($id_partie_get)) {
                             $pos = get_position(false, $id_partie_get);
@@ -340,15 +330,33 @@
                             $tableau_position_joueur = get_id_mate($id_partie_get, get_team(get_current_user_id(), $id_partie_get)); // get_position(true);
                             $tuile = array('img4', 'img3', 'img2', 'img1');
 
-
+                            
                             for ($y = 0; $y < 20; $y ++) :
-                                ?>
+                      
+                                
+                                {
+                                  echo " <p style=text-indent:34.5em;position:absolute;>  $y  ";
+                                  }
+                                  ?>
+                        
                                 <div class=" row ">
                                     <?php
                                     for ($x = 0; $x < 20; $x++):
+                                        
+                                        
+                                        {
+                                            print "<p style=position:absolute;margin-top:555px;>  $x  ";
+                                        }
+                                        
+                                      
+                                        
                                         $color = rand(0, count($tuile) - 1);
                                         $bgcase = $tuile[$color];
                                         ?> 
+                                    
+                                    
+                                    
+                                    
                                         <div
                                              class="<?php echo $x ?><?php echo ';' . $y ?> cellule <?php echo $bgcase ?> img_map"
                                              onclick="move(this, <?php echo $id_partie_get ?>)">
@@ -385,8 +393,7 @@
             </div>
         </div>
         
-        <a class="coordonnées"> 0 1 2 3 4 5 6 7 8  9</a>        
-        <a class="coordonnées3"> 10 11 12 13 14 15 16 17 18 19</a>
+      
         
         <div id="admin">
             <button type="submit" class="btn btn-secondary"
@@ -410,6 +417,10 @@
             <?php
         }
         ?>
+        
+        
+        
+       
 
     </body>
 </html>
