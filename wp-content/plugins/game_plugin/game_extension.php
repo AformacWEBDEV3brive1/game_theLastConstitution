@@ -76,6 +76,20 @@ CREATE TABLE `looted` (
   
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE `minuit` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `id_partie` int NOT NULL,
+  `decompte_joueurs_equipe_1` int NOT NULL,
+  `decompte_joueurs_equipe_2` int NOT NULL,
+  `score_equipe_1` int NOT NULL,
+  `score_equipe_2` int NOT NULL,
+  `score_rapidite_equipe_1` int NOT NULL,
+  `score_rapidite_equipe_2` int NOT NULL, 
+  `points_victoire_equipe_1` int NOT NULL,
+  `points_victoire_equipe_2` int NOT NULL,
+  `bataille` timestamp NOT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 ALTER TABLE `batiments`
 ADD PRIMARY KEY (id);
 
@@ -317,7 +331,7 @@ INSERT INTO `chat` (`id`, `id_joueur`, `position`, `equipe`, `id_partie`, `tag`,
 function drop_table() {
     $wpdb = openBDD();
     
-    $wpdb->query("DROP TABLE IF EXISTS coffre_ville, objet, class_objet, type_objet, looted, events, game_player, chat, games_data, batiments, level_batiments, type_batiments, games_metadata");
+    $wpdb->query("DROP TABLE IF EXISTS minuit, coffre_ville, objet, class_objet, type_objet, looted, events, game_player, chat, games_data, batiments, level_batiments, type_batiments, games_metadata");
 }
 
 register_activation_hook(__FILE__, 'create_table');
