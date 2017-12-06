@@ -1,4 +1,6 @@
 
+
+
 function move(id, id_partie) {
     var coo = id.className.split(' ')[0];
     $.ajax({url: '../../wp-content/plugins/game_plugin/process_general.php',
@@ -52,7 +54,7 @@ function display_pseudo_oncell(id, id_partie) {
         type: 'post',
         data: {info: 'get_ids_from_cell', position: coo, id_partie: id_partie},
         success: function (output) {
-            $('#zoneJoueur').html(output);
+            $('#zone_list_player').html(output);
         }
     });
 

@@ -121,7 +121,7 @@ INSERT INTO `games_metadata` (`id_partie`, `start`) VALUES
 
 INSERT INTO `games_data` (`id_joueur`, `id_partie`, `position`, `points_action`, `equipe`) VALUES
 
-(1, 1, '7;3', 15000, 1),
+(1, 1, '7;3', 15, 1),
 (2, 1, '8;4', 15, 1),
 (3, 1, '2;0', 12, 1),
 (4, 1, '19;19', 2, 1),
@@ -329,7 +329,7 @@ CREATE TABLE `lobby` (
 function drop_table() {
     $wpdb = openBDD();
     
-    $wpdb->query("DROP TABLE IF EXISTS looted, chat, games_data, games_metadata, events, batiments, level_batiments, type_batiments, coffre_ville, objet, game_player, type_objet, class_objet");
+    $wpdb->query("DROP TABLE IF EXISTS coffre_ville, objet, class_objet, type_objet, looted, events, game_player, chat, games_data, batiments, level_batiments, type_batiments, games_metadata");
 }
 
 register_activation_hook(__FILE__, 'create_table');
