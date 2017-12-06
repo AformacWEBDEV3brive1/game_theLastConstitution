@@ -15,7 +15,6 @@ function create_slices() {
 
     $results = $wpdb->get_results("SELECT id_joueur FROM `lobby`", ARRAY_A);
 
-    print_r($results);
     
     $count = count($results);
 
@@ -28,17 +27,28 @@ function create_slices() {
     $i = 0;
     foreach ($results as $key => $result) {
         $sliced[$i][] = $result;
-
-        if (($key + 1) % $slice == 0)
-            $i++;
+        
+        if (($key + 1)  % $slice == 0 )
+        $i++;
+         
     }
-    print_r("coucou");
-    print_r($sliced);
-create_party($sliced[0]); 
-
+   
+    foreach($sliced as $partie){
+        
+        
+        
+        if(count($partie)!=$slice){
+            echo $partie.' est different ';
+            continue;
+        }else{
+            create_party($partie);
+        }
+        
+    }
+    
 }
 
-function create_party($sliced) {
+function create_party($partie) {
 
     global $wpdb;
 
@@ -55,26 +65,36 @@ function create_party($sliced) {
 
     $party = $party_last[0]->id_partie;
     
-    print_r($sliced);
+   
     
-    foreach ($sliced as $player) {
+    foreach ($partie as $player) {
 
-
-        $x = rand(0, 19);
-        $y = rand(0, 19);
-
+        print_r($player);
         //set la position X et Y
-        $position = $x . ";" . $y;
+        
+        if($player["id_joueur"]%2 == 0){
+            $position = "0;0";
+            $equipe="1";
+        }else{
+            $position = "19;19";
+            $equipe="2";
+        }
+        
+        
         
         $pts_action = 25;
         
-        echo " les resultats sont  en position ".$position." en pts action ".$pts_action." en joueur : ".$player;
+        
+        echo " les resultats sont  en position ".$position." en pts action ".$pts_action." l'id joueur : ".$player["id_joueur"]." dans l'equipe ".$equipe."\n";
+        
+        
+        
     }
 
-//    creerunepartiedanslatablepartie;
-//    choisiruneposition;
-//    
-//    setlesptsactions;
+
+
+  
+
 }
 
  create_slices();
