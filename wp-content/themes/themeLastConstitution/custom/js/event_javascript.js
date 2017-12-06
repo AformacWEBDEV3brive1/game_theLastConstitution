@@ -7,13 +7,11 @@ function event_game(id) {
         success: function (output) {
             if (output.trim()=='') {
             } else {
-
                 var tab = JSON.parse(output);
                 alert("le résultat de l'event est de " + tab[0]["type"] + tab[0]["valeur"]);   
             }
         }
     });
-
 }
 
 
