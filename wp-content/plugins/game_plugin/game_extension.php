@@ -322,6 +322,19 @@ INSERT INTO `chat` (`id`, `id_joueur`, `position`, `equipe`, `id_partie`, `tag`,
 (3, 3, '19;19', 2, 1, 'ville', 'salut', '1511172046'),
 (4, 1, '2;3', 1, 1, 'case', 'hey', '1511172050');
 
+
+CREATE TABLE `lobby` (
+  
+  `id_joueur` int NOT NULL
+  
+ 
+  
+  
+  
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
 ");
     
    error_log( var_dump( $wpdb->last_query ) );

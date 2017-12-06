@@ -171,36 +171,36 @@ function show_menu_chat(id_chat) {
 }, 2500);
 */
 
-window.setInterval(function(){
-    $.ajax({url: '../../wp-content/plugins/game_plugin/game_chat.php',
-        type: 'post',
-        data: {called_ajax_php: 'game_chat.php', php_function_file: 'refresh_chat', id_partie: location.search.substring(4)},
-        success: function (output) {
-            //verifier que output n'est pas vide   --OK
-            //verifier quel chat est concerné
-            //ajouter le message
-        	
-        	if(output != "[]")
-        	{
-        		//console.log(output);
-        		output = JSON.parse(output);
-        		
-                for (var i = 0, len = output.length; i < len; i++) {
-                	if(output[i].tag == "ville")
-	        		{
-	        			console.log("ville : " + output);
-	        			$('#chat_ville').append("<div class='row'><div class='col-3'>" + output[i].heure  + "</div><div class='col-2'>" + output[i].id_joueur + "</div><div class='col-7'>" + output[i].message + "</div></div><hr />");
-	        		}
-	        		else if(output[i].tag == "case")
-	    			{
-	        			console.log("case : " + output);
-	        			$('#chat_case').append("<div class='row'><div class='col-3'>" + output[i].heure  + "</div><div class='col-2'>" + output[i].id_joueur + "</div><div class='col-7'>" + output[i].message + "</div></div><hr />");
-	    			}
-                }
-        	}
-        }
-    });
-}, 5000);
+//window.setInterval(function(){
+//    $.ajax({url: '../../wp-content/plugins/game_plugin/game_chat.php',
+//        type: 'post',
+//        data: {called_ajax_php: 'game_chat.php', php_function_file: 'refresh_chat', id_partie: location.search.substring(4)},
+//        success: function (output) {
+//            //verifier que output n'est pas vide   --OK
+//            //verifier quel chat est concerné
+//            //ajouter le message
+//        	
+//        	if(output != "[]")
+//        	{
+//        		//console.log(output);
+//        		output = JSON.parse(output);
+//        		
+//                for (var i = 0, len = output.length; i < len; i++) {
+//                	if(output[i].tag == "ville")
+//	        		{
+//	        			console.log("ville : " + output);
+//	        			$('#chat_ville').append("<div class='row'><div class='col-3'>" + output[i].heure  + "</div><div class='col-2'>" + output[i].id_joueur + "</div><div class='col-7'>" + output[i].message + "</div></div><hr />");
+//	        		}
+//	        		else if(output[i].tag == "case")
+//	    			{
+//	        			console.log("case : " + output);
+//	        			$('#chat_case').append("<div class='row'><div class='col-3'>" + output[i].heure  + "</div><div class='col-2'>" + output[i].id_joueur + "</div><div class='col-7'>" + output[i].message + "</div></div><hr />");
+//	    			}
+//                }
+//        	}
+//        }
+//    });
+//}, 1000);
 
 function send_message(tag)
 {
