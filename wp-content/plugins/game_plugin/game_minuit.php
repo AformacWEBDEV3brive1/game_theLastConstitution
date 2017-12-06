@@ -11,7 +11,7 @@ function global_minuit()
 { 
     try
     {
-        $parties = get_all_games();
+        $parties = get_all_id_games();
              
         foreach ($parties as $value) 
         {
@@ -48,7 +48,7 @@ function global_minuit()
 }
 
 // Pour récupérer la liste de toutes les parties
-function get_all_games()
+function get_all_id_games()
 {
     try 
     {
