@@ -1,13 +1,8 @@
 <?php
 
-/*
- *
- * Plugin Name: Creation de parties ..............
- *
- */
 include_once 'process_general.php';
 
-$slice = 6;
+$slice = 4;
 
 function create_slices() {
     global $slice;
@@ -50,6 +45,7 @@ function create_slices() {
 
 function create_party($partie) {
 
+    global $slice;
     global $wpdb;
 
     $wpdb->insert('games_metadata', array(
@@ -66,22 +62,24 @@ function create_party($partie) {
     $party = $party_last[0]->id_partie;
     
    
-    
+     $k=0;
     foreach ($partie as $player) {
-
-        print_r($player);
+        
+       
         //set la position X et Y
         
-        if($player["id_joueur"]%2 == 0){
+        $equipe1=array_slice($partie,0,$slice/2);
+        
+        print_r($equipe1);
+        
+        if(null!== in_array($player["id_joueur"],$equipe1[$k])){
             $position = "0;0";
             $equipe="1";
         }else{
             $position = "19;19";
             $equipe="2";
         }
-        
-        
-        
+       
         $pts_action = 25;
         
         
@@ -104,7 +102,18 @@ function create_party($partie) {
         '%d'
     )
 );
+        $wpdb->delete(
+    'lobby',
+    array(
+        'id_joueur' => $player['id_joueur']
         
+    ),
+    array(
+        '%d'
+    )
+);
+        
+        $k++;
     }
 
 

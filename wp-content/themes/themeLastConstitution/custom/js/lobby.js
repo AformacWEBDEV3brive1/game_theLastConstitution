@@ -26,8 +26,7 @@ function subscribe_game() {
         data: {info: 'subscribe_game', called_ajax_php: "process_general.php"},
         success: function (output) {
         console.log("lacacacacacacacaca " + output);
-     // $('#button_recherche').prop('disabled', true);  
-     // get_mate();
+      $('#button_recherche').prop('disabled', true);  
       $('#gamer_mate').html("Actuellement " + output + "personnes recherchent une game");
         }
     });
