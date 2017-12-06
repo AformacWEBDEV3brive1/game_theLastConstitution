@@ -87,7 +87,23 @@ function create_party($partie) {
         
         echo " les resultats sont  en position ".$position." en pts action ".$pts_action." l'id joueur : ".$player["id_joueur"]." dans l'equipe ".$equipe."\n";
         
-        
+        $wpdb->insert(
+    'games_data',
+    array(
+        'id_joueur' => $player['id_joueur'],
+        'id_partie' => $party,
+        'position' => $position,
+        'points_action' => $pts_action,
+        'equipe'=>$equipe
+    ),
+    array(
+        '%d',
+        '%d',
+        '%s',
+        '%d',
+        '%d'
+    )
+);
         
     }
 
