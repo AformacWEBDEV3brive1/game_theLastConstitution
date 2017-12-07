@@ -150,9 +150,7 @@
                                     <div class="chat">
                                         <div id="chat_ville">
                                             <?php
-                                            // error_log("idpartieget: " . $id_partie_get);
                                             $chat_ville = load_chat_by_tag("ville", $id_partie_get);
-                                            // error_log("chat ville: " . $chat_ville);
                                             if ($chat_ville != null) {
                                                 foreach ($chat_ville as $value) {
                                                     ?> 
@@ -181,8 +179,6 @@
                                         <div id="chat_case">
                                             <?php
                                             $chat_case = load_chat_by_tag("case", $id_partie_get);
-
-                                            // error_log("chat case: " . $chat_case);
                                             if ($chat_case != null) {
                                                 foreach ($chat_case as $value) {
                                                     ?> 
@@ -318,7 +314,7 @@
                                         $bgcase = $tuile[$color];
                                         ?> 
                                         <div
-                                             class="<?php echo $x ?><?php echo ';' . $y ?> cellule <?php echo $bgcase ?> img_map"
+                                             class="<?php echo $x ?><?php echo ';' . $y ?> cellule <?php //echo $bgcase ?> img_map"
                                              onclick="move(this, <?php echo $id_partie_get ?>)">
                                                  <?php
                                                  foreach ($tableau_position_joueur as $value) {

@@ -5,12 +5,10 @@ function loot_from_coffre_ville() {
         type: 'post',
         data: {info: 'loot_get_loot_from_coffre_ville', id_partie: id_partie, id_equipe: id_equipe, php_function_file: "process_loot.php"},
         success: function (output) {
-            console.log(output);
             if (output == '') {
                 //ne fait rien si pas d'event
             } else {
                 var tab = JSON.parse(output);
-                console.log(tab);
                 var long_tab = tab.length;
 
                 var val_arme = 0;
@@ -86,7 +84,6 @@ function loot_zone(id_partie){
     type: 'post',
      data: {info: 'looted', id_partie : id_partie},
      success: function (output){
-         //console.log(output);
          $('#zone_joueur').html(output);
          $('#button_fouiller').prop('disabled', true);
      }
