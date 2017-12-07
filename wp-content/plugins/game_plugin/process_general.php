@@ -278,6 +278,7 @@ function tour_suivant() {
     //echo get_points_action(get_current_user_id(), $_POST['id_partie']);
     event_delete($_POST['id_partie']);
     create_random_event($_POST['id_partie']);
+    global_minuit();
 }
 
 //prend en paramètre une position en #;#

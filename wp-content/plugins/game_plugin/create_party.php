@@ -2,7 +2,7 @@
 
 include_once 'process_general.php';
 
-$slice = 2;
+$slice = 6;
 
 function create_slices() {
     global $slice;
@@ -67,18 +67,23 @@ function create_party($partie) {
         
        
         //set la position X et Y
-        
         $equipe1=array_slice($partie,0,$slice/2);
         
         print_r($equipe1);
-        
-        if(null!== in_array($player["id_joueur"],$equipe1[$k])){
-            $position = "0;0";
-            $equipe="1";
-        }else{
+        if(!isset($equipe1[$k])){
             $position = "19;19";
             $equipe="2";
+        }else{
+            if(null!== in_array($player["id_joueur"],$equipe1[$k])){
+                $position = "0;0";
+                $equipe="1";
+            }else{
+                $position = "19;19";
+                $equipe="2";
+            }
         }
+        
+        
        
         $pts_action = 25;
         
