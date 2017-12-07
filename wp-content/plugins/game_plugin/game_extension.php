@@ -344,6 +344,7 @@ function drop_table() {
     $wpdb = openBDD();
     
     $wpdb->query("DROP TABLE IF EXISTS lobby, minuit, coffre_ville, objet, class_objet, type_objet, looted, events, game_player, chat, games_data, batiments, level_batiments, type_batiments, games_metadata");
+
 }
 
 register_activation_hook(__FILE__, 'create_table');
