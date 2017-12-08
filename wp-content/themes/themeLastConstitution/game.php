@@ -331,7 +331,7 @@
                             $tuile = array('img4', 'img3', 'img2', 'img1');
 
                             
-                            for ($y = 0; $y < 20; $y ++) :
+                            for ($y = 1; $y < 20; $y ++) :
                       
                                 
                                 {
@@ -345,16 +345,16 @@
                                         
                                         
                                         {
-                                            print "<p style=position:absolute;margin-top:555px;>  $x  ";
+                                           echo " <p style=position:absolute;margin-top:535px;> $y  ";
                                         }
                                         
                                       
                                         
-                                        $color = rand(0, count($tuile) - 1);
-                                        $bgcase = $tuile[$color];
+                                    //    $color = rand(0, count($tuile) - 1);
+                                      //  $bgcase = $tuile[$color];
                                         ?> 
                                     
-                                    
+                            
                                     
                                     
                                         <div
@@ -393,11 +393,12 @@
             </div>
         </div>
         
-      
+        
         
         <div id="admin">
             <button type="submit" class="btn btn-secondary"
-                    onclick="tour_suivant(<?php echo $id_partie_get ?>)">Tour suivant</button>
+                    onclick="tour_suivant(<?php echo $id_partie_get ?>)">Tour suivant
+            </button>
             <p id="resultat"></p>
         </div>
         <div id="admin2">
