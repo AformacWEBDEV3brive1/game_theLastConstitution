@@ -38,6 +38,8 @@
     z-index:-1;
 
 }
+
+
 .potition_button
 {
     margin-left:  150px;
@@ -95,4 +97,7 @@ element {
 }
 
 
+.img_map {
+    background-image: url(images/herbe1.png);
+}
 

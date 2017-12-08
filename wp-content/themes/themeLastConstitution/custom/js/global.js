@@ -53,6 +53,8 @@ function tour_suivant(id_partie) {
             
             $('#points_victoire_equipe_1').html(output["points_victoire_equipe_1"]);
             $('#points_victoire_equipe_2').html(output["points_victoire_equipe_2"]);
+            
+            $('#pts_victoire').html(output["pts_victoire_totaux"]);
         }
     });
 }

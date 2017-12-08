@@ -113,11 +113,12 @@
                                 
                                 <div>
                                 Points de victoire: 
+                                <p><span id="pts_victoire">
                                 <?php 
                                 
                                 echo get_points_victoire(get_team(get_current_user_id(), $id_partie_get), $id_partie_get)
                                 
-                                ?> /10 (10pts = Victoire)
+                                ?></span> /10 (10pts = Victoire)</p>
                                 </div>
                             </div>
                             <div id="etat" class="hidden">
@@ -295,7 +296,10 @@
                     </div>
                 </div>
                 <div class="col-7">
-                    <div id="grille " class="">    
+                    <div id="grille " class="">  
+                       
+                        
+                        
                         <?php
                         if (isset($id_partie_get)) {
                             $pos = get_position(false, $id_partie_get);
@@ -313,6 +317,7 @@
                                   ?>
                         
                                 <div class=" row ">
+                                    
                                     <?php
                                     for ($x = 0; $x < 20; $x++):
                                         
@@ -323,14 +328,15 @@
                                         
                                       
                                         
-                                      $color = rand(0, count($tuile) - 1);
-                                     $bgcase = $tuile[$color];
+                         //           $color = rand(0, count($tuile) - 1);
+                           //          $bgcase = $tuile[$color];
                                         ?> 
                                     
                             
                                     
                                     
                                         <div
+                                            
                                              class="<?php echo $x ?><?php echo ';' . $y ?> cellule <?php echo $bgcase ?> img_map"
                                              onclick="move(this, <?php echo $id_partie_get ?>)">
                                                  <?php
@@ -350,22 +356,25 @@
                                                      }
                                                  }
                                                  if ($x == 0 && $y == 0) {
-                                                     echo "<div class='ville_map'></div>";
+                                                   //  echo "<div class='ville_map'></div>";
                                                  }
                                                  ?>
+                                            
                                         </div>
                                 <?php endfor; ?>
                                 </div>
+                        
                                 <?php
                             endfor
                             ;
                         }
                         ?>
+                        
                     </div>
                 </div>
             </div>
         </div>
-
+      
         <div id="admin">
             <button type="submit" class="btn btn-secondary"
                     onclick="tour_suivant(<?php echo $id_partie_get ?>)">Tour suivant
@@ -378,7 +387,9 @@
             </button>
             <p id="resultat"></p>
         </div>
-
+        
+        
+        
         <?php
         if ($id_partie_get == 99) {
             ?>
@@ -387,12 +398,13 @@
             </form>
 
             <?php
+            
         }
         ?>
         
         
         
-       
+         
 
     </body>
 </html>
