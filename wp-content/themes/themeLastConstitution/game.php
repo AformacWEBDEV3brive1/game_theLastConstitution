@@ -302,7 +302,13 @@
                                                 $bgcase = $tuile[$color];
                                                 ?> 
                                                 <div
-                                                     class="<?php echo $x ?><?php echo ';' . $y ?> cellule <?php echo $bgcase ?> img_map"
+                                                     class="<?php echo $x ?><?php echo ';' . $y ?> cellule 
+                                                     <?php 
+
+                                                            echo $bgcase ;
+                                                       
+                                                        
+                                                     ?> img_map"
                                                      onclick="move(this, <?php echo $id_partie_get ?>)">
                                                          <?php
                                                          foreach ($tableau_position_joueur as $value) {
@@ -320,7 +326,7 @@
                                                                  break;
                                                              }
                                                          }
-                                                         if ($x == 0 && $y == 0) {
+                                                         if (($x == 0 && $y == 0) || ($x == 19 && $y == 19)) {
                                                              echo "<div class='ville_map'></div>";
                                                          }
                                                          ?>
@@ -354,7 +360,7 @@
         </div>
 
         <?php
-        if ($id_partie_get == 99) {
+        if ($id_partie_get == 999999) {
             ?>
             <form method="post" action="../../wp-content/plugins/game_plugin/game_demo.php">
                 <input type="submit" value="Reset démo" name="reset_demo"></input>
