@@ -1,9 +1,10 @@
 <?php
 
-$connexion_string = "mysql:dbname=game_last_constitution_wp;host=127.0.0.1;charset=utf8";
+$connexion_string = "mysql:dbname=gameTheLastConstitution;host=127.0.0.1;charset=utf8";
 
 $login = "root";
-$mdp = "ezaltar";
+$mdp = "mega6*3zd";
+
 function openBDD()
 {
     global $connexion_string;
