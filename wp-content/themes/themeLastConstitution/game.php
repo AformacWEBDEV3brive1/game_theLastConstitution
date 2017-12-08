@@ -113,11 +113,12 @@
                                 
                                 <div>
                                 Points de victoire: 
+                                <p><span id="pts_victoire">
                                 <?php 
                                 
                                 echo get_points_victoire(get_team(get_current_user_id(), $id_partie_get), $id_partie_get)
                                 
-                                ?> /10 (10pts = Victoire)
+                                ?></span> /10 (10pts = Victoire)</p>
                                 </div>
                             </div>
                             <div id="etat" class="hidden">
