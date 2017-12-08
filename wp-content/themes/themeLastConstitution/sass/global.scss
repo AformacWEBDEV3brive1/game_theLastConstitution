@@ -143,6 +143,14 @@
     height: 100%;
 }
 
-.taille_min {
+.taille_min_global_mobile {
     min-width: 600px;
+}
+
+.taille_min_menu_mobile {
+    min-height: 500px;
+}
+
+.separation_menu_grille {
+    margin-bottom: 3em;
 }
