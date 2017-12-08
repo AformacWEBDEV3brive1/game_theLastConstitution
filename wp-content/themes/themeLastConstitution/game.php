@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <?php
 /* Template Name: jeu */
@@ -42,22 +41,33 @@
             $id_partie_get = $_GET['id'];
 
             $parties = array();
+            
+            
+            error_log("DEBUG : parties = "); 
             foreach (get_games(get_current_user_id()) as $value) {
-
+                error_log("$value[0]");
                 array_push($parties, $value[0]);
             }
 
+            error_log("DEBUG : id_partie_get = $id_partie_get");
+            error_log("fonction end_game return ".end_game($id_partie_get));
+            error_log("if in_array return ".in_array($id_partie_get, $parties));
+            
             if (!in_array($id_partie_get, $parties)) {
+                error_log('fin de zsedrfghjfgdzgethryjtkuylu');
                 wp_redirect(get_permalink(get_page_by_title('lobby')));
                 exit();
             }
             
             if (end_game($id_partie_get)) {
-                wp_redirect(get_permalink(get_page_by_title('fin-de-partie')) . "?id_partie=" . $id_partie_get);
+                error_log('fin de partie elle est terminé point');
+                $log = wp_redirect(get_permalink(get_page_by_title('fin-de-partie')) . "?id_partie=" . $id_partie_get);
+                error_log("redirect : ".$log);
                 exit();
             }
         }
     } else {
+        error_log("le else de l'enfer !!");
         wp_redirect(home_url());
         exit();
     }
@@ -65,19 +75,19 @@
     
    
     
-    <body>
+    <body class="taille_min">
         <h1 class="text-center"> Last Constitution </h1>
         <div class="container containerGlobal">
             <div class="row">
-                <div class="col-lg-6">
-                    <div id="menu" class="menu">
-                        <div id="onglets" class="">
-                            <button type="submit" class="btn" onclick="show_menu('ville')" > Ville </button>
-                            <button type="submit" class="btn" onclick="show_menu('etat')" > Etat </button>
-                            <button type="submit" class="btn" onclick="show_menu('zone')" > Zone </button>
-                            <button type="submit" class="btn" onclick="show_menu('chat')" > Chat </button>
-                            <button type="submit" class="btn" onclick="show_menu('coffre'), loot_from_coffre_ville()" > Coffre </button>
-                            <button type="submit" class="btn" onclick="show_menu('resultats')"> Journal </button>
+                <div class="col-12 col-md-12 col-lg-6">
+                    <div id="menu" class="menu container">
+                        <div id="onglets" class="row justify-content-around">
+                            <button type="submit" class="btn col-2" onclick="show_menu('ville')" > Ville </button>
+                            <button type="submit" class="btn col-2" onclick="show_menu('etat')" > Etat </button>
+                            <button type="submit" class="btn col-2" onclick="show_menu('zone')" > Zone </button>
+                            <button type="submit" class="btn col-2" onclick="show_menu('chat')" > Chat </button>
+                            <button type="submit" class="btn col-2" onclick="show_menu('coffre'), loot_from_coffre_ville()" > Coffre </button>
+                            <button type="submit" class="btn col-2" onclick="show_menu('rapport')" > Rapport </button>
                         </div>
                         
                         
@@ -87,25 +97,25 @@
                                 <h2 class="text-center"> Ville </h2>
                                 <div class="row justify-content-around">
                                     <div class="batiment caserne col-6">
-                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <button class="btn" onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
                                         <p>xp = <span class="xp"></span></p>
                                         <p>type = <span class="type"></span></p>
                                         <p>niveau = <span class="level"></span></p>
                                     </div>
                                     <div class="batiment banque col-6">
-                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <button class="btn" onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
                                         <p>xp = <span class="xp"></span></p>
                                         <p>type = <span class="type"></span></p>
                                         <p>niveau = <span class="level"></span></p>
                                     </div>
                                     <div class="batiment maison col-6">
-                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <button class="btn" onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
                                         <p>xp = <span class="xp"></span></p>
                                         <p>type = <span class="type"></span></p>
                                         <p>niveau = <span class="level"></span></p>
                                     </div>
                                     <div class="batiment hopital col-6">
-                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <button class="btn" onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
                                         <p>xp = <span class="xp"></span></p>
                                         <p>type = <span class="type"></span></p>
                                         <p>niveau = <span class="level"></span></p>
@@ -156,14 +166,6 @@
                                         echo get_position(false, $id_partie_get);
                                         ?>
                                     </p>
-                                </div>
-                                
-                                <div id="journal">
-                                	<p>Hier soir de rudes combats ont eu lieu!</p>
-                                	<p>L'équipe 1 à générer un score de combat de <span id="score_equipe_1"></span>.</p>
-                                	<p>Quant à elle l'équipe 2 à générer un score de combat de <span id="score_equipe_2"></span>.</p>
-                                	<p>L'équipe <span id="equipe_gagnante"></span> à gagné la bataille</p>
-                                	<p>Equipe 1 obtient  <span id="points_victoire_equipe_1"></span> et l'équipe 2 obtient <span id="points_victoire_equipe_2"></span>, gloire à eux! </p>
                                 </div>
                             </div>
                             <div id="chat" class="hidden">
@@ -233,17 +235,7 @@
                                     <button type="submit" class="btn btn-secondary"
                                             onclick="send_message('case')">Envoyer
                                     </button>
-                        
-                         <!--           
-                                <script>
-                                    function handle(e){
-                                        if(e.keyCode === 13)
-                                        {                                      
-                                            document.getElementById("message_case").style.backgroundColor = "black";
-                                        }
-                                    }
-                                </script> 
-                         -->                          
+                                          
                                 </div>
                                 <p id="message_reponse"></p>
                             </div>
@@ -288,7 +280,7 @@
                                     <p class="nom_food"> </p>
                                 </div>
                             </div>
-                            <div id="resultats" class="hidden">
+                            <div id="rapport" class="hidden">
                                 <h2 class="text-center">Résultats des combats</h2>
                                 <div id="journal">
                                     <p>Hier soir de rudes combats ont eu lieu!</p>
@@ -301,59 +293,64 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 grille">
-                    <div id="grille" class="">    
-                        <?php
-                        if (isset($id_partie_get)) {
-                            $pos = get_position(false, $id_partie_get);
-                            $pos_allies = get_position(true, $id_partie_get);
-                            $tableau_position_joueur = get_id_mate($id_partie_get, get_team(get_current_user_id(), $id_partie_get)); // get_position(true);
-                            $tuile = array('img4', 'img3', 'img2', 'img1');
+                <div class="col-12 col-md-12 col-lg-6">
+                    <div class="conatainer">
+                        <div class="row justify-content-around">
+                            <div id="grille" class="text-center">    
+                                <?php
+                                if (isset($id_partie_get)) {
+                                    $pos = get_position(false, $id_partie_get);
+                                    $pos_allies = get_position(true, $id_partie_get);
+                                    $tableau_position_joueur = get_id_mate($id_partie_get, get_team(get_current_user_id(), $id_partie_get)); // get_position(true);
+                                    $tuile = array('img4', 'img3', 'img2', 'img1');
 
 
-                            for ($y = 0; $y < 20; $y ++) :
-                                ?>
-                                <div class=" row ">
-                                    <?php
-                                    for ($x = 0; $x < 20; $x++):
-                                        $color = rand(0, count($tuile) - 1);
-                                        $bgcase = $tuile[$color];
-                                        ?> 
-                                        <div
-                                             class="<?php echo $x ?><?php echo ';' . $y ?> cellule <?php echo $bgcase ?> img_map"
-                                             onclick="move(this, <?php echo $id_partie_get ?>)">
-                                                 <?php
-                                                 foreach ($tableau_position_joueur as $value) {
-                                                     if ($x . ";" . $y == $value[1]) {
-                                                         echo '<div onclick="display_pseudo_oncell(this, ' . $id_partie_get . ')" id="';
-                                                         echo "joueur" . $value[0] . " ";
-                                                         echo '"class="';
-                                                         foreach ($pos_allies as $value) {
-                                                             $all_pos = $value["position"];
-                                                             if ($all_pos == $x . ';' . $y) {
-                                                                 echo $all_pos . " ";
+                                    for ($y = 0; $y < 20; $y ++) :
+                                        ?>
+                                        <div class=" row ">
+                                            <?php
+                                            for ($x = 0; $x < 20; $x++):
+                                                $color = rand(0, count($tuile) - 1);
+                                                $bgcase = $tuile[$color];
+                                                ?> 
+                                                <div
+                                                     class="<?php echo $x ?><?php echo ';' . $y ?> cellule <?php echo $bgcase ?> img_map"
+                                                     onclick="move(this, <?php echo $id_partie_get ?>)">
+                                                         <?php
+                                                         foreach ($tableau_position_joueur as $value) {
+                                                             if ($x . ";" . $y == $value[1]) {
+                                                                 echo '<div onclick="display_pseudo_oncell(this, ' . $id_partie_get . ')" id="';
+                                                                 echo "joueur" . $value[0] . " ";
+                                                                 echo '"class="';
+                                                                 foreach ($pos_allies as $value) {
+                                                                     $all_pos = $value["position"];
+                                                                     if ($all_pos == $x . ';' . $y) {
+                                                                         echo $all_pos . " ";
+                                                                     }
+                                                                 }
+                                                                 echo ' text-center perso"> X </div>';
+                                                                 break;
                                                              }
                                                          }
-                                                         echo ' text-center perso"> X </div>';
-                                                         break;
-                                                     }
-                                                 }
-                                                 if ($x == 0 && $y == 0) {
-                                                     echo "<div class='ville_map'></div>";
-                                                 }
-                                                 ?>
+                                                         if ($x == 0 && $y == 0) {
+                                                             echo "<div class='ville_map'></div>";
+                                                         }
+                                                         ?>
+                                                </div>
+                                        <?php endfor; ?>
                                         </div>
-                                <?php endfor; ?>
-                                </div>
-                                <?php
-                            endfor
-                            ;
-                        }
-                        ?>
+                                        <?php
+                                    endfor
+                                    ;
+                                }
+                                ?>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </div> 
             </div>
         </div>
+           
         
         
         <div id="admin">

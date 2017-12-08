@@ -36,6 +36,7 @@ function tour_suivant(id_partie) {
         type: 'post',
         data: {info: 'tour_suivant', id_partie: id_partie},
         success: function (output) {
+            
         	output = JSON.parse(output);
         	console.log(output);
             $('#resultat').html("action effectuée !!");
@@ -86,37 +87,37 @@ function show_menu(id_menu) {
         $("#etat").addClass("hidden");
         $("#zone").addClass("hidden");
         $("#coffre").addClass("hidden");
-        $("#resultats").addClass("hidden");
+        $("#rapport").addClass("hidden");
     } else if (id_menu == "etat") {
         $("#etat").removeClass("hidden");
         $("#chat").addClass("hidden");
         $("#ville").addClass("hidden");
         $("#zone").addClass("hidden");
         $("#coffre").addClass("hidden");
-        $("#resultats").addClass("hidden");
+        $("#rapport").addClass("hidden");
     } else if (id_menu == "chat") {
         $("#chat").removeClass("hidden");
         $("#ville").addClass("hidden");
         $("#etat").addClass("hidden");
         $("#zone").addClass("hidden");
         $("#coffre").addClass("hidden");
-        $("#resultats").addClass("hidden");
+        $("#rapport").addClass("hidden");
     } else if (id_menu == "zone") {
         $("#zone").removeClass("hidden");
         $("#chat").addClass("hidden");
         $("#ville").addClass("hidden");
         $("#etat").addClass("hidden");
         $("#coffre").addClass("hidden");
-        $("#resultats").addClass("hidden");
+        $("#rapport").addClass("hidden");
     }else if (id_menu == "coffre") {
         $("#coffre").removeClass("hidden");
         $("#chat").addClass("hidden");
         $("#ville").addClass("hidden");
         $("#etat").addClass("hidden");
         $("#zone").addClass("hidden");
-        $("#resultats").addClass("hidden");
-    }else if (id_menu == "resultats") {
-        $("#resultats").removeClass("hidden");
+        $("#rapport").addClass("hidden");
+    }else if (id_menu == "rapport") {
+        $("#rapport").removeClass("hidden");
         $("#chat").addClass("hidden");
         $("#ville").addClass("hidden");
         $("#etat").addClass("hidden");

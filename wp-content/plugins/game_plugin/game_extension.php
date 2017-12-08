@@ -405,24 +405,6 @@ ALTER TABLE `score`
 -- INSERT
 --
 
-INSERT INTO `games_metadata` (`id_partie`, `start`) VALUES
-(1, CURRENT_TIMESTAMP),
-(2, CURRENT_TIMESTAMP),
-(3, CURRENT_TIMESTAMP),
-(4, CURRENT_TIMESTAMP),
-(5, CURRENT_TIMESTAMP),
-(6, CURRENT_TIMESTAMP),
-(7, CURRENT_TIMESTAMP);
-
-INSERT INTO `games_data` (`id_joueur`, `id_partie`, `position`, `points_action`, `equipe`) VALUES
-(1, 1, '7;3', 15, 1),
-(2, 1, '8;4', 15, 1),
-(3, 1, '2;0', 12, 1),
-(4, 1, '19;19', 2, 1),
-(5, 1, '15;2', 14, 2),
-(6, 1, '5;2', 15, 2),
-(7, 1, '0;0', 15, 2);
-
 INSERT INTO `type_objet` (`id_type`, `type_objet`) VALUES
 (1, 'arme'),
 (2, 'protection'),
@@ -485,12 +467,6 @@ INSERT INTO `type_batiments` (`type`, `nom`) VALUES
 (2, 'mairie'),
 (3, 'maison'),
 (4, 'hopital');
-
-INSERT INTO `chat` (`id`, `id_joueur`, `position`, `equipe`, `id_partie`, `tag`, `message`, `heure`) VALUES
-(1, 1, '0;0', 1, 1, 'ville', 'bonjour', '1511172044'),
-(2, 2, '0;0', 1, 1, 'ville', 'yo', '1511172046'),
-(3, 3, '19;19', 2, 1, 'ville', 'salut', '1511172046'),
-(4, 1, '2;3', 1, 1, 'case', 'hey', '1511172050');
 ");
     
     error_log(var_dump($wpdb->last_query));

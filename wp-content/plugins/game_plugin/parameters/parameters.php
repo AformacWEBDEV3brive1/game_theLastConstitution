@@ -6,6 +6,7 @@ $login = "root";
 $mdp = "123456";
 
 
+
 function openBDD()
 {
     global $connexion_string;
