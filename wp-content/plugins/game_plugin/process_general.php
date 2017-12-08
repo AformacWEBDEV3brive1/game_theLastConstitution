@@ -22,11 +22,9 @@ if (isset($_POST["php_function_file"])) {
             event_check_position($_POST["id_partie"]);
         }
     } else if ($_POST["php_function_file"] == "process_loot.php") {
-        error.log("coucou2");
         if ($_POST["info"] == 'loot_get_loot_from_coffre_ville') {
 
             loot_get_coffre_ville($_POST["id_equipe"], $_POST["id_partie"]);
-            error_log($tab_ressources);
         }
     } else if ($_POST["php_function_file"] == "process_lobby.php") {
         error.log("coucou3");

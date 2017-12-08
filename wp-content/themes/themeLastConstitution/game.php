@@ -34,29 +34,32 @@
     get_template_part("../../plugins/game_plugin/process_general.php");
     get_template_part("../../plugins/game_plugin/process_event.php");
     get_template_part("../../plugins/game_plugin/process_loot.php");
-
     if (is_user_logged_in()) {
         $id_partie_get;
         if (isset($_GET['id'])) {
             $id_partie_get = $_GET['id'];
-
             $parties = array();
+            
+            
+            error_log("DEBUG : parties = "); 
             foreach (get_games(get_current_user_id()) as $value) {
-
                 array_push($parties, $value[0]);
             }
-
             if (!in_array($id_partie_get, $parties)) {
+                error_log('fin de zsedrfghjfgdzgethryjtkuylu');
                 wp_redirect(get_permalink(get_page_by_title('lobby')));
                 exit();
             }
             
             if (end_game($id_partie_get)) {
-                wp_redirect(get_permalink(get_page_by_title('fin-de-partie')) . "?id_partie=" . $id_partie_get);
+                error_log('fin de partie elle est terminé point');
+                $log = wp_redirect(get_permalink(get_page_by_title('fin-de-partie')) . "?id_partie=" . $id_partie_get);
+                error_log("redirect : ".$log);
                 exit();
             }
         }
     } else {
+        error_log("le else de l'enfer !!");
         wp_redirect(home_url());
         exit();
     }
@@ -67,7 +70,7 @@
     <body class="taille_min_global_mobile">
         
         <h1 class="text-center"> Last Constitution </h1>
-        <div class="container">
+        <div class="container containerGlobal">
             <div class="row">
                 <div class="col-12 col-md-12 col-lg-6">
                     <div id="menu" class="menu container taille_min_menu_mobile separation_menu_grille">
@@ -76,40 +79,39 @@
                             <button type="submit" class="btn col-2" onclick="show_menu('ville')" > Ville </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('etat')" > Etat </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('zone')" > Zone </button>
-                                                        <button type="submit" class="btn col-2" onclick="show_menu('zone')" > Zone </button>
-
                             <button type="submit" class="btn col-2" onclick="show_menu('chat')" > Chat </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('coffre'), loot_from_coffre_ville()" > Coffre </button>
-                            
+                            <button type="submit" class="btn col-2" onclick="show_menu('rapport')" > Rapport </button>
                         </div>
     
                         <div class="container">
                             <div id="ville"> 
                                 <h2 class="text-center"> Ville </h2>
                                 <div class="row justify-content-around">
+                                <?php $infos_batiments = get_information_buildings_return($id_partie_get); ?>
                                     <div class="batiment caserne col-6">
-                                        <button class="btn" onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
-                                        <p>xp = <span class="xp"></span></p>
-                                        <p>type = <span class="type"></span></p>
-                                        <p>niveau = <span class="level"></span></p>
+                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <p>xp = <span class="xp"><?php echo $infos_batiments[0]->xp ?></span></p>
+                                        <p>type = <span class="type"><?php echo $infos_batiments[0]->type ?></span></p>
+                                        <p>niveau = <span class="level"><?php echo $infos_batiments[0]->niveau ?></span></p>
                                     </div>
                                     <div class="batiment banque col-6">
-                                        <button class="btn" onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
-                                        <p>xp = <span class="xp"></span></p>
-                                        <p>type = <span class="type"></span></p>
-                                        <p>niveau = <span class="level"></span></p>
+                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <p>xp = <span class="xp"><?php echo $infos_batiments[1]->xp ?></span></p>
+                                        <p>type = <span class="type"><?php echo $infos_batiments[1]->type ?></span></p>
+                                        <p>niveau = <span class="level"><?php echo $infos_batiments[1]->niveau ?></span></p>
                                     </div>
                                     <div class="batiment maison col-6">
-                                        <button class="btn" onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
-                                        <p>xp = <span class="xp"></span></p>
-                                        <p>type = <span class="type"></span></p>
-                                        <p>niveau = <span class="level"></span></p>
+                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <p>xp = <span class="xp"><?php echo $infos_batiments[2]->xp ?></span></p>
+                                        <p>type = <span class="type"><?php echo $infos_batiments[2]->type ?></span></p>
+                                        <p>niveau = <span class="level"><?php echo $infos_batiments[2]->niveau ?></span></p>
                                     </div>
                                     <div class="batiment hopital col-6">
-                                        <button class="btn" onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
-                                        <p>xp = <span class="xp"></span></p>
-                                        <p>type = <span class="type"></span></p>
-                                        <p>niveau = <span class="level"></span></p>
+                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <p>xp = <span class="xp"><?php echo $infos_batiments[3]->xp ?></span></p>
+                                        <p>type = <span class="type"><?php echo $infos_batiments[3]->type ?></span></p>
+                                        <p>niveau = <span class="level"><?php echo $infos_batiments[3]->niveau ?></span></p>
                                     </div>
                                 </div>
                                 
@@ -139,11 +141,9 @@
                                 </div>
                                 <div id="num_team">
                                     <p>
-                                        Vous êtes dans l'équipe <span class="team"><b>
-                                            <?php
+                                        Vous êtes dans l'équipe <span class="team"><?php
                                             echo get_team(get_current_user_id(), $id_partie_get);
-                                            ?> 
-                                        </b>.</span>
+                                            ?></span>.
                                     Vos points de victoire totaux sont : 
                                     
                                 
@@ -162,15 +162,7 @@
                                         <b><?php
                                         echo get_position(false, $id_partie_get);
                                         ?>
-                                    </b></p>
-                                </div>
-                                
-                                <div id="journal">
-                                	<p> <em> Hier soir de rudes combats ont eu lieu! </em></p>
-                                	<p> <em> L'équipe <b>1</b> à générer un score de combat de <b><span id="score_equipe_1"></span></b>. </em></p>
-                                        <p> <em> Quant à elle l'équipe <b>2</b> à générer un score de combat de <b><span id="score_equipe_2"></span></b>. </em></p>
-                                	<p> <em> L'équipe <b><span id="equipe_gagnante"></b></span> à gagné la bataille </em></p>
-                                	<p> <em>Equipe <b>1</b> obtient point(s) de victiore <b><span id="points_victoire_equipe_1"></b></span> et l'équipe <b>2</b> obtient <b><span id="points_victoire_equipe_2"> </span></b>point(s) de victoire, gloire à eux! </em></p>
+                                    </p>
                                 </div>
                             </div>
                             <div id="chat" class="hidden">
@@ -216,8 +208,6 @@
                                         <div id="chat_case">
                                             <?php
                                             $chat_case = load_chat_by_tag("case", $id_partie_get);
-
-                                            // error_log("chat case: " . $chat_case);
                                             if ($chat_case != null) {
                                                 foreach ($chat_case as $value) {
                                                     ?> 
@@ -237,7 +227,7 @@
                                             ?>
                                         </div>
                                     </div>
-                                    <input type="text" id="message_case" onkeypress="handle(event)" >
+                                    <input type="text" id="message_case" >
 
                                     <button type="submit" class="btn btn-secondary"
                                             onclick="send_message('case')">Envoyer
@@ -285,6 +275,20 @@
                                     <p> Nourritures  </p>
                                     <p class="result_food"></p>
                                     <p class="nom_food"> </p>
+                                </div>
+                            </div>
+                            <div id="rapport" class="hidden">
+                                <h2 class="text-center">Résultats des combats</h2>
+                                <div id="journal">
+                                     </b></p>
+                                </div>
+                                
+                                <div id="journal">
+                                	<p> <em> Hier soir de rudes combats ont eu lieu! </em></p>
+                                	<p> <em> L'équipe <b>1</b> à générer un score de combat de <b><span id="score_equipe_1"></span></b>. </em></p>
+                                        <p> <em> Quant à elle l'équipe <b>2</b> à générer un score de combat de <b><span id="score_equipe_2"></span></b>. </em></p>
+                                	<p> <em> L'équipe <b><span id="equipe_gagnante"></b></span> à gagné la bataille </em></p>
+                                	<p> <em>Equipe <b>1</b> obtient point(s) de victiore <b><span id="points_victoire_equipe_1"></b></span> et l'équipe <b>2</b> obtient <b><span id="points_victoire_equipe_2"> </span></b>point(s) de victoire, gloire à eux! </em></p>
                                 </div>
                             </div>
                         </div>
@@ -361,10 +365,10 @@
         </div>
 
         <?php
-        if ($id_partie_get == 99) {
+        if ($id_partie_get == 999999) {
             ?>
             <form method="post" action="../../wp-content/plugins/game_plugin/game_demo.php">
-                <input type="submit" value="Reset démo" name="reset_demo"></input>
+                <input type="submit" value="Reset démo" name="reset_demo"/>
             </form>
 
             <?php

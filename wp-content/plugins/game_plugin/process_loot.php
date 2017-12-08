@@ -66,7 +66,6 @@ function loot_insert_coffre_ville($butin, $id_equipe, $id_partie) {
 
         $query_coffre = $wpdb->prepare("SELECT id_objet, quantite_objet FROM coffre_ville WHERE id_equipe='%d' AND id_partie='%d' AND id_objet='%d'", $id_equipe, $id_partie, $butin);
         $result_coffre = $wpdb->get_results($query_coffre);
-        error_log(serialize($result_coffre));
         //Test si objet existe dans la table
         if ($result_coffre == null) {
 
@@ -103,7 +102,7 @@ function loot_insert_coffre_ville($butin, $id_equipe, $id_partie) {
 function loot_get_coffre_ville($id_equipe, $id_partie) {
 
     global $wpdb;
-    
+    error_log("SELECT nom_objet, valeur_objet, quantite_objet, type_objet, class_objet FROM coffre_ville AS c, objet AS o, type_objet AS t, class_objet AS co WHERE co.id_class = o.id_class AND c.id_objet=o.id_objet AND o.id_type = t.id_type AND id_equipe=$id_equipe AND id_partie=$id_partie");
     try {
         $query = $wpdb->prepare("SELECT nom_objet, valeur_objet, quantite_objet, type_objet, class_objet FROM coffre_ville AS c, objet AS o, type_objet AS t, class_objet AS co WHERE co.id_class = o.id_class AND c.id_objet=o.id_objet AND o.id_type = t.id_type AND id_equipe='%d' AND id_partie='%d'",$id_equipe,$id_partie);
         $tmp = ($wpdb->get_results($query));

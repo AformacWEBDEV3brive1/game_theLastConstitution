@@ -68,6 +68,6 @@
         }
         ?>
         <br/>
-        <p>La partie est finie</p>
+        <p>La partie est finie</p><span><a href='lobby.php'><h4> --> RETOUR AU LOBBY <-- </h4></a></span>
     </body>
 </html>

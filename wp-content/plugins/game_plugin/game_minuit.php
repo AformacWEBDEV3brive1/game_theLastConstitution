@@ -297,12 +297,3 @@ function check_victoire_temps($id_partie)
     }
 
 }
-
-
-
-
-
-
-
-
-

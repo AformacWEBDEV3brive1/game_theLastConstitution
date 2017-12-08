@@ -1,6 +1,8 @@
 function loot_from_coffre_ville() {
+    
     var id_partie = location.search.substring(4);//renvoie id qui est dans l'url
     var id_equipe = $('.team').clone().children().remove().end().text().trim();//.clone() clones the selected element.children() selects the children from the cloned element .remove() removes the previously selected children .end() selects the selected element again .text() gets the text from the element without children
+    console.log("id équipe" + id_equipe);
     $.ajax({url: '../../wp-content/plugins/game_plugin/process_general.php',
         type: 'post',
         data: {info: 'loot_get_loot_from_coffre_ville', id_partie: id_partie, id_equipe: id_equipe, php_function_file: "process_loot.php"},

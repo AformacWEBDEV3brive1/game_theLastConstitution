@@ -4,6 +4,9 @@ $connexion_string = "mysql:dbname=game_last_constitution_wp;host=127.0.0.1;chars
 
 $login = "root";
 $mdp = "ezaltar";
+
+
+
 function openBDD()
 {
     global $connexion_string;
