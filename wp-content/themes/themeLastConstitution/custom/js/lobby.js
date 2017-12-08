@@ -18,6 +18,7 @@
 
 
 
+
 function subscribe_game() {
     console.log("couicou");
     $.ajax({url: '../../wp-content/plugins/game_plugin/process_lobby.php',
