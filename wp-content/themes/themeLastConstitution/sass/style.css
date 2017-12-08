@@ -1,22 +1,103 @@
-.hidden {
-  display: none; }
+.menu{
+    border: solid 2px black; 
+    height: 100%;
+}
 
-#menu #onglets {
-  margin-top: 10px; }
+.batiment{
+    border: solid 2px black;
+    /*height: 80px;
+    width: 50px;
+    margin-bottom: 50px;
+    margin-top: 20px;*/
+}
 
-#menu .container {
-  margin-top: 10px; }
+.cellule{
+    width:28px;
+    height:28px;
+    border:1px solid black;
+}
+.cellule:hover{
+    background-color:red;
+    cursor:hand;
+}
 
-#admin {
-  margin-top: 20px;
-  margin-left: 46%; }
+.perso{
+    color:black;
+    font-size:20px;
+    font-weight:900;
 
-#admin2 {
-  margin-top: -51px;
-  margin-left: 52%; }
+}
+.ville_map{
+    background-image: url(images/ville.png);
+    background-size: 28px 28px;
+    width:28px;
+    height:28px;
+    position: absolute;
+    top:0px;
+    left:0px;
+    z-index:-1;
 
-.chat {
-  overflow-y: scroll;
-  height: 200px; }
+}
 
-/*# sourceMappingURL=style.css.map */
+
+.potition_button
+{
+    margin-left:  150px;
+    margin-top: -105px;
+}
+
+.chat_spe{
+    border:1px solid black;
+}
+
+.arme{
+    background-image: url(images/arme.jpeg);
+}
+.vehicule{
+    background-image: url(images/vehicule.jpeg); 
+}
+.prot{
+    background-image: url(images/prot.png);
+}
+.food{
+    background-image: url(images/food.png);
+}
+.item_list{
+    background-size: 45px 45px;
+    width:45px;
+    height:45px;
+    float:left;
+}
+.invent{
+    margin-top: 50px;
+}
+
+
+
+
+.img1{
+    background-image: url(images/herbe1.png);
+}
+.img2{
+    background-image: url(images/herbe2.png);
+}
+.img3{
+    background-image: url(images/herbe3.png);
+}
+.img4{
+    background-image: url(images/herbe1.png);
+}
+.img_map{
+    background-size:100%;
+}
+
+element {
+    text-indent: 35em;
+    position: absolute;
+}
+
+
+.img_map {
+    background-image: url(images/herbe1.png);
+}
+

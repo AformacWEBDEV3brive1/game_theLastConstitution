@@ -1,41 +1,19 @@
-.menu{
-    border: solid 2px black; 
-    height: 100%;
-}
+.hidden {
+  display: none; }
 
-.batiment{
-    border: solid 2px black;
-    /*height: 80px;
-    width: 50px;
-    margin-bottom: 50px;
-    margin-top: 20px;*/
-}
+#menu #onglets {
+  margin-top: 10px; }
 
-.cellule{
-    width:28px;
-    height:28px;
-    border:1px solid black;
-}
-.cellule:hover{
-    background-color:red;
-    cursor:hand;
-}
+#menu .container {
+  margin-top: 10px; }
 
-.perso{
-    color:black;
-    font-size:20px;
-    font-weight:900;
+#admin {
+  margin-top: 20px;
+  margin-left: 46%; }
 
-}
-.ville_map{
-    background-image: url(images/ville.png);
-    background-size: 28px 28px;
-    width:28px;
-    height:28px;
-    position: absolute;
-    top:0px;
-    left:0px;
-    z-index:-1;
+#admin2 {
+  margin-top: -51px;
+  margin-left: 52%; }
 
 }
 
@@ -46,10 +24,11 @@
     margin-top: -105px;
 }
 
-.chat_spe{
-    border:1px solid black;
-}
+.taille {
+  width: 100%;
+  height: 100%; }
 
+<<<<<<< HEAD (5d59bc8) - la case background ne b
 .arme{
     background-image: url(images/arme.jpeg);
 }
@@ -96,8 +75,6 @@ element {
     position: absolute;
 }
 
-
 .img_map {
     background-image: url(images/herbe1.png);
 }
-
