@@ -41,9 +41,18 @@ function tour_suivant(id_partie) {
         type: 'post',
         data: {info: 'tour_suivant', id_partie: id_partie},
         success: function (output) {
+        	output = JSON.parse(output);
+        	console.log(output);
             $('#resultat').html("action effectuée !!");
-            $('#points_action').html(output);
-
+            $('#points_action').html(output["pa"]);
+            
+            $('#score_equipe_1').html(output["score_equipe_1"]);
+            $('#score_equipe_2').html(output["score_equipe_2"]);
+            
+            $('#equipe_gagnante').html(output["equipe_gagnante"]);
+            
+            $('#points_victoire_equipe_1').html(output["points_victoire_equipe_1"]);
+            $('#points_victoire_equipe_2').html(output["points_victoire_equipe_2"]);
         }
     });
 }
@@ -54,7 +63,7 @@ function display_pseudo_oncell(id, id_partie) {
         type: 'post',
         data: {info: 'get_ids_from_cell', position: coo, id_partie: id_partie},
         success: function (output) {
-            $('#zoneJoueur').html(output);
+            $('#zone_list_player').html(output);
         }
     });
 
@@ -168,8 +177,7 @@ function show_menu_chat(id_chat) {
         	}
         }
     });
-}, 2500);
-*/
+}, 2500);*/
 
 window.setInterval(function(){
     $.ajax({url: '../../wp-content/plugins/game_plugin/game_chat.php',
