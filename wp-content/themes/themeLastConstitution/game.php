@@ -34,25 +34,17 @@
     get_template_part("../../plugins/game_plugin/process_general.php");
     get_template_part("../../plugins/game_plugin/process_event.php");
     get_template_part("../../plugins/game_plugin/process_loot.php");
-
     if (is_user_logged_in()) {
         $id_partie_get;
         if (isset($_GET['id'])) {
             $id_partie_get = $_GET['id'];
-
             $parties = array();
             
             
             error_log("DEBUG : parties = "); 
             foreach (get_games(get_current_user_id()) as $value) {
-                error_log("$value[0]");
                 array_push($parties, $value[0]);
             }
-
-            error_log("DEBUG : id_partie_get = $id_partie_get");
-            error_log("fonction end_game return ".end_game($id_partie_get));
-            error_log("if in_array return ".in_array($id_partie_get, $parties));
-            
             if (!in_array($id_partie_get, $parties)) {
                 error_log('fin de zsedrfghjfgdzgethryjtkuylu');
                 wp_redirect(get_permalink(get_page_by_title('lobby')));
@@ -75,7 +67,7 @@
     
    
     
-    <body class="taille_min">
+    <body>
         <h1 class="text-center"> Last Constitution </h1>
         <div class="container containerGlobal">
             <div class="row">
@@ -96,40 +88,40 @@
                             <div id="ville"> 
                                 <h2 class="text-center"> Ville </h2>
                                 <div class="row justify-content-around">
+                                <?php $infos_batiments = get_information_buildings_return($id_partie_get); ?>
                                     <div class="batiment caserne col-6">
-                                        <button class="btn" onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
-                                        <p>xp = <span class="xp"></span></p>
-                                        <p>type = <span class="type"></span></p>
-                                        <p>niveau = <span class="level"></span></p>
+                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <p>xp = <span class="xp"><?php echo $infos_batiments[0]->xp ?></span></p>
+                                        <p>type = <span class="type"><?php echo $infos_batiments[0]->type ?></span></p>
+                                        <p>niveau = <span class="level"><?php echo $infos_batiments[0]->niveau ?></span></p>
                                     </div>
                                     <div class="batiment banque col-6">
-                                        <button class="btn" onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
-                                        <p>xp = <span class="xp"></span></p>
-                                        <p>type = <span class="type"></span></p>
-                                        <p>niveau = <span class="level"></span></p>
+                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <p>xp = <span class="xp"><?php echo $infos_batiments[1]->xp ?></span></p>
+                                        <p>type = <span class="type"><?php echo $infos_batiments[1]->type ?></span></p>
+                                        <p>niveau = <span class="level"><?php echo $infos_batiments[1]->niveau ?></span></p>
                                     </div>
                                     <div class="batiment maison col-6">
-                                        <button class="btn" onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
-                                        <p>xp = <span class="xp"></span></p>
-                                        <p>type = <span class="type"></span></p>
-                                        <p>niveau = <span class="level"></span></p>
+                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <p>xp = <span class="xp"><?php echo $infos_batiments[2]->xp ?></span></p>
+                                        <p>type = <span class="type"><?php echo $infos_batiments[2]->type ?></span></p>
+                                        <p>niveau = <span class="level"><?php echo $infos_batiments[2]->niveau ?></span></p>
                                     </div>
                                     <div class="batiment hopital col-6">
-                                        <button class="btn" onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
-                                        <p>xp = <span class="xp"></span></p>
-                                        <p>type = <span class="type"></span></p>
-                                        <p>niveau = <span class="level"></span></p>
+                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <p>xp = <span class="xp"><?php echo $infos_batiments[3]->xp ?></span></p>
+                                        <p>type = <span class="type"><?php echo $infos_batiments[3]->type ?></span></p>
+                                        <p>niveau = <span class="level"><?php echo $infos_batiments[3]->niveau ?></span></p>
                                     </div>
                                 </div>
                                 
                                 <div>
                                 Points de victoire: 
-                                <p><span id="pts_victoire">
                                 <?php 
                                 
                                 echo get_points_victoire(get_team(get_current_user_id(), $id_partie_get), $id_partie_get)
                                 
-                                ?></span> /10 (10pts = Victoire)</p>
+                                ?> /10 (10pts = Victoire)
                                 </div>
                             </div>
                             <div id="etat" class="hidden">
@@ -303,18 +295,29 @@
                                     $pos_allies = get_position(true, $id_partie_get);
                                     $tableau_position_joueur = get_id_mate($id_partie_get, get_team(get_current_user_id(), $id_partie_get)); // get_position(true);
                                     $tuile = array('img4', 'img3', 'img2', 'img1');
-
-
                                     for ($y = 0; $y < 20; $y ++) :
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
                                         ?>
                                         <div class=" row ">
                                             <?php
                                             for ($x = 0; $x < 20; $x++):
+                                                
                                                 $color = rand(0, count($tuile) - 1);
                                                 $bgcase = $tuile[$color];
                                                 ?> 
                                                 <div
-                                                     class="<?php echo $x ?><?php echo ';' . $y ?> cellule <?php echo $bgcase ?> img_map"
+                                                     class="<?php echo $x ?><?php echo ';' . $y ?> cellule 
+                                                     <?php 
+
+                                                            echo $bgcase ;
+                                                       
+                                                        
+                                                     ?> img_map"
                                                      onclick="move(this, <?php echo $id_partie_get ?>)">
                                                          <?php
                                                          foreach ($tableau_position_joueur as $value) {
@@ -332,7 +335,7 @@
                                                                  break;
                                                              }
                                                          }
-                                                         if ($x == 0 && $y == 0) {
+                                                         if (($x == 0 && $y == 0) || ($x == 19 && $y == 19)) {
                                                              echo "<div class='ville_map'></div>";
                                                          }
                                                          ?>
@@ -366,7 +369,7 @@
         </div>
 
         <?php
-        if ($id_partie_get == 99) {
+        if ($id_partie_get == 999999) {
             ?>
             <form method="post" action="../../wp-content/plugins/game_plugin/game_demo.php">
                 <input type="submit" value="Reset démo" name="reset_demo"/>

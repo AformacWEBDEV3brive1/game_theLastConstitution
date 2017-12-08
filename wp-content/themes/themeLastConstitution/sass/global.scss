@@ -28,14 +28,14 @@
 
 }
 .ville_map{
-    background-image: url(images/ville.png);
+    background-image: url(../images/ville.png);
     background-size: 28px 28px;
     width:28px;
     height:28px;
     position: absolute;
     top:0px;
     left:0px;
-    z-index:-1;
+    z-index:2;
 
 }
 .potition_button
@@ -49,16 +49,16 @@
 }
 
 .arme{
-    background-image: url(images/arme.jpeg);
+    background-image: url(../images/arme.jpeg);
 }
 .vehicule{
-    background-image: url(images/vehicule.jpeg); 
+    background-image: url(../images/vehicule.jpeg); 
 }
 .prot{
-    background-image: url(images/prot.png);
+    background-image: url(../images/prot.png);
 }
 .food{
-    background-image: url(images/food.png);
+    background-image: url(../images/food.png);
 }
 .item_list{
     background-size: 45px 45px;
@@ -96,16 +96,16 @@
     left: 1525px;
 }
 .img1{
-    background-image: url(images/herbe1.png);
+    background-image: url(../images/herbe1.png);
 }
 .img2{
-    background-image: url(images/herbe2.png);
+    background-image: url(../images/herbe2.png);
 }
 .img3{
-    background-image: url(images/herbe3.png);
+    background-image: url(../images/herbe3.png);
 }
 .img4{
-    background-image: url(images/herbe1.png);
+    background-image: url(../images/herbe1.png);
 }
 .img_map{
     background-size:100%;
@@ -145,4 +145,8 @@
 
 .taille_min {
     min-width: 600px;
+}
+
+.img_map {
+    background-image:url(../images/herbe1.png);
 }
