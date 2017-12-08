@@ -76,6 +76,8 @@
                             <button type="submit" class="btn col-2" onclick="show_menu('ville')" > Ville </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('etat')" > Etat </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('zone')" > Zone </button>
+                                                        <button type="submit" class="btn col-2" onclick="show_menu('zone')" > Zone </button>
+
                             <button type="submit" class="btn col-2" onclick="show_menu('chat')" > Chat </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('coffre'), loot_from_coffre_ville()" > Coffre </button>
                             
