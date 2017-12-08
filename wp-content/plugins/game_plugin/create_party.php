@@ -2,7 +2,7 @@
 
 include_once 'process_general.php';
 
-$slice = 6;
+$slice = 2;
 
 function create_slices() {
     global $slice;
@@ -60,6 +60,53 @@ function create_party($partie) {
     $party_last = $wpdb->get_results("SELECT * FROM games_metadata ORDER BY id_partie DESC LIMIT 1");
 
     $party = $party_last[0]->id_partie;
+    
+    $wpdb->insert('score', array(
+        'id_partie' => $party,
+        'equipe' => 1,
+        'score' => 0
+    )
+        , array(
+            '%d',
+            '%d',
+            '%d'
+    ));
+    
+    $wpdb->insert('score', array(
+        'id_partie' => $party,
+        'equipe' => 2,
+        'score' => 0
+    )
+        , array(
+            '%d',
+            '%d',
+            '%d'
+    ));
+    
+    $wpdb->insert('batiments', array('id_partie' => $party,'equipe' => 1,'xp' => 0, 'niveau' => 1, 'type' => 1)
+        , array('%d','%d','%d', '%d', '%d'));
+    
+    $wpdb->insert('batiments', array('id_partie' => $party,'equipe' => 1,'xp' => 0, 'niveau' => 1, 'type' => 2)
+        , array('%d','%d','%d', '%d', '%d'));
+    
+    $wpdb->insert('batiments', array('id_partie' => $party,'equipe' => 1,'xp' => 0, 'niveau' => 1, 'type' => 3)
+        , array('%d','%d','%d', '%d', '%d'));
+    
+    $wpdb->insert('batiments', array('id_partie' => $party,'equipe' => 1,'xp' => 0, 'niveau' => 1, 'type' => 4)
+        , array('%d','%d','%d', '%d', '%d'));
+    
+    
+    $wpdb->insert('batiments', array('id_partie' => $party,'equipe' => 2,'xp' => 0, 'niveau' => 1, 'type' => 1)
+        , array('%d','%d','%d', '%d', '%d'));
+    
+    $wpdb->insert('batiments', array('id_partie' => $party,'equipe' => 2,'xp' => 0, 'niveau' => 1, 'type' => 2)
+        , array('%d','%d','%d', '%d', '%d'));
+    
+    $wpdb->insert('batiments', array('id_partie' => $party,'equipe' => 2,'xp' => 0, 'niveau' => 1, 'type' => 3)
+        , array('%d','%d','%d', '%d', '%d'));
+    
+    $wpdb->insert('batiments', array('id_partie' => $party,'equipe' => 2,'xp' => 0, 'niveau' => 1, 'type' => 4)
+        , array('%d','%d','%d', '%d', '%d'));
     
    
      $k=0;

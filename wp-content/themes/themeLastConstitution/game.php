@@ -51,6 +51,11 @@
                 wp_redirect(get_permalink(get_page_by_title('lobby')));
                 exit();
             }
+            
+            if (end_game($id_partie_get)) {
+                wp_redirect(get_permalink(get_page_by_title('fin-de-partie')) . "?id_partie=" . $id_partie_get);
+                exit();
+            }
         }
     } else {
         wp_redirect(home_url());
@@ -105,6 +110,15 @@
                                         <p>niveau = <span class="level"></span></p>
                                     </div>
                                 </div>
+                                
+                                <div>
+                                Points de victoire: 
+                                <?php 
+                                
+                                echo get_points_victoire(get_team(get_current_user_id(), $id_partie_get), $id_partie_get)
+                                
+                                ?> /10 (10pts = Victoire)
+                                </div>
                             </div>
                             <div id="etat" class="hidden">
                                 <h2 class="text-center"> Etat </h2>
@@ -140,6 +154,14 @@
                                         echo get_position(false, $id_partie_get);
                                         ?>
                                     </p>
+                                </div>
+                                
+                                <div id="journal">
+                                	<p>Hier soir de rudes combats ont eu lieu!</p>
+                                	<p>L'équipe 1 à générer un score de combat de <span id="score_equipe_1"></span>.</p>
+                                	<p>Quant à elle l'équipe 2 à générer un score de combat de <span id="score_equipe_2"></span>.</p>
+                                	<p>L'équipe <span id="equipe_gagnante"></span> à gagné la bataille</p>
+                                	<p>Equipe 1 obtient  <span id="points_victoire_equipe_1"></span> et l'équipe 2 obtient <span id="points_victoire_equipe_2"></span>, gloire à eux! </p>
                                 </div>
                             </div>
                             <div id="chat" class="hidden">
@@ -267,57 +289,6 @@
                                     <p class="result_food"></p>
                                     <p class="nom_food"> </p>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="coffre" class="hidden">
-                        <h2 class="text-center"> Coffre de Ville </h2>
-                        <div id="arme_list" class="row invent">
-                            <p>Armes : 
-
-                            </p>
-                            <div>
-                                <?php
-                                for ($i = 0; $i < 50; $i++) {
-                                    echo '<div class="arme item_list"></div>';
-                                }
-                                ?>
-                            </div>
-                        </div>
-                        <div id="vehicule_list" class="row invent">
-                            <p>Véhicules : 
-                                <?php echo "60"; ?>
-                            </p>
-                            <div>
-                                <?php
-                                for ($i = 0; $i < 20; $i++) {
-                                    echo '<div class="vehicule item_list"></div>';
-                                }
-                                ?>
-                            </div>
-                        </div>
-                        <div id="prot_list" class="row invent">
-                            <p>Protection : 
-                                <?php echo "50"; ?>
-                            </p>
-                            <div>
-                                <?php
-                                for ($i = 0; $i < 30; $i++) {
-                                    echo '<div class="prot item_list"></div>';
-                                }
-                                ?>
-                            </div>
-                        </div>
-                        <div id="food_list" class="row invent">
-                            <p>Nourritures : 
-                                <?php echo "230"; ?>
-                            </p>
-                            <div>
-                                <?php
-                                for ($i = 0; $i < 40; $i++) {
-                                    echo '<div class="food item_list"></div>';
-                                }
-                                ?>
                             </div>
                         </div>
                     </div>
