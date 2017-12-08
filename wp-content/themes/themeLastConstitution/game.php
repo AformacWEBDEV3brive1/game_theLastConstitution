@@ -64,7 +64,7 @@
     
    
     
-    <body>
+    <body class="taille_min">
         <h1 class="text-center"> Last Constitution </h1>
         <div class="container">
             <div class="row">
