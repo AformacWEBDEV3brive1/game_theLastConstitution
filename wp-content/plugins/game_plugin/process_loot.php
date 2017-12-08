@@ -66,7 +66,6 @@ function loot_insert_coffre_ville($butin, $id_equipe, $id_partie) {
 
         $query_coffre = $wpdb->prepare("SELECT id_objet, quantite_objet FROM coffre_ville WHERE id_equipe='%d' AND id_partie='%d' AND id_objet='%d'", $id_equipe, $id_partie, $butin);
         $result_coffre = $wpdb->get_results($query_coffre);
-        error_log(serialize($result_coffre));
         //Test si objet existe dans la table
         if ($result_coffre == null) {
 

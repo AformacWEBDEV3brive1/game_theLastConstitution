@@ -56,9 +56,9 @@ function create_demo_users()
     
     global $wpdb;
     
-    // Création de la partie démo (id=99)
+    // Création de la partie démo (id=999999)
     $wpdb->insert('games_metadata', array(
-        'id_partie' => 99
+        'id_partie' => 999999
     ), array(
         '%d'
     ));
@@ -66,7 +66,7 @@ function create_demo_users()
     // Créations des joueurs dans la table games_data
     $wpdb->insert('games_data', array(
         'id_joueur' => get_user_by('login', 'Demo')->ID,
-        'id_partie' => 99,
+        'id_partie' => 999999,
         'position' => "0;0",
         'points_action' => 25,
         'equipe' => 1
@@ -81,7 +81,7 @@ function create_demo_users()
     
     $wpdb->insert('games_data', array(
         'id_joueur' => get_user_by('login', 'Demo2')->ID,
-        'id_partie' => 99,
+        'id_partie' => 999999,
         'position' => "5;5",
         'points_action' => 25,
         'equipe' => 1
@@ -96,7 +96,7 @@ function create_demo_users()
     
     $wpdb->insert('games_data', array(
         'id_joueur' => get_user_by('login', 'Demo3')->ID,
-        'id_partie' => 99,
+        'id_partie' => 999999,
         'position' => "15;15",
         'points_action' => 25,
         'equipe' => 2
@@ -111,7 +111,7 @@ function create_demo_users()
     
     $wpdb->insert('games_data', array(
         'id_joueur' => get_user_by('login', 'Demo4')->ID,
-        'id_partie' => 99,
+        'id_partie' => 999999,
         'position' => "19;19",
         'points_action' => 25,
         'equipe' => 2
@@ -127,7 +127,7 @@ function create_demo_users()
     // Créations des bâtiments dans la table batiments
     $wpdb->insert('batiments', array(
         'id' => 5,
-        'id_partie' => 99,
+        'id_partie' => 999999,
         'equipe' => 1,
         'xp' => 10,
         'niveau' => 1,
@@ -144,7 +144,7 @@ function create_demo_users()
     
     $wpdb->insert('batiments', array(
         'id' => 6,
-        'id_partie' => 99,
+        'id_partie' => 999999,
         'equipe' => 1,
         'xp' => 10,
         'niveau' => 1,
@@ -161,7 +161,7 @@ function create_demo_users()
     
     $wpdb->insert('batiments', array(
         'id' => 7,
-        'id_partie' => 99,
+        'id_partie' => 999999,
         'equipe' => 1,
         'xp' => 10,
         'niveau' => 1,
@@ -178,7 +178,7 @@ function create_demo_users()
     
     $wpdb->insert('batiments', array(
         'id' => 8,
-        'id_partie' => 99,
+        'id_partie' => 999999,
         'equipe' => 1,
         'xp' => 10,
         'niveau' => 1,
@@ -195,7 +195,7 @@ function create_demo_users()
     
     $wpdb->insert('batiments', array(
         'id' => 9,
-        'id_partie' => 99,
+        'id_partie' => 999999,
         'equipe' => 2,
         'xp' => 10,
         'niveau' => 1,
@@ -212,7 +212,7 @@ function create_demo_users()
     
     $wpdb->insert('batiments', array(
         'id' => 10,
-        'id_partie' => 99,
+        'id_partie' => 999999,
         'equipe' => 2,
         'xp' => 10,
         'niveau' => 1,
@@ -229,7 +229,7 @@ function create_demo_users()
     
     $wpdb->insert('batiments', array(
         'id' => 11,
-        'id_partie' => 99,
+        'id_partie' => 999999,
         'equipe' => 2,
         'xp' => 10,
         'niveau' => 1,
@@ -246,7 +246,7 @@ function create_demo_users()
     
     $wpdb->insert('batiments', array(
         'id' => 12,
-        'id_partie' => 99,
+        'id_partie' => 999999,
         'equipe' => 2,
         'xp' => 10,
         'niveau' => 1,
@@ -256,6 +256,29 @@ function create_demo_users()
         '%d',
         '%d',
         '%d',
+        '%d',
+        '%d',
+        '%d'
+    ));
+    
+    // ajout des lignes de score
+    $wpdb->insert('score', array(
+        'id_partie' => 999999,
+        'equipe' => 1,
+        'score' => 0
+        
+    ), array(
+        '%d',
+        '%d',
+        '%d'
+    ));
+    
+    $wpdb->insert('score', array(
+        'id_partie' => 999999,
+        'equipe' => 2,
+        'score' => 0
+        
+    ), array(
         '%d',
         '%d',
         '%d'
@@ -285,9 +308,9 @@ function delete_demo_users()
         '%d'
     ));
     
-    // Suppression de la partie (id=99) dans games_metadata
+    // Suppression de la partie (id=999999) dans games_metadata
     $wpdb->delete('games_metadata', array(
-        'id_partie' => 99
+        'id_partie' => 999999
     ), array(
         '%d'
     ));
@@ -328,7 +351,7 @@ function reset_demo()
         'xp' => 10,
         'niveau' => 1
     ), array(
-        'id_partie' => 99,
+        'id_partie' => 999999,
         'equipe' => 1,
         'type' => 1
     ));
@@ -336,7 +359,7 @@ function reset_demo()
         'xp' => 10,
         'niveau' => 1
     ), array(
-        'id_partie' => 99,
+        'id_partie' => 999999,
         'equipe' => 1,
         'type' => 2
     ));
@@ -344,7 +367,7 @@ function reset_demo()
         'xp' => 10,
         'niveau' => 1
     ), array(
-        'id_partie' => 99,
+        'id_partie' => 999999,
         'equipe' => 1,
         'type' => 3
     ));
@@ -352,7 +375,7 @@ function reset_demo()
         'xp' => 10,
         'niveau' => 1
     ), array(
-        'id_partie' => 99,
+        'id_partie' => 999999,
         'equipe' => 1,
         'type' => 4
     ));
@@ -360,7 +383,7 @@ function reset_demo()
         'xp' => 10,
         'niveau' => 1
     ), array(
-        'id_partie' => 99,
+        'id_partie' => 999999,
         'equipe' => 2,
         'type' => 1
     ));
@@ -368,7 +391,7 @@ function reset_demo()
         'xp' => 10,
         'niveau' => 1
     ), array(
-        'id_partie' => 99,
+        'id_partie' => 999999,
         'equipe' => 2,
         'type' => 2
     ));
@@ -376,7 +399,7 @@ function reset_demo()
         'xp' => 10,
         'niveau' => 1
     ), array(
-        'id_partie' => 99,
+        'id_partie' => 999999,
         'equipe' => 2,
         'type' => 3
     ));
@@ -384,12 +407,32 @@ function reset_demo()
         'xp' => 10,
         'niveau' => 1
     ), array(
-        'id_partie' => 99,
+        'id_partie' => 999999,
         'equipe' => 2,
         'type' => 4
     ));
     $wpdb->delete('chat', array(
-        'id_partie' => 99
+        'id_partie' => 999999
+    ), array(
+        '%d'
+    ));
+    
+    $wpdb->update('score', array(
+        'score' => 0
+    ), array(
+        'id_partie' => 999999,
+        'equipe' => 1
+    ));
+    
+    $wpdb->update('score', array(
+        'score' => 0
+    ), array(
+        'id_partie' => 999999,
+        'equipe' => 2
+    ));
+    
+    $wpdb->delete('coffre_ville', array(
+        'id_partie' => 999999
     ), array(
         '%d'
     ));
