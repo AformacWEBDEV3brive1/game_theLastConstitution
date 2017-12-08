@@ -14,12 +14,10 @@ require_once( explode("wp-content", __FILE__)[0] . "wp-load.php" );
 
 if (isset($_POST["php_function_file"])) {
     if ($_POST["php_function_file"] == "process_general.php") {
-        error.log("coucou");
         if ($_POST["info"] == "move") {
             move($_POST["id_partie"], $_POST["new_position"]);
         }
     } else if ($_POST["php_function_file"] == "process_event.php") {
-        error.log("coucou1");
         if ($_POST["info"] == "event_check_position") {
             event_check_position($_POST["id_partie"]);
         }
@@ -278,24 +276,33 @@ function tour_suivant() {
     event_delete($_POST['id_partie']);
     create_random_event($_POST['id_partie']);
     $resultats = global_minuit();
-      
-    if($resultats["points_victoire_equipe_1"] > $resultats["points_victoire_equipe_2"])
-    {
-        $gagnant = 1;
-    }
-    else
-    {
-        $gagnant = 2;
-    }
     
-    echo json_encode(
-        array(pa => get_points_action(get_current_user_id(), $_POST['id_partie']), 
-            score_equipe_1 => $resultats["score_equipe_1"] + $resultats["score_rapidite_equipe_1"],
-            score_equipe_2 => $resultats["score_equipe_2"] + $resultats["score_rapidite_equipe_2"],
-            equipe_gagnante => $gagnant,
-            points_victoire_equipe_1 => $resultats["points_victoire_equipe_1"],
-            points_victoire_equipe_2 => $resultats["points_victoire_equipe_2"]
-        ));
+    foreach ($resultats as $value)
+    {
+        if($value["id_partie"] == $_POST['id_partie'])
+        {
+            if($value["points_victoire_equipe_1"] > $value["points_victoire_equipe_2"])
+            {
+                $gagnant = 1;
+            }
+            else
+            {
+                $gagnant = 2;
+            }
+            
+            $pts_victoire_totaux = get_points_victoire(get_team(get_current_user_id(), $_POST['id_partie']), $_POST['id_partie']);
+            
+            echo json_encode(
+                array(pa => get_points_action(get_current_user_id(), $_POST['id_partie']),
+                    score_equipe_1 => $value["score_equipe_1"] + $value["score_rapidite_equipe_1"],
+                    score_equipe_2 => $value["score_equipe_2"] + $value["score_rapidite_equipe_2"],
+                    equipe_gagnante => $gagnant,
+                    points_victoire_equipe_1 => $value["points_victoire_equipe_1"],
+                    points_victoire_equipe_2 => $value["points_victoire_equipe_2"],
+                    pts_victoire_totaux => $pts_victoire_totaux
+                ));
+        }
+    }
 }
 
 //prend en paramètre une position en #;#
