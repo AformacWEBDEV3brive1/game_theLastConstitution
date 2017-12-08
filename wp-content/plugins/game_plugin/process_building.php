@@ -40,6 +40,23 @@ function get_information_buildings() {
     }
 }
 
+function get_information_buildings_return($id_partie) {
+    try 
+    {
+        $equipe = get_team(get_current_user_id(), $id_partie);        
+        
+        global $wpdb;
+        $prepare = $wpdb->prepare("SELECT xp , niveau , type FROM batiments WHERE id_partie = %d AND equipe = %d", $id_partie, $equipe);
+        $results = $wpdb->get_results($prepare);
+        
+        return $results;
+    } 
+    catch (Exception $e) 
+    {
+        return $e->getMessage();
+    }
+}
+
 function check_enough_xp_for_lvlup($id_building, $xp_total) {
     try {
         $current_lvl = get_current_lvl($id_building);
