@@ -87,30 +87,42 @@ function show_menu(id_menu) {
         $("#etat").addClass("hidden");
         $("#zone").addClass("hidden");
         $("#coffre").addClass("hidden");
+        $("#resultats").addClass("hidden");
     } else if (id_menu == "etat") {
         $("#etat").removeClass("hidden");
         $("#chat").addClass("hidden");
         $("#ville").addClass("hidden");
         $("#zone").addClass("hidden");
         $("#coffre").addClass("hidden");
+        $("#resultats").addClass("hidden");
     } else if (id_menu == "chat") {
         $("#chat").removeClass("hidden");
         $("#ville").addClass("hidden");
         $("#etat").addClass("hidden");
         $("#zone").addClass("hidden");
         $("#coffre").addClass("hidden");
+        $("#resultats").addClass("hidden");
     } else if (id_menu == "zone") {
         $("#zone").removeClass("hidden");
         $("#chat").addClass("hidden");
         $("#ville").addClass("hidden");
         $("#etat").addClass("hidden");
         $("#coffre").addClass("hidden");
+        $("#resultats").addClass("hidden");
     }else if (id_menu == "coffre") {
         $("#coffre").removeClass("hidden");
         $("#chat").addClass("hidden");
         $("#ville").addClass("hidden");
         $("#etat").addClass("hidden");
         $("#zone").addClass("hidden");
+        $("#resultats").addClass("hidden");
+    }else if (id_menu == "resultats") {
+        $("#resultats").removeClass("hidden");
+        $("#chat").addClass("hidden");
+        $("#ville").addClass("hidden");
+        $("#etat").addClass("hidden");
+        $("#zone").addClass("hidden");
+        $("#coffre").addClass("hidden");
     }
 }
 
@@ -137,7 +149,7 @@ function show_menu_chat(id_chat) {
         $('#switch_chat').html(': case');
     }
 }
-window.setInterval(function(){
+/*window.setInterval(function(){
     $.ajax({url: '../../wp-content/plugins/game_plugin/game_chat.php',
         type: 'post',
         data: {called_ajax_php: 'game_chat.php', php_function_file: 'refresh_chat', id_partie: location.search.substring(4)},

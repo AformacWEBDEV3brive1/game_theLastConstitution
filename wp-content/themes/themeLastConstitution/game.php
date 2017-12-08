@@ -77,6 +77,7 @@
                             <button type="submit" class="btn col-2" onclick="show_menu('zone')" > Zone </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('chat')" > Chat </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('coffre'), loot_from_coffre_ville()" > Coffre </button>
+                            <button type="submit" class="btn col-2" onclick="show_menu('resultats')" > Résultats </button>
                         </div>
                         
                         
@@ -286,6 +287,10 @@
                                     <p class="nom_food"> </p>
                                 </div>
                             </div>
+                            <div id="resultats" class="hidden">
+                                <h2 class="text-center">Résultats des combats</h2>
+                                
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -308,7 +313,7 @@
                                         $bgcase = $tuile[$color];
                                         ?> 
                                         <div
-                                             class="<?php echo $x ?><?php echo ';' . $y ?> cellule <?php //echo $bgcase ?> img_map"
+                                             class="<?php echo $x ?><?php echo ';' . $y ?> cellule <?php echo $bgcase ?> img_map"
                                              onclick="move(this, <?php echo $id_partie_get ?>)">
                                                  <?php
                                                  foreach ($tableau_position_joueur as $value) {
