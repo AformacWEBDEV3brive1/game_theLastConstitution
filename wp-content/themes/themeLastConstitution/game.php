@@ -287,10 +287,17 @@
                                     $tableau_position_joueur = get_id_mate($id_partie_get, get_team(get_current_user_id(), $id_partie_get)); // get_position(true);
                                     $tuile = array('img4', 'img3', 'img2', 'img1');
                                     for ($y = 0; $y < 20; $y ++) :
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
                                         ?>
                                         <div class=" row ">
                                             <?php
                                             for ($x = 0; $x < 20; $x++):
+                                                
                                                 $color = rand(0, count($tuile) - 1);
                                                 $bgcase = $tuile[$color];
                                                 ?> 
