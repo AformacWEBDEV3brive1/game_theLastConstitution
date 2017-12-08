@@ -67,17 +67,17 @@
     
     <body>
         <h1 class="text-center"> Last Constitution </h1>
-        <div class="container">
+        <div class="container containerGlobal">
             <div class="row">
-                <div class="col-6">
+                <div class="col-lg-6">
                     <div id="menu" class="menu">
-                        <div id="onglets" class="row justify-content-around">
-                            <button type="submit" class="btn col-2" onclick="show_menu('ville')" > Ville </button>
-                            <button type="submit" class="btn col-2" onclick="show_menu('etat')" > Etat </button>
-                            <button type="submit" class="btn col-2" onclick="show_menu('zone')" > Zone </button>
-                            <button type="submit" class="btn col-2" onclick="show_menu('chat')" > Chat </button>
-                            <button type="submit" class="btn col-2" onclick="show_menu('coffre'), loot_from_coffre_ville()" > Coffre </button>
-                            <button type="submit" class="btn col-2" onclick="show_menu('resultats')" > Résultats </button>
+                        <div id="onglets" class="">
+                            <button type="submit" class="btn" onclick="show_menu('ville')" > Ville </button>
+                            <button type="submit" class="btn" onclick="show_menu('etat')" > Etat </button>
+                            <button type="submit" class="btn" onclick="show_menu('zone')" > Zone </button>
+                            <button type="submit" class="btn" onclick="show_menu('chat')" > Chat </button>
+                            <button type="submit" class="btn" onclick="show_menu('coffre'), loot_from_coffre_ville()" > Coffre </button>
+                            <button type="submit" class="btn" onclick="show_menu('resultats')"> Journal </button>
                         </div>
                         
                         
@@ -114,11 +114,12 @@
                                 
                                 <div>
                                 Points de victoire: 
+                                <p><span id="pts_victoire">
                                 <?php 
                                 
                                 echo get_points_victoire(get_team(get_current_user_id(), $id_partie_get), $id_partie_get)
                                 
-                                ?> /10 (10pts = Victoire)
+                                ?></span> /10 (10pts = Victoire)</p>
                                 </div>
                             </div>
                             <div id="etat" class="hidden">
@@ -289,12 +290,18 @@
                             </div>
                             <div id="resultats" class="hidden">
                                 <h2 class="text-center">Résultats des combats</h2>
-                                
+                                <div id="journal">
+                                    <p>Hier soir de rudes combats ont eu lieu!</p>
+                                    <p>L'équipe 1 à générer un score de combat de <span id="score_equipe_1"></span>.</p>
+                                    <p>Quant à elle l'équipe 2 à générer un score de combat de <span id="score_equipe_2"></span>.</p>
+                                    <p>L'équipe <span id="equipe_gagnante"></span> à gagné la bataille</p>
+                                    <p>Equipe 1 obtient  <span id="points_victoire_equipe_1"></span> et l'équipe 2 obtient <span id="points_victoire_equipe_2"></span>, gloire à eux! </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-lg-6 grille">
                     <div id="grille" class="">    
                         <?php
                         if (isset($id_partie_get)) {
@@ -365,7 +372,7 @@
         if ($id_partie_get == 99) {
             ?>
             <form method="post" action="../../wp-content/plugins/game_plugin/game_demo.php">
-                <input type="submit" value="Reset démo" name="reset_demo"></input>
+                <input type="submit" value="Reset démo" name="reset_demo"/>
             </form>
 
             <?php

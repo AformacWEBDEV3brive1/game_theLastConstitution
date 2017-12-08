@@ -12,7 +12,8 @@ function global_minuit()
     try
     {
         $parties = get_all_id_games();
-             
+         
+        $resultats = array();
         foreach ($parties as $value) 
         {
             
@@ -42,9 +43,12 @@ function global_minuit()
             $victory_points = get_victory_points($scores_rapidity, $score_equipe_1, $score_equipe_2);
             
             // enregistrer le resultat de cette bataille dans la base
-            $resultats =  enregistrement_bataille($id_partie, $joueurs_equipe_1, $joueurs_equipe_2, $scores_rapidity, $score_equipe_1, $score_equipe_2, $victory_points); 
-            return $resultats;
+            $resultat =  enregistrement_bataille($id_partie, $joueurs_equipe_1, $joueurs_equipe_2, $scores_rapidity, $score_equipe_1, $score_equipe_2, $victory_points); 
+            
+            //ajouter resultat a resultats
+            array_push($resultats, $resultat);
         }
+        return $resultats;
     }
     catch (Exception $e)
     {
@@ -197,7 +201,6 @@ function get_victory_points($scores_rapidity, $score_equipe_1, $score_equipe_2)
 
 function enregistrement_bataille($id_partie, $joueurs_equipe_1, $joueurs_equipe_2, $scores_rapidity, $score_equipe_1, $score_equipe_2, $victory_points)
 {
-    error_log("coucou");
     global $wpdb;
     
     $query = $wpdb->insert(
@@ -224,14 +227,17 @@ function enregistrement_bataille($id_partie, $joueurs_equipe_1, $joueurs_equipe_
             '%d'
         )
     );
-    error_log("coucou2");
     
     
     $pts_victoire_equipe_1 = get_points_victoire(1, $id_partie);    
     $pts_victoire_equipe_2 = get_points_victoire(2, $id_partie);
     
-    $wpdb->query($wpdb->prepare("UPDATE `score` SET `score`='%d' WHERE equipe='%d' AND id_partie='%d'", $pts_victoire_equipe_1 + $victory_points["equipe1"], 1, $id_partie));
-    $wpdb->query($wpdb->prepare("UPDATE `score` SET `score`='%d' WHERE equipe='%d' AND id_partie='%d'", $pts_victoire_equipe_2 + $victory_points["equipe2"], 2, $id_partie));
+    
+    $prepare = $wpdb->prepare("UPDATE `score` SET `score`='%d' WHERE equipe='%d' AND id_partie='%d'", $pts_victoire_equipe_1 + $victory_points["equipe1"], 1, $id_partie);
+    $wpdb->query($prepare);
+    
+    $prepare2 = $wpdb->prepare("UPDATE `score` SET `score`='%d' WHERE equipe='%d' AND id_partie='%d'", $pts_victoire_equipe_2 + $victory_points["equipe2"], 2, $id_partie);
+    $wpdb->query($prepare2);
 
     return array(
         'id_partie' => $id_partie,
