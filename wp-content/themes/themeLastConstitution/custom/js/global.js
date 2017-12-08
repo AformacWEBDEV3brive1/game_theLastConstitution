@@ -1,4 +1,6 @@
 
+
+
 function move(id, id_partie) {
     var coo = id.className.split(' ')[0];
     $.ajax({url: '../../wp-content/plugins/game_plugin/process_general.php',
@@ -50,7 +52,7 @@ function display_pseudo_oncell(id, id_partie) {
         type: 'post',
         data: {info: 'get_ids_from_cell', position: coo, id_partie: id_partie},
         success: function (output) {
-            $('#zoneJoueur').html(output);
+            $('#zone_list_player').html(output);
         }
     });
 
@@ -126,7 +128,6 @@ function show_menu_chat(id_chat) {
         $('#switch_chat').html(': case');
     }
 }
-
 window.setInterval(function(){
     $.ajax({url: '../../wp-content/plugins/game_plugin/game_chat.php',
         type: 'post',
@@ -149,11 +150,80 @@ window.setInterval(function(){
 	    			{
 	        			$('#chat_case').append("<div class='row'><div class='col-3'>" + output[i].heure  + "</div><div class='col-2'>" + output[i].id_joueur + "</div><div class='col-7'>" + output[i].message + "</div></div><hr />");
 	    			}
+
+/*window.setInterval(function(){
+    $.ajax({url: '../../wp-content/plugins/game_plugin/game_chat.php',
+        type: 'post',
+        data: {called_ajax_php: 'game_chat.php', php_function_file: 'load_chat', id_partie: location.search.substring(4), tag: 'ville'},
+        success: function (output) {
+        	if(output != "null")
+        	{
+        		output = JSON.parse(output);
+
+                $('#chat_ville').html("");
+                
+                for (var i = 0, len = output.length; i < len; i++) {
+                	//console.log(typeof output[i].heure);
+                	$('#chat_ville').append(
+                			"<div class='row'><div class='col-2'>[" 
+                			+ output[i].heure 
+                			+ "] </div><div class='col-2'>" 
+                			+ output[i].id_joueur 
+                			+ ": </div><div class='col-8'>" 
+                			+ output[i].message 
+                			+ "</div></div><hr/>");
+>>>>>>> fab14685bb2e0b81d0f837dee0a5b9484990591f
                 }
         	}
         }
     });
+<<<<<<< HEAD
 }, 5000);
+=======
+    
+    $.ajax({url: '../../wp-content/plugins/game_plugin/game_chat.php',
+        type: 'post',
+        data: {called_ajax_php: 'game_chat.php', php_function_file: 'load_chat', id_partie: location.search.substring(4), tag: 'case'},
+        success: function (output) {
+        	if(output != "null")
+        	{
+                $('#chat_case').html(output);
+        	}
+        }
+    });
+}, 2500);
+*/
+
+//window.setInterval(function(){
+//    $.ajax({url: '../../wp-content/plugins/game_plugin/game_chat.php',
+//        type: 'post',
+//        data: {called_ajax_php: 'game_chat.php', php_function_file: 'refresh_chat', id_partie: location.search.substring(4)},
+//        success: function (output) {
+//            //verifier que output n'est pas vide   --OK
+//            //verifier quel chat est concerné
+//            //ajouter le message
+//        	
+//        	if(output != "[]")
+//        	{
+//        		//console.log(output);
+//        		output = JSON.parse(output);
+//        		
+//                for (var i = 0, len = output.length; i < len; i++) {
+//                	if(output[i].tag == "ville")
+//	        		{
+//	        			console.log("ville : " + output);
+//	        			$('#chat_ville').append("<div class='row'><div class='col-3'>" + output[i].heure  + "</div><div class='col-2'>" + output[i].id_joueur + "</div><div class='col-7'>" + output[i].message + "</div></div><hr />");
+//	        		}
+//	        		else if(output[i].tag == "case")
+//	    			{
+//	        			console.log("case : " + output);
+//	        			$('#chat_case').append("<div class='row'><div class='col-3'>" + output[i].heure  + "</div><div class='col-2'>" + output[i].id_joueur + "</div><div class='col-7'>" + output[i].message + "</div></div><hr />");
+//	    			}
+//                }
+//        	}
+//        }
+//    });
+//}, 1000);
 
 function send_message(tag)
 {
