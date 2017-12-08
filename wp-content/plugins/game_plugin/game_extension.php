@@ -307,6 +307,19 @@ INSERT INTO `chat` (`id`, `id_joueur`, `position`, `equipe`, `id_partie`, `tag`,
 (3, 3, '19;19', 2, 1, 'ville', 'salut', '1511172046'),
 (4, 1, '2;3', 1, 1, 'case', 'hey', '1511172050');
 
+
+CREATE TABLE `lobby` (
+  
+  `id_joueur` int NOT NULL
+  
+ 
+  
+  
+  
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
 ");
     
    error_log( var_dump( $wpdb->last_query ) );
@@ -316,7 +329,7 @@ INSERT INTO `chat` (`id`, `id_joueur`, `position`, `equipe`, `id_partie`, `tag`,
 function drop_table() {
     $wpdb = openBDD();
     
-    $wpdb->query("DROP TABLE IF EXISTS looted, chat, games_data, games_metadata, events, batiments, level_batiments, type_batiments, coffre_ville, objet, game_player, type_objet, class_objet");
+    $wpdb->query("DROP TABLE IF EXISTS lobby, coffre_ville, objet, class_objet, type_objet, looted, events, game_player, chat, games_data, batiments, level_batiments, type_batiments, games_metadata");
 }
 
 register_activation_hook(__FILE__, 'create_table');

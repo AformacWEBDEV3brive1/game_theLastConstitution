@@ -13,7 +13,6 @@ function event_game(id) {
             }
         }
     });
-
 }
 
 

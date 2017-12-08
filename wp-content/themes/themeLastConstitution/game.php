@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <?php
 /* Template Name: jeu */
@@ -30,18 +29,7 @@
         <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/style.css" />
         <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/sass/style.css" />
     </head>
-   
-    <script>
-       var text = "";
-       var $y;
-       for ($y = 0; $y < 20; $y++) 
-       {
-           text += "" + $y + "<br>";
-       }
-       document.getElementById("coordonnées2").innerHTML = text;
-    </script>
-    
-    
+        
     <?php
     get_template_part("../../plugins/game_plugin/process_general.php");
     get_template_part("../../plugins/game_plugin/process_event.php");
@@ -71,7 +59,7 @@
     
    
     
-    <body onload="display_info_bat(<?php echo $id_partie_get ?>)">
+    <body>
         <h1 class="text-center"> Last Constitution </h1>
         <div class="container">
             <div class="row">
@@ -242,8 +230,12 @@
                                 <h2 class="text-center">
                                     Zone <span id="nom_position"></span>
                                 </h2>
+                               
                                 <button id="button_fouiller" onclick="loot_zone(<?php echo $id_partie_get ?>)" >FOUILLER ZONE</button>
                                 <p id="zone_joueur"></p>
+                                
+                                 <p id="zone_list_player" ></p>
+                                
 
 
                             </div>

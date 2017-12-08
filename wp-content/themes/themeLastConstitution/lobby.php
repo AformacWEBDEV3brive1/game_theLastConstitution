@@ -19,6 +19,7 @@
 
 
         <!-- custom css & js -->
+        <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/custom/js/lobby.js"></script>
         <script type="text/javascript" src="../../wp-content/themes/themeLastConstitution/custom/js/global.js"></script>
         <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/style.css" />
         <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/sass/style.css" />
@@ -28,9 +29,8 @@
 
         <?php
         get_template_part("../../plugins/game_plugin/process_general.php");
-        
-        if(!is_user_logged_in())
-        {
+
+        if (!is_user_logged_in()) {
             wp_redirect(home_url());
             exit;
         }
@@ -46,11 +46,21 @@
         <p> Vous êtes dans la/les partie(s) <br/>
             <?php
             foreach (get_games(get_current_user_id()) as $value) {
-                echo $value[0];
-               echo "<a href='index.php/jeu?id=" . $value[0] . "' >-->rejoindre partie<--</a><br/>";
-             }
+                echo "Partie : " . $value[0];
+                echo "<a href='index.php/jeu?id=" . $value[0] . "' >-->rejoindre partie<--</a><br/>";
+            }
             ?>
         </p>
+
+        <?php
+        if (isLookingforgame() == true) {
+            echo '<button type="button" id="button_recherche" class="btn disabled">RECHERCHE</button>';
+            echo "<p id='gamer_mate'> Actuellement " . compteur_get_mate() . " personne(s) recherchent une game</p>";
+        } else {
+            echo '<button onclick="subscribe_game()" type="button" id="button_recherche" class="btn">RECHERCHE</button>';
+            echo "<p id='gamer_mate'></p>";
+        }
+        ?>
 
     </body>
 </html>
