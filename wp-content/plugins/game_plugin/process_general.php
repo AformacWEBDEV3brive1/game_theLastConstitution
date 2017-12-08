@@ -275,10 +275,27 @@ function nouveau_montant_pa($id_joueur, $points_action, $id_partie) {
 //Fonction pour simuler le tour suivant. [ADMIN]
 function tour_suivant() {
     reset_all_points_action();
-    //echo get_points_action(get_current_user_id(), $_POST['id_partie']);
     event_delete($_POST['id_partie']);
     create_random_event($_POST['id_partie']);
-    global_minuit();
+    $resultats = global_minuit();
+      
+    if($resultats["points_victoire_equipe_1"] > $resultats["points_victoire_equipe_2"])
+    {
+        $gagnant = 1;
+    }
+    else
+    {
+        $gagnant = 2;
+    }
+    
+    echo json_encode(
+        array(pa => get_points_action(get_current_user_id(), $_POST['id_partie']), 
+            score_equipe_1 => $resultats["score_equipe_1"] + $resultats["score_rapidite_equipe_1"],
+            score_equipe_2 => $resultats["score_equipe_2"] + $resultats["score_rapidite_equipe_2"],
+            equipe_gagnante => $gagnant,
+            points_victoire_equipe_1 => $resultats["points_victoire_equipe_1"],
+            points_victoire_equipe_2 => $resultats["points_victoire_equipe_2"]
+        ));
 }
 
 //prend en paramètre une position en #;#
