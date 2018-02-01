@@ -2,7 +2,7 @@
 
 include_once 'process_general.php';
 
-$slice = 4;
+$slice = 2;
 
 function create_slices() {
     global $slice;
