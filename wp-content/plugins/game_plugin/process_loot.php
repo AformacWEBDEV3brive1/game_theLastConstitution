@@ -104,10 +104,9 @@ function loot_get_coffre_ville($id_equipe, $id_partie) {
     global $wpdb;
     error_log("SELECT nom_objet, valeur_objet, quantite_objet, type_objet, class_objet FROM coffre_ville AS c, objet AS o, type_objet AS t, class_objet AS co WHERE co.id_class = o.id_class AND c.id_objet=o.id_objet AND o.id_type = t.id_type AND id_equipe=$id_equipe AND id_partie=$id_partie");
     try {
-        $query = $wpdb->prepare("SELECT nom_objet, valeur_objet, quantite_objet, type_objet, class_objet FROM coffre_ville AS c, objet AS o, type_objet AS t, class_objet AS co WHERE co.id_class = o.id_class AND c.id_objet=o.id_objet AND o.id_type = t.id_type AND id_equipe='%d' AND id_partie='%d'",$id_equipe,$id_partie);
+        $query = $wpdb->prepare("SELECT nom_objet, valeur_objet, quantite_objet, type_objet, class_objet FROM coffre_ville AS c, objet AS o, type_objet AS t, class_objet AS co WHERE co.id_class = o.id_class AND c.id_objet=o.id_objet AND o.id_type = t.id_type AND id_equipe='%d' AND id_partie='%d'", $id_equipe, $id_partie);
         $tmp = ($wpdb->get_results($query));
         echo json_encode($tmp);
-        
     } catch (Exception $ex) {
         return $e->getMessage();
     }
@@ -121,37 +120,53 @@ function looted($id_partie) {
     try {
 
         if (check_looted_current_player($id_partie) == false) {
-            
-            if(get_points_action(get_current_user_id(), $id_partie) >= 1)
-            {
-            
-            $query = $wpdb->insert(
-                    'looted', //table name
-                    array(
-                'id_partie' => $id_partie,
-                'position' => get_position_by_id($id_partie, get_current_user_id()),
-                    ), //columns
-                    array(
-                '%d',
-                '%s',
-                    )
-            );
-            $luck = rand(0, 100);
 
-            if ($luck <= 50) {
+            if (get_points_action(get_current_user_id(), $id_partie) >= 1) {
+                $team = get_team(get_current_user_id(), $id_partie);
+                if ($team == 1) {
+                    $query = $wpdb->insert(
+                            'looted', //table name
+                            array(
+                        'id_partie' => $id_partie,
+                        'position' => get_position_by_id($id_partie, get_current_user_id()),
+                        'equipe_1' => 1,
+                            ), //columns
+                            array(
+                        '%d',
+                        '%s',
+                            )
+                    );
+                }else{
+                    $query = $wpdb->insert(
+                            'looted', //table name
+                            array(
+                        'id_partie' => $id_partie,
+                        'position' => get_position_by_id($id_partie, get_current_user_id()),
+                        'equipe_2' => 1,
+                            ), //columns
+                            array(
+                        '%d',
+                        '%s',
+                            )
+                    );
+                }
+                
+                $luck = rand(0, 100);
 
-                echo "rien à recuperer!!!! Degage!!";
-            } else {
+                if ($luck <= 50) {
+
+                    echo "rien à recuperer!!!! Degage!!";
+                } else {
 //              
-                $butin = loot_get_random_class(loot_get_random_type(), $luck);
+                    $butin = loot_get_random_class(loot_get_random_type(), $luck);
 
 
 
-                loot_insert_coffre_ville($butin, get_team(get_current_user_id(), $id_partie), $id_partie);
-            }
-            
+                    loot_insert_coffre_ville($butin, get_team(get_current_user_id(), $id_partie), $id_partie);
+                }
 
-            nouveau_montant_pa(get_current_user_id(), get_points_action(get_current_user_id(), $id_partie) - 1, $id_partie);
+
+                nouveau_montant_pa(get_current_user_id(), get_points_action(get_current_user_id(), $id_partie) - 1, $id_partie);
             }
         }
     } catch (Exception $e) {
@@ -160,14 +175,14 @@ function looted($id_partie) {
 }
 
 //Test si la case est deja looté ou pas
-function check_looted_current_player($id_partie) {
+function check_looted_current_player($id_partie, $byTeam = false) {
 
     global $wpdb;
     try {
         $resultats = $wpdb->get_results(
                 $wpdb->prepare(
                         "SELECT * FROM looted WHERE position = %s AND id_partie = %d", get_position_by_id($id_partie, get_current_user_id()), $id_partie
-                )
+                        )
         );
 
         return count($resultats);
