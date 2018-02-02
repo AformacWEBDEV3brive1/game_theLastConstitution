@@ -278,7 +278,7 @@
                             <div id="rapport" class="hidden">
                                 <h2 class="text-center">Résultats des combats</h2>
                                 <div id="journal">
-
+                                </b></p>
                                 </div>
 
                                 <div id="journal">
