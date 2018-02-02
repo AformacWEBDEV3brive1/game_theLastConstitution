@@ -326,6 +326,7 @@
                                                                     echo $all_pos . " ";
                                                                     if ($all_pos == $value[1]) {
                                                                         echo ' text-center perso"> ' . $value[0] . ' </div>';
+                                                                        break;
                                                                     }
                                                                 }
                                                             }
