@@ -29,7 +29,7 @@
         <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/style.css" />
         <link type="text/css" rel="stylesheet" href="../../wp-content/themes/themeLastConstitution/sass/style.css" />
     </head>
-        
+
     <?php
     get_template_part("../../plugins/game_plugin/process_general.php");
     get_template_part("../../plugins/game_plugin/process_event.php");
@@ -39,9 +39,9 @@
         if (isset($_GET['id'])) {
             $id_partie_get = $_GET['id'];
             $parties = array();
-            
-            
-            error_log("DEBUG : parties = "); 
+
+
+            error_log("DEBUG : parties = ");
             foreach (get_games(get_current_user_id()) as $value) {
                 array_push($parties, $value[0]);
             }
@@ -50,11 +50,11 @@
                 wp_redirect(get_permalink(get_page_by_title('lobby')));
                 exit();
             }
-            
+
             if (end_game($id_partie_get)) {
                 error_log('fin de partie elle est terminé point');
                 $log = wp_redirect(get_permalink(get_page_by_title('fin-de-partie')) . "?id_partie=" . $id_partie_get);
-                error_log("redirect : ".$log);
+                error_log("redirect : " . $log);
                 exit();
             }
         }
@@ -64,18 +64,18 @@
         exit();
     }
     ?>
-    
-   
-    
+
+
+
     <body class="taille_min_global_mobile">
-        
+
         <h1 class="text-center"> Last Constitution </h1>
         <div class="container containerGlobal">
             <div class="row">
                 <div class="col-12 col-md-12 col-lg-6">
                     <div id="menu" class="menu container taille_min_menu_mobile separation_menu_grille">
                         <div id="onglets" class="row justify-content-around">
-                            
+
                             <button type="submit" class="btn col-2" onclick="show_menu('ville')" > Ville </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('etat')" > Etat </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('zone')" > Zone </button>
@@ -83,12 +83,12 @@
                             <button type="submit" class="btn col-2" onclick="show_menu('coffre'), loot_from_coffre_ville()" > Coffre </button>
                             <button type="submit" class="btn col-2" onclick="show_menu('rapport')" > Rapport </button>
                         </div>
-    
+
                         <div class="container">
                             <div id="ville"> 
                                 <h2 class="text-center"> Ville </h2>
                                 <div class="row justify-content-around">
-                                <?php $infos_batiments = get_information_buildings_return($id_partie_get); ?>
+                                    <?php $infos_batiments = get_information_buildings_return($id_partie_get); ?>
                                     <div class="batiment caserne col-6">
                                         <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
                                         <p>xp = <span class="xp"><?php echo $infos_batiments[0]->xp ?></span></p>
@@ -114,29 +114,29 @@
                                         <p>niveau = <span class="level"><?php echo $infos_batiments[3]->niveau ?></span></p>
                                     </div>
                                 </div>
-                                
-                                
+
+
                             </div>
                             <div id="etat" class="hidden">
                                 <h2 class="text-center"> Etat </h2>
                                 <div id="pseudo">
                                     <p> Pseudo :                      
-                                        <B>
-                                        <?php
-                                        $current_user = wp_get_current_user();
-                                        echo $current_user->user_login;
-                                        ?> 
-                                        </B>
+                                        <b>
+                                            <?php
+                                            $current_user = wp_get_current_user();
+                                            echo $current_user->user_login;
+                                            ?> 
+                                        </b>
                                     </p>
                                 </div>
-                                
+
                                 <div>
                                     <p>
                                         Vous avez: <span id="points_action"> <B>
-                                            <?php
-                                            echo get_points_action(get_current_user_id(), $id_partie_get);
-                                            ?> 
-                                                </B></span> points d'action.
+                                                <?php
+                                                echo get_points_action(get_current_user_id(), $id_partie_get);
+                                                ?> 
+                                            </B></span> points d'action.
                                     </p>
                                 </div>
                                 <div id="num_team">
@@ -144,24 +144,22 @@
                                         Vous êtes dans l'équipe <span class="team"><?php
                                             echo get_team(get_current_user_id(), $id_partie_get);
                                             ?></span>.
-                                    Vos points de victoire totaux sont : 
-                                    
-                                
-                                <span id="pts_victoire">
-                                <?php 
-                                
-                                echo get_points_victoire(get_team(get_current_user_id(), $id_partie_get), $id_partie_get)
-                                
-                                ?></span> /10 (10pts = Victoire)
-                                
+                                        Vos points de victoire totaux sont : 
+
+
+                                        <span id="pts_victoire">
+                                            <?php
+                                            echo get_points_victoire(get_team(get_current_user_id(), $id_partie_get), $id_partie_get)
+                                            ?></span> /10 (10pts = Victoire)
+
                                     </p>
-                                    
+
                                 </div>
                                 <div id="position">
                                     <p>Vous êtes en: 
                                         <b><?php
-                                        echo get_position(false, $id_partie_get);
-                                        ?>
+                                            echo get_position(false, $id_partie_get);
+                                            ?>
                                     </p>
                                 </div>
                             </div>
@@ -185,7 +183,7 @@
                                                     ?> 
                                                     <div class="row">
                                                         <div class="col-3"><?php echo $value->heure ?></div>
-                                                        <!-- <div class="col-2"><?php //echo get_login_by_id($value->id_joueur);      ?></div> -->
+                                                        <!-- <div class="col-2"><?php //echo get_login_by_id($value->id_joueur);                  ?></div> -->
                                                         <div class="col-2"><?php
                                                             get_user_by('id', $value->id_joueur);
                                                             echo $user->login
@@ -213,7 +211,7 @@
                                                     ?> 
                                                     <div class="row">
                                                         <div class="col-3"><?php echo $value->heure ?></div>
-                                                        <!--  <div class="col-2"><?php //echo get_login_by_id($value->id_joueur);      ?></div>-->
+                                                        <!--  <div class="col-2"><?php //echo get_login_by_id($value->id_joueur);                  ?></div>-->
                                                         <div class="col-2"><?php
                                                             $user = get_user_by('id', $value->id_joueur);
                                                             echo $user->login
@@ -232,7 +230,7 @@
                                     <button type="submit" class="btn btn-secondary"
                                             onclick="send_message('case')">Envoyer
                                     </button>
-                                          
+
                                 </div>
                                 <p id="message_reponse"></p>
                             </div>
@@ -240,12 +238,12 @@
                                 <h2 class="text-center">
                                     Zone <span id="nom_position"></span>
                                 </h2>
-                               
+
                                 <button id="button_fouiller" onclick="loot_zone(<?php echo $id_partie_get ?>)" >FOUILLER ZONE</button>
                                 <p id="zone_joueur"></p>
-                                
-                                 <p id="zone_list_player" ></p>
-                                
+
+                                <p id="zone_list_player" ></p>
+
 
 
                             </div>
@@ -280,15 +278,15 @@
                             <div id="rapport" class="hidden">
                                 <h2 class="text-center">Résultats des combats</h2>
                                 <div id="journal">
-                                     </b></p>
+
                                 </div>
-                                
+
                                 <div id="journal">
-                                	<p> <em> Hier soir de rudes combats ont eu lieu! </em></p>
-                                	<p> <em> L'équipe <b>1</b> à générer un score de combat de <b><span id="score_equipe_1"></span></b>. </em></p>
-                                        <p> <em> Quant à elle l'équipe <b>2</b> à générer un score de combat de <b><span id="score_equipe_2"></span></b>. </em></p>
-                                	<p> <em> L'équipe <b><span id="equipe_gagnante"></b></span> à gagné la bataille </em></p>
-                                	<p> <em>Equipe <b>1</b> obtient point(s) de victiore <b><span id="points_victoire_equipe_1"></b></span> et l'équipe <b>2</b> obtient <b><span id="points_victoire_equipe_2"> </span></b>point(s) de victoire, gloire à eux! </em></p>
+                                    <p> <em> Hier soir de rudes combats ont eu lieu! </em></p>
+                                    <p> <em> L'équipe <b>1</b> à générer un score de combat de <b><span id="score_equipe_1"></span></b>. </em></p>
+                                    <p> <em> Quant à elle l'équipe <b>2</b> à générer un score de combat de <b><span id="score_equipe_2"></span></b>. </em></p>
+                                    <p> <em> L'équipe <b><span id="equipe_gagnante"></span></b> à gagné la bataille </em></p>
+                                    <p> <em>Equipe <b>1</b> obtient point(s) de victiore <b><span id="points_victoire_equipe_1"></span></b> et l'équipe <b>2</b> obtient <b><span id="points_victoire_equipe_2"> </span></b>point(s) de victoire, gloire à eux! </em></p>
                                 </div>
                             </div>
                         </div>
@@ -314,44 +312,46 @@
                                             $bgcase = $tuile[$color];
                                             ?> 
                                             <div
-                                                 class="<?php echo $x ?><?php echo ';' . $y ?> cellule <?php echo $bgcase ?> img_map"
-                                                 onclick="move(this, <?php echo $id_partie_get ?>)">
-                                                     <?php
-                                                     foreach ($tableau_position_joueur as $value) {
-                                                         if ($x . ";" . $y == $value[1]) {
-                                                             echo '<div onclick="display_pseudo_oncell(this, ' . $id_partie_get . ')" id="';
-                                                             echo "joueur" . $value[0] . " ";
-                                                             echo '"class="';
-                                                             foreach ($pos_allies as $value) {
-                                                                 $all_pos = $value["position"];
-                                                                 if ($all_pos == $x . ';' . $y) {
-                                                                     echo $all_pos . " ";
-                                                                 }
-                                                             }
-                                                             echo ' text-center perso"> X </div>';
-                                                             break;
-                                                         }
-                                                     }
-                                                     if ($x == 0 && $y == 0) {
-                                                         echo "<div class='ville_map'></div>";
-                                                     }
-                                                     ?>
+                                                class="<?php echo $x ?><?php echo ';' . $y ?> cellule <?php echo $bgcase ?> img_map"
+                                                onclick="move(this, <?php echo $id_partie_get ?>)">
+                                                    <?php
+                                                    foreach ($tableau_position_joueur as $value) {
+                                                        if ($x . ";" . $y == $value[1]) {
+                                                            echo '<div onclick="display_pseudo_oncell(this, ' . $id_partie_get . ')" id="';
+                                                            echo "joueur" . $value[0] . " ";
+                                                            echo '"class="';
+                                                            foreach ($pos_allies as $value) {
+                                                                $all_pos = $value["position"];
+                                                                if ($all_pos == $x . ';' . $y) {
+                                                                    echo $all_pos . " ";
+                                                                    if ($all_pos == $value[1]) {
+                                                                        echo ' text-center perso"> ' . $value[0] . ' </div>';
+                                                                    }
+                                                                }
+                                                            }
+                                                            break;
+                                                        }
+                                                    }
+                                                    if ($x == 0 && $y == 0) {
+                                                        echo "<div class='ville_map'></div>";
+                                                    }
+                                                    ?>
                                             </div>
-                                    <?php endfor; ?>
+                                                <?php endfor; ?>
                                     </div>
-                                    <?php
-                                endfor
-                                ;
-                            }
-                            ?>
+                                        <?php
+                                    endfor
+                                    ;
+                                }
+                                ?>
                         </div>
                     </div>
                 </div> 
             </div>
         </div>
-           
-        
-        
+
+
+
         <div id="admin">
             <button type="submit" class="btn btn-secondary"
                     onclick="tour_suivant(<?php echo $id_partie_get ?>)">Tour suivant</button>
@@ -364,16 +364,16 @@
             <p id="resultat"></p>
         </div>
 
-        <?php
-        if ($id_partie_get == 999999) {
-            ?>
+<?php
+if ($id_partie_get == 999999) {
+    ?>
             <form method="post" action="../../wp-content/plugins/game_plugin/game_demo.php">
                 <input type="submit" value="Reset démo" name="reset_demo"/>
             </form>
 
-            <?php
-        }
-        ?>
+    <?php
+}
+?>
 
     </body>
 </html>

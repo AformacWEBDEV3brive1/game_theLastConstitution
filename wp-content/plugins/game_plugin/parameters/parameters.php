@@ -3,7 +3,7 @@
 $connexion_string = "mysql:dbname=the_last_constitution;host=127.0.0.1;charset=utf8";
 
 $login = "root";
-$mdp = "ezaltar";
+$mdp = "123456";
 
 
 
