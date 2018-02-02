@@ -10,6 +10,7 @@ function move(id, id_partie) {
             if (output["id_partie"].trim() == "false") {
                 $('#resultat').html("Pas assez de points d'action !");
             } else {
+                console.log(output);
                 $('#grille').load('?id=' + output["id_partie"] + ' #grille');
                 $('#points_action').load('?id=' + output["id_partie"] + ' #points_action');
                 $('#position').load('?id=' + output["id_partie"] + ' #position');

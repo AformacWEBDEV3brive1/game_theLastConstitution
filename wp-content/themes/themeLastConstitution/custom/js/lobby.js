@@ -38,7 +38,7 @@ function subscribe_game() {
         type: 'post',
         data: {info: 'subscribe_game', called_ajax_php: "process_general.php"},
         success: function (output) {
-        
+
         }
     });
 }
