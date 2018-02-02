@@ -278,7 +278,7 @@
                             <div id="rapport" class="hidden">
                                 <h2 class="text-center">Résultats des combats</h2>
                                 <div id="journal">
-
+                                </b></p>
                                 </div>
 
                                 <div id="journal">
@@ -326,6 +326,7 @@
                                                                     echo $all_pos . " ";
                                                                     if ($all_pos == $value[1]) {
                                                                         echo ' text-center perso"> ' . $value[0] . ' </div>';
+                                                                        break;
                                                                     }
                                                                 }
                                                             }
