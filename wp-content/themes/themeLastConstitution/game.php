@@ -42,27 +42,23 @@
             $parties = array();
 
 
-          //  error_log("DEBUG : parties = ");
             foreach (get_games(get_current_user_id()) as $value) {
                 array_push($parties, $value[0]);
             }
 
 
             if (!in_array($id_partie_get, $parties)) {
-                error_log('HALLAH WUAKBAR !!');
                 wp_redirect(get_permalink(get_page_by_title('lobby')));
                 exit();
             }
 
             if (end_game($id_partie_get)) {
-                error_log('fin de partie elle est terminé point');
                 $log = wp_redirect(get_permalink(get_page_by_title('fin-de-partie')) . "?id_partie=" . $id_partie_get);
                 error_log("redirect : " . $log);
                 exit();
             }
         }
     } else {
-        error_log("le else de l'enfer !!");
         wp_redirect(home_url());
         exit();
     }
@@ -315,7 +311,7 @@
                                             $bgcase = $tuile[$color];
                                             ?> 
                                             <div
-                                                class="<?php echo $x ?><?php echo ';' . $y ?> cellule <?php if(check_looted_current_player($id_partie_get, true, $x . ";" . $y) == 1){echo "fouille ";}else {echo "pas_fouille ";} echo $bgcase ?> img_map"
+                                                class="<?php echo $x ?><?php echo ';' . $y ?> cellule <?php if(check_looted_current_player($id_partie_get, true, $x . ";" . $y) == 1){echo "looted ";} echo $bgcase ?> img_map"
                                                 onclick="move(this, <?php echo $id_partie_get ?>)">
                                                     <?php
                                                     foreach ($tableau_position_joueur as $value) {
