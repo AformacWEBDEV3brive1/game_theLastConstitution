@@ -86,8 +86,10 @@ function loot_zone(id_partie){
     type: 'post',
      data: {info: 'looted', id_partie : id_partie},
      success: function (output){
-         $('#zone_joueur').html(output);
+         output = JSON.parse(output);
+         $('#zone_joueur').html(output["message"]);
          $('#button_fouiller').prop('disabled', true);
+         $('#grille').load('?id=' + output["id_partie"] + ' #grille');
      }
 });
 

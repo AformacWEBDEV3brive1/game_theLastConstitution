@@ -34,6 +34,7 @@
     get_template_part("../../plugins/game_plugin/process_general.php");
     get_template_part("../../plugins/game_plugin/process_event.php");
     get_template_part("../../plugins/game_plugin/process_loot.php");
+
     if (is_user_logged_in()) {
         $id_partie_get;
         if (isset($_GET['id'])) {
@@ -41,12 +42,14 @@
             $parties = array();
 
 
-            error_log("DEBUG : parties = ");
+          //  error_log("DEBUG : parties = ");
             foreach (get_games(get_current_user_id()) as $value) {
                 array_push($parties, $value[0]);
             }
+
+
             if (!in_array($id_partie_get, $parties)) {
-                error_log('fin de zsedrfghjfgdzgethryjtkuylu');
+                error_log('HALLAH WUAKBAR !!');
                 wp_redirect(get_permalink(get_page_by_title('lobby')));
                 exit();
             }
@@ -312,7 +315,7 @@
                                             $bgcase = $tuile[$color];
                                             ?> 
                                             <div
-                                                class="<?php echo $x ?><?php echo ';' . $y ?> cellule <?php echo $bgcase ?> img_map"
+                                                class="<?php echo $x ?><?php echo ';' . $y ?> cellule <?php if(check_looted_current_player($id_partie_get, true, $x . ";" . $y) == 1){echo "fouille ";}else {echo "pas_fouille ";} echo $bgcase ?> img_map"
                                                 onclick="move(this, <?php echo $id_partie_get ?>)">
                                                     <?php
                                                     foreach ($tableau_position_joueur as $value) {
