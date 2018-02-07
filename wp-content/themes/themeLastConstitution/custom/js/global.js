@@ -245,6 +245,15 @@ window.setInterval(function(){
         	}
         }
     });
+    $.ajax({url:'../../wp-content/plugins/game_plugin/game_minuit.php',
+        type:'post',
+        data:{called_ajax_php: 'game_minuit.php', php_function_file: 'end_game'},
+        success:function(game_over){
+            if(game_over == true){
+                location.refresh;
+            }
+        }
+    });
 }, 5000);
 
 function send_message(tag)

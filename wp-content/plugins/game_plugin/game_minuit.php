@@ -42,11 +42,13 @@ function global_minuit()
             // calcul des points de victoire
             $victory_points = get_victory_points($scores_rapidity, $score_equipe_1, $score_equipe_2);
             
+            
             // enregistrer le resultat de cette bataille dans la base
             $resultat =  enregistrement_bataille($id_partie, $joueurs_equipe_1, $joueurs_equipe_2, $scores_rapidity, $score_equipe_1, $score_equipe_2, $victory_points); 
             
             //ajouter resultat a resultats
             array_push($resultats, $resultat);
+            
         }
         return $resultats;
     }

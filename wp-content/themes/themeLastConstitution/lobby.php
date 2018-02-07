@@ -35,14 +35,21 @@
             exit;
         }
         ?>
-
-        <h1>C'EST LE LOBBY, ET TOI ?</h1>
-
-
-        <p> Votre ENORME nom: 
-            <?php echo wp_get_current_user()->user_login; ?>
-        </p>
-
+        <center class="container">
+        <h1><b>LOBBY</b></h1>
+        <div class="row">
+        <div class="col-md-5 col-lg-12 lobby_metal">
+            <p> Votre nom: 
+                <?php echo wp_get_current_user()->user_login; ?>
+            </p>
+            <p> Votre id: 
+                <?php echo wp_get_current_user()->id; ?>
+            </p>
+        </div>
+            <div class="col-md-1 col-lg-12 lobby_espace">
+                
+            </div>
+            <div class="offset-md-1 offset-lg-0 col-md-5 col-lg-12 lobby_metal">
         <p> Vous êtes dans la/les partie(s) <br/>
             <?php
             foreach (get_games(get_current_user_id()) as $value) {
@@ -51,16 +58,17 @@
             }
             ?>
         </p>
-
+        </div>
+        </div>
         <?php
         if (isLookingforgame() == true) {
-            echo '<button type="button" id="button_recherche" class="btn disabled">RECHERCHE</button>';
-            echo "<p id='gamer_mate'> Actuellement " . compteur_get_mate() . " personne(s) recherchent une game</p>";
+            echo '<button type="button" id="button_recherche" class="btn disabled">RECHERCHE</button><img src="images/loader.gif" heigth="20px" weight="20px">';
+            echo "<p id='gamer_mate'> Actuellement " . compteur_get_mate() . " personne(s) recherche(nt) une game</p>";
         } else {
-            echo '<button onclick="subscribe_game()" type="button" id="button_recherche" class="btn">RECHERCHE</button>';
+            echo '<button onclick="subscribe_game()" type="button" id="button_recherche" class="btn">RECHERCHE</button><img id="spinner" class="invisible" src="images/loader.gif" heigth="20px" weight="20px">';
             echo "<p id='gamer_mate'></p>";
         }
         ?>
-
+        </center>
     </body>
 </html>

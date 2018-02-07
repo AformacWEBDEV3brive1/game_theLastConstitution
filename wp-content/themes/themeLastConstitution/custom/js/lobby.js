@@ -18,6 +18,20 @@
 
 
 
+//fonction inutile en double donc je la commente
+//function subscribe_game() {
+//    console.log("couicou");
+//    $.ajax({url: '../../wp-content/plugins/game_plugin/process_lobby.php',
+//        type: 'post',
+//        data: {info: 'subscribe_game', called_ajax_php: "process_general.php"},
+//        success: function (output) {
+//      $('#button_recherche').prop('disabled', true);  
+//      $('#gamer_mate').html("Actuellement " + output + "personnes recherchent une game");
+//      //location.reload();
+//        }
+//    });
+//    
+//}
 
 function subscribe_game() {
     console.log("couicou");
@@ -25,22 +39,13 @@ function subscribe_game() {
         type: 'post',
         data: {info: 'subscribe_game', called_ajax_php: "process_general.php"},
         success: function (output) {
-        console.log("lacacacacacacacaca " + output);
-      $('#button_recherche').prop('disabled', true);  
-      $('#gamer_mate').html("Actuellement " + output + "personnes recherchent une game");
+      $('#button_recherche').prop('disabled', true);
+      $('#spinner').removeClass('invisible');
+      $('#gamer_mate').html("Actuellement " + output + " personne(s) recherche(nt) une game");
+    
         }
     });
-}
-
-function subscribe_game() {
-    console.log("couicou");
-    $.ajax({url: '../../wp-content/plugins/game_plugin/process_lobby.php',
-        type: 'post',
-        data: {info: 'subscribe_game', called_ajax_php: "process_general.php"},
-        success: function (output) {
-
-        }
-    });
+    
 }
 
 
