@@ -52,8 +52,9 @@ function loot_get_random_class($type, $luck) {
 
         $query_obj = $wpdb->prepare("SELECT nom_objet, id_objet FROM objet WHERE id_type='%d' AND id_class='%d'", $type, $result[$i]->id_class);
         $result_obj = $wpdb->get_results($query_obj);
-        echo "vous trouvez objet de classe " . $result_obj[0]->nom_objet . $result[$i]->class_objet; //AJOUTER TYPE ET REFAIRE MESSAGE
-        return $result_obj[0]->id_objet;
+
+        // $result_obj[0] contient l'id et le nom de l'objet, $result[$i]->class_objet est la classe de l'objet
+        return array($result_obj[0], $result[$i]->class_objet);
     } catch (Exception $ex) {
         return $e->getMessage();
     }
@@ -155,16 +156,14 @@ function looted($id_partie) {
 
                 if ($luck <= 50) {
 
-                    //echo "rien à recuperer!!!! Degage!!";
                     $message = "Rien a récupérer ! Va voir ailleurs !";
                 } else {
-//              
+    
                     $butin = loot_get_random_class(loot_get_random_type(), $luck);
-
-
-
-                    loot_insert_coffre_ville($butin, get_team(get_current_user_id(), $id_partie), $id_partie);
-                    $message = "";
+                    
+                    loot_insert_coffre_ville($butin[0]->id_objet, get_team(get_current_user_id(), $id_partie), $id_partie);
+                    
+                    $message = "Vous avez trouvé un objet: " . $butin[0]->nom_objet . " " . $butin[1] . " !";
                 }
 
 

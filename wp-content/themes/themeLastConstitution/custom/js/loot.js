@@ -86,6 +86,7 @@ function loot_zone(id_partie){
     type: 'post',
      data: {info: 'looted', id_partie : id_partie},
      success: function (output){
+    	 console.log("test bug JSON: " + output);
          output = JSON.parse(output);
          $('#zone_joueur').html(output["message"]);
          $('#button_fouiller').prop('disabled', true);
