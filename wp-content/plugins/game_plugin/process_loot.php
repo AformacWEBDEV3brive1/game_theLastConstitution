@@ -170,7 +170,7 @@ function looted($id_partie) {
                 nouveau_montant_pa(get_current_user_id(), get_points_action(get_current_user_id(), $id_partie) - 1, $id_partie);
             }
         }
-        echo json_encode(array(id_partie => 999999, message => $message ));
+        echo json_encode(array(id_partie => $id_partie, message => $message ));
     } catch (Exception $e) {
         return $e->getMessage();
     }
