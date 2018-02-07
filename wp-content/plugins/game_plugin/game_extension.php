@@ -132,7 +132,10 @@ CREATE TABLE `lobby` (
 CREATE TABLE `looted` (
   `id` int(11) NOT NULL,
   `id_partie` int(11) NOT NULL,
-  `position` varchar(255) NOT NULL
+  `position` varchar(255) NOT NULL,
+  `equipe_1` TINYINT,
+  `equipe_2` TINYINT
+
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
