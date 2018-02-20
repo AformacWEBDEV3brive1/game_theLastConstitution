@@ -9,14 +9,12 @@
 include_once 'process_general.php';
 require_once( explode("wp-content", __FILE__)[0] . "wp-load.php" );
 
-//$wpdb->show_errors();
-//print_r($wpdb->show_errors());
 
 function loot_cell($id_equipe, $id_partie) {
     
 }
 
-// renvoie aléatoirement un type 
+// return a type randomly.
 function loot_get_random_type() {
 
     global $wpdb;
@@ -53,7 +51,7 @@ function loot_get_random_class($type, $luck) {
         $query_obj = $wpdb->prepare("SELECT nom_objet, id_objet FROM objet WHERE id_type='%d' AND id_class='%d'", $type, $result[$i]->id_class);
         $result_obj = $wpdb->get_results($query_obj);
 
-        // $result_obj[0] contient l'id et le nom de l'objet, $result[$i]->class_objet est la classe de l'objet
+        // $result_obj[0] contains the id and object name, $result[$i]->class_objet is object's class.
         return array($result_obj[0], $result[$i]->class_objet);
     } catch (Exception $ex) {
         return $e->getMessage();
@@ -67,12 +65,12 @@ function loot_insert_coffre_ville($butin, $id_equipe, $id_partie) {
 
         $query_coffre = $wpdb->prepare("SELECT id_objet, quantite_objet FROM coffre_ville WHERE id_equipe='%d' AND id_partie='%d' AND id_objet='%d'", $id_equipe, $id_partie, $butin);
         $result_coffre = $wpdb->get_results($query_coffre);
-        //Test si objet existe dans la table
+        // test if object exist or not.
         if ($result_coffre == null) {
 
 
 
-            //Insert l'objet si n'existe PAS dans la table
+            //Insert object if it doesn't exist.
             $query = $wpdb->insert(
                     'coffre_ville', //table name
                     array(
@@ -88,7 +86,7 @@ function loot_insert_coffre_ville($butin, $id_equipe, $id_partie) {
                 '%d',
                     )
             );
-            //Update la table si objet existe dans la table
+            //Update table if object doen't exist.
         } else {
 
 
@@ -176,7 +174,7 @@ function looted($id_partie) {
     }
 }
 
-//Test si la case est deja looté ou pas
+//Test if case if already looted or not.
 function check_looted_current_player($id_partie, $byTeam = false, $position = false) {
     global $wpdb;
     if ($byTeam == false AND $position == false) {

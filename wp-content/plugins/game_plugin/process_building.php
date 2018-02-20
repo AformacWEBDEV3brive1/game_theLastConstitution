@@ -25,7 +25,7 @@ if ($_POST["called_ajax_php"] == "process_building.php") {
     }
 }
 
-//Retourne les informations (xp , niveau , type ) de tous les batiments 
+//Return informations of all buldings (xp, lvl, type).
 function get_information_buildings() {
     try {
         global $id_partie;

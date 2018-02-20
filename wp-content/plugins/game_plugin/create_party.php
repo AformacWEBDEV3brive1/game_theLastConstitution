@@ -2,6 +2,7 @@
 
 include_once 'process_general.php';
 
+// Number of players of games. ALL PEAOPLE NOT ONE TEAM.
 $slice = 4;
 
 function create_slices() {
@@ -43,6 +44,7 @@ function create_slices() {
     
 }
 
+// Cut all players in two and put them in two teams 
 function create_party($partie) {
 
     global $slice;
@@ -113,7 +115,7 @@ function create_party($partie) {
     foreach ($partie as $player) {
         
        
-        //set la position X et Y
+        //set X and Y position.
         $equipe1=array_slice($partie,0,$slice/2);
         
         print_r($equipe1);
