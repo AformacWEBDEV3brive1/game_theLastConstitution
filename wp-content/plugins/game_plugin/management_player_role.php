@@ -7,15 +7,15 @@
   
  */
 
-// création du rôle "Joueur"
+// Creation of "Joueur" role.
 function Joueur_roles_add() 
 {
-    // on récupère le rôle contributor
+    // get contributor role.
     $role = get_role('contributor');
     // on ajoute la capacité upload_files à contributor
     $role->add_cap('upload_files');
  
-    // On ajoute le rôle Joueur
+    // Add the "Joueur" role.
     add_role(
             'Joueur', 'Joueur', array(
             'read' => true, // peut accéder à son profil donc à l'administration
@@ -23,28 +23,28 @@ function Joueur_roles_add()
             )
     );
     
-    // pour supprimer un role on utilise remove_role('identifiant')
+    // To delete a role : use remove_role('identifiant').
     // remove_role('Joueur');
 }
  
 register_activation_hook(__FILE__, 'Joueur_roles_add');
  
-// suppréssion du rôle "Joueur"
+// Deletion of "Joueur" rôle. 
 function Joueur_roles_remove() 
 {
-    // on récupère le rôle contributor
+    // Get contributor role
     $role = get_role('contributor');
-    // on supprime la capacité upload_files à contributor
+    // Contributor cant upload files anymore with that function.
     $role->remove_cap('upload_files');
  
    
-    // pour supprimer un role on utilise remove_role('identifiant')
+    // To delete a role : use remove_role('identifiant').
     remove_role('Joueur');
 }
  
 register_deactivation_hook( __FILE__, 'Joueur_roles_remove' );
 
-// fonction qui permet de s'inscrire uniquement en tant que joueur
+// function who allowed to subscribe only with "joueur" role.
 add_filter('pre_option_default_role', 
 
 function($default_role){

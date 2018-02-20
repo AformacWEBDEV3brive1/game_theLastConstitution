@@ -16,8 +16,8 @@ if ($_POST["called_ajax_php"] == "game_chat.php") {
     }
 }
 
-// Prend en entrée l'ID d'un joueur, l'ID de la partie et le tag du chat (ville/case).
-// retourne les messages dans un tableau (tous si c'est la ville, tois si c'est la case).
+// Takes in entry current user id, game's id and the chat's tag (city / box).
+// return message in an array.
 
 function load_chat_by_tag($tag, $id_partie) {
     try {
@@ -71,17 +71,13 @@ function player_in_his_city($id_partie, $equipe, $all = false) {
     
     if($all == "true"){
         global $wpdb;
-         //error_log($wpdb->prepare("SELECT `position` FROM `games_data` WHERE id_partie = '%d' AND equipe = '%d' ", $id_partie, $equipe));
-//        $positions = get_position("myteam", $id_partie);
+         
             $team_position_joueur = $wpdb->get_results($wpdb->prepare("SELECT `position` FROM `games_data` WHERE id_partie = '%d' AND equipe = '%d' ", $id_partie, $equipe));
-           
-//      $team_position_joueur = $wpdb->get_results($query_team_position_joueur);
-//        error_log($positions);
+
       $i = 0;
       error_log(serialize($team_position_joueur));
       foreach ($team_position_joueur as $value[$i]){
           error_log("aaaaaaaaaaaaaaa" . $i);
-//          error_log("cccccccccccccccccccccccccccc" . $value[$i]);
           if (($value == "0;0" && $equipe == 1) || ($value == "19;19" && $equipe == 2)){
              $i++;  
              error_log("bbbbbbbbbbbbbbbbb" . $i);
@@ -89,7 +85,7 @@ function player_in_his_city($id_partie, $equipe, $all = false) {
          
       }
 //      echo $i;
-        // compter nombre personne dans 0,0 ou 16,16
+        // set people's position on 0,0 or 16,16
     }elseif($all == false){
         $position = get_position(false, $id_partie);
         if (($position == "0;0" && $equipe == 1) || ($position == "19;19" && $equipe == 2)) {

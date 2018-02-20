@@ -13,7 +13,7 @@ if ($_POST['reset_demo']) {
 
 function create_demo_users()
 {
-    // Création de utilisateurs Wordpress
+    // Creation of WordPress users for fomo
     $user_info = array(
         "user_pass" => "demo1",
         "user_login" => "Demo",
@@ -56,14 +56,14 @@ function create_demo_users()
     
     global $wpdb;
     
-    // Création de la partie démo (id=999999)
+    // Creation of demo game (id=999999)
     $wpdb->insert('games_metadata', array(
         'id_partie' => 999999
     ), array(
         '%d'
     ));
     
-    // Créations des joueurs dans la table games_data
+    // Creation of players in game_data table.
     $wpdb->insert('games_data', array(
         'id_joueur' => get_user_by('login', 'Demo')->ID,
         'id_partie' => 999999,
@@ -124,7 +124,7 @@ function create_demo_users()
         '%d'
     ));
     
-    // Créations des bâtiments dans la table batiments
+    // Creation of buildings in buldings table.
     $wpdb->insert('batiments', array(
         'id' => 5,
         'id_partie' => 999999,
@@ -261,7 +261,7 @@ function create_demo_users()
         '%d'
     ));
     
-    // ajout des lignes de score
+    // add of score lines
     $wpdb->insert('score', array(
         'id_partie' => 999999,
         'equipe' => 1,
@@ -287,7 +287,7 @@ function create_demo_users()
 
 function delete_demo_users()
 {
-    // Suppression des utilisateurs wordpress
+    // Delete of WordPress users.
     wp_delete_user(get_user_by('login', 'Demo')->ID);
     wp_delete_user(get_user_by('login', 'Demo2')->ID);
     wp_delete_user(get_user_by('login', 'Demo3')->ID);
@@ -295,7 +295,7 @@ function delete_demo_users()
     
     global $wpdb;
     
-    // Suppression des joueurs dans games_data
+    // Delete player of game_data table.
     $wpdb->delete('games_data', array(
         'id_joueur' => get_user_by('login', 'Demo')->ID,
         'id_joueur' => get_user_by('login', 'Demo2')->ID,
@@ -308,7 +308,7 @@ function delete_demo_users()
         '%d'
     ));
     
-    // Suppression de la partie (id=999999) dans games_metadata
+    // Delete Demo game (id=999999) in games_metadata
     $wpdb->delete('games_metadata', array(
         'id_partie' => 999999
     ), array(
