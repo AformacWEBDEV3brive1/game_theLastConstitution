@@ -65,7 +65,7 @@
             echo '<button type="button" id="button_recherche" class="btn disabled">RECHERCHE</button><img src="images/loader.gif" heigth="20px" weight="20px">';
             echo "<p id='gamer_mate'> Actuellement " . compteur_get_mate() . " personne(s) recherche(nt) une game</p>";
         } else {
-            echo '<button onclick="subscribe_game()" type="button" id="button_recherche" class="btn">RECHERCHE</button><img id="spinner" class="invisible" src="images/loader.gif" heigth="20px" weight="20px">';
+            echo '<button onclick="subscribe_game()" type="button" id="button_recherche" class="btn">RECHERCHE</button><img id="spinner" class="invisible" src="../../wp-content/themes/themeLastConstitution/images/loader.gif" heigth="20px" width="20px">';
             echo "<p id='gamer_mate'></p>";
         }
         ?>
