@@ -153,6 +153,8 @@ CREATE TABLE `minuit` (
   `score_equipe_2` int(11) NOT NULL,
   `score_rapidite_equipe_1` int(11) NOT NULL,
   `score_rapidite_equipe_2` int(11) NOT NULL,
+  `level_armurerie_equipe_1` int(11) NOT NULL,
+  `level_armurerie_equipe_2` int(11) NOT NULL,
   `points_victoire_equipe_1` int(11) NOT NULL,
   `points_victoire_equipe_2` int(11) NOT NULL,
   `bataille` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP

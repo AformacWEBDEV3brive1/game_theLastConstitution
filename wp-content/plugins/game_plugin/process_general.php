@@ -292,8 +292,14 @@ function tour_suivant() {
             
             echo json_encode(
                 array(pa => get_points_action(get_current_user_id(), $_POST['id_partie']),
-                    score_equipe_1 => $value["score_equipe_1"] + $value["score_rapidite_equipe_1"],
-                    score_equipe_2 => $value["score_equipe_2"] + $value["score_rapidite_equipe_2"],
+                    score_combat_equipe_1 => $value["score_equipe_1"],
+                    score_combat_equipe_2 => $value["score_equipe_2"],
+                    score_rapidite_equipe_1 => $value["score_rapidite_equipe_1"],
+                    score_rapidite_equipe_2 => $value["score_rapidite_equipe_2"],
+                    decompte_joueurs_equipe_1 => $value["decompte_joueurs_equipe_1"],
+                    decompte_joueurs_equipe_2 => $value["decompte_joueurs_equipe_2"],
+                    level_armurerie_equipe_1 => $value["level_armurerie_equipe_1"],
+                    level_armurerie_equipe_2 => $value["level_armurerie_equipe_2"],
                     equipe_gagnante => $gagnant,
                     points_victoire_equipe_1 => $value["points_victoire_equipe_1"],
                     points_victoire_equipe_2 => $value["points_victoire_equipe_2"],
