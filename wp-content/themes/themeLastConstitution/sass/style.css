@@ -138,4 +138,17 @@
   background-color: brown;
   background-image: ""; }
 
+@media screen and (min-width: 768px) {
+  .lobby_metal {
+    background-color: #999966;
+    color: white;
+    border-radius: 5px; }
+
+  .lobby_espace {
+    border-radius: 5px; } }
+@media screen and (min-width: 992px) {
+  .lobby_espace {
+    border-radius: 5px;
+    height: 50px; } }
+
 /*# sourceMappingURL=style.css.map */

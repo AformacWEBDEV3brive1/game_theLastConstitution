@@ -40,6 +40,15 @@ function create_pages()
     );
     
     wp_insert_post($page_jeu);
+    // la page de fin de partie
+    $page_com = array(
+        'post_title' => 'Commentaire',
+        'post_content' => '',
+        'post_type' => 'page',
+        'post_status'   => 'publish',
+        'page_template' => 'posts.php'
+    );
+    wp_insert_post($page_com);
 }
 add_action( "after_switch_theme", "create_pages" );
 
@@ -49,6 +58,7 @@ function delete_pages()
     wp_delete_post( get_page_by_title( 'jeu' )->ID ); 
     wp_delete_post( get_page_by_title( 'lobby' )->ID );   
     wp_delete_post( get_page_by_title( 'fin-de-partie' )->ID ); 
+    wp_delete_post( get_page_by_title( 'Commentaire' )->ID );
 }
 add_action( "switch_theme", "delete_pages" );
 

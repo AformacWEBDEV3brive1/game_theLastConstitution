@@ -11,14 +11,20 @@
 function Joueur_roles_add() 
 {
     // on récupère le rôle contributor
-    $role = get_role('contributor');
+    $role = get_role('author');
     // on ajoute la capacité upload_files à contributor
-    $role->add_cap('upload_files');
+    //$role->add_cap('upload_files');
+    $role->add_cap('edit_posts');
  
     // On ajoute le rôle Joueur
     add_role(
             'Joueur', 'Joueur', array(
             'read' => true, // peut accéder à son profil donc à l'administration
+            'edit_posts'=>true,
+            'edit_published_posts'=>true,
+            'publish_posts'=>true,
+            'delete_posts'=>true,
+            'delete_published_posts'=>true,
             'switch_player' => true // peut changer le Joueur
             )
     );
@@ -33,7 +39,7 @@ register_activation_hook(__FILE__, 'Joueur_roles_add');
 function Joueur_roles_remove() 
 {
     // on récupère le rôle contributor
-    $role = get_role('contributor');
+    $role = get_role('author');
     // on supprime la capacité upload_files à contributor
     $role->remove_cap('upload_files');
  

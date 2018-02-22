@@ -7,7 +7,7 @@ include_once 'parameters/parameters.php';
 include_once 'process_general.php';
 require_once( explode("wp-content", __FILE__)[0] . "wp-load.php" );
 
-
+/*wp_create_category('$commentaire');*/
 
 //compte le nb d'event restant
 function count_test() {

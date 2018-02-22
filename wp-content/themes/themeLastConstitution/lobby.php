@@ -62,15 +62,15 @@
         </div>
         <?php
         if (isLookingforgame() == true) {
-            echo '<button type="button" id="button_recherche" class="btn disabled">RECHERCHE</button><img src="../../wp-content/themes/themeLastConstitution/images/loader.gif" heigth="10px" width="20px" />';
+            echo '<button type="button" id="button_recherche" class="btn disabled">RECHERCHE</button><img src="../../wp-content/themes/themeLastConstitution/images/loader.gif" heigth="20px" width="20px" />';
             echo "<p id='gamer_mate'> Actuellement " . compteur_get_mate() . " personne(s) recherche(nt) une game</p>";
         } else {
-            echo '<button onclick="subscribe_game()" type="button" id="button_recherche" class="btn">RECHERCHE</button><img id="spinner" class="invisible" src="../../../wp-content/themes/themeLastConstitution/images/loader.gif" heigth="20px" width="20px"/>';
+            echo '<button onclick="subscribe_game()" type="button" id="button_recherche" class="btn">RECHERCHE</button><img id="spinner" class="invisible" src="../../wp-content/themes/themeLastConstitution/images/loader.gif" heigth="20px" width="20px"/>';
             echo "<p id='gamer_mate'></p>";
         }
         ?>
             <div>
-                <button id="com" class="btn">Lire les avis !</button>
+                <button id="com" class="btn"><a href="http://localhost/last%20constitution0.2/index.php/commentaire/">Lire les avis !</a></button>
             </div>
         </center>
     </body>
