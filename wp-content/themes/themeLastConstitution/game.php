@@ -95,19 +95,19 @@
                                         <p>niveau = <span class="level"><?php echo $infos_batiments[0]->niveau ?></span></p>
                                     </div>
                                     <div class="batiment banque col-6">
-                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)" disabled>AMELIORER</button>
                                         <p>xp = <span class="xp"><?php echo $infos_batiments[1]->xp ?></span></p>
                                         <p>type = <span class="type"><?php echo $infos_batiments[1]->type ?></span></p>
                                         <p>niveau = <span class="level"><?php echo $infos_batiments[1]->niveau ?></span></p>
                                     </div>
                                     <div class="batiment maison col-6">
-                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)" disabled>AMELIORER</button>
                                         <p>xp = <span class="xp"><?php echo $infos_batiments[2]->xp ?></span></p>
                                         <p>type = <span class="type"><?php echo $infos_batiments[2]->type ?></span></p>
                                         <p>niveau = <span class="level"><?php echo $infos_batiments[2]->niveau ?></span></p>
                                     </div>
                                     <div class="batiment hopital col-6">
-                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)">AMELIORER</button>
+                                        <button onclick="upgrade_building(this.parentNode.id, <?php echo $id_partie_get ?>)" disabled>AMELIORER</button>
                                         <p>xp = <span class="xp"><?php echo $infos_batiments[3]->xp ?></span></p>
                                         <p>type = <span class="type"><?php echo $infos_batiments[3]->type ?></span></p>
                                         <p>niveau = <span class="level"><?php echo $infos_batiments[3]->niveau ?></span></p>
@@ -363,7 +363,7 @@
                                                         }
                                                     }
                                                     if ($x == 0 && $y == 0) {
-                                                        echo "<div class='ville_map'></div>";
+                                                        echo "<div class=''></div>";
                                                     }
                                                     ?>
                                             </div>

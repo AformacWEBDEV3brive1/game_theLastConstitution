@@ -145,7 +145,16 @@
     border-radius: 5px; }
 
   .lobby_espace {
-    border-radius: 5px; } }
+    border-radius: 5px; }
+
+  .hopital {
+    background-color: lightgray; }
+
+  .maison {
+    background-color: lightgray; }
+
+  .banque {
+    background-color: lightgray; } }
 @media screen and (min-width: 992px) {
   .lobby_espace {
     border-radius: 5px;
