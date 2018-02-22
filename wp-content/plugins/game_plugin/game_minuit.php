@@ -6,7 +6,7 @@
  
 require_once( explode("wp-content", __FILE__)[0] . "wp-load.php" );
 
-// La fonction qui va appeller toutes les autres
+// Fonction who's gonna call all the other.
 function global_minuit()
 { 
     try
@@ -17,36 +17,41 @@ function global_minuit()
         foreach ($parties as $value) 
         {
             
-            // les joueurs ont 100 de score de combat de base
+            // Teams has 100 battle score at the begining.
             $score_equipe_1 = 100;
             $score_equipe_2 = 100;
             
-            // récupérer l'id de la partie
+            // get id of the game.
             $id_partie = $value->id_partie;
             
-            // récupérer le nombre de joueurs en ville pour chaque équipe
+            // Get number of players in town for each team.
             $joueurs_equipe_1 = get_players_in_city($id_partie, 1);
             $joueurs_equipe_2 = get_players_in_city($id_partie, 2);
             
-            // récupérer le contenu des coffres
+            // Get content of chest.
             $coffre_equipe1 = loot_get_coffre_ville_return(1, $id_partie);
             $coffre_equipe2 = loot_get_coffre_ville_return(2, $id_partie);
             
-            // calcul des scores de rapidité
+            // récupérer le level de l'armurerie
+            $level_armurerie_equipe1 = get_level_buildings($id_partie, 1, 1);
+            $level_armurerie_equipe2 = get_level_buildings($id_partie, 2, 1);
+            
+            // calcul of rapidity score.
             $scores_rapidity = give_bonus_rapidity_score($id_partie, $coffre_equipe1, $coffre_equipe2);
             
-            // calcul des scores de combat
-            $score_equipe_1 += get_combat_score($id_partie, 1, $joueurs_equipe_1, $coffre_equipe1);
-            $score_equipe_2 += get_combat_score($id_partie, 2, $joueurs_equipe_2, $coffre_equipe2);
+            // calcul of battle score.
+            $score_equipe_1 += get_combat_score($id_partie, 1, $joueurs_equipe_1, $coffre_equipe1, $level_armurerie_equipe1);
+            $score_equipe_2 += get_combat_score($id_partie, 2, $joueurs_equipe_2, $coffre_equipe2, $level_armurerie_equipe2);
             
-            // calcul des points de victoire
+            // calcul of victory points.
             $victory_points = get_victory_points($scores_rapidity, $score_equipe_1, $score_equipe_2);
             
             
-            // enregistrer le resultat de cette bataille dans la base
-            $resultat =  enregistrement_bataille($id_partie, $joueurs_equipe_1, $joueurs_equipe_2, $scores_rapidity, $score_equipe_1, $score_equipe_2, $victory_points); 
+            // Save result in data base.
+            $resultat =  enregistrement_bataille($id_partie, $joueurs_equipe_1, $joueurs_equipe_2, $scores_rapidity, $level_armurerie_equipe1, $level_armurerie_equipe2, $score_equipe_1, $score_equipe_2, $victory_points); 
+
             
-            //ajouter resultat a resultats
+            //Add "resultat" to "resultats".
             array_push($resultats, $resultat);
             
         }
@@ -58,7 +63,7 @@ function global_minuit()
     }
 }
 
-// Pour récupérer la liste de toutes les parties
+// Get the list of all games
 function get_all_id_games()
 {
     try 
@@ -73,7 +78,7 @@ function get_all_id_games()
     }
 }
 
-// Récupérer le nombre de joueur dans la ville
+// Get number of all the players in town.
 function get_players_in_city($id_partie, $equipe)
 {
     if($equipe == 1)
@@ -93,10 +98,10 @@ function get_players_in_city($id_partie, $equipe)
     return $resultat->nombre;   
 }
 
-// Calcul des scores de rapidité
+// Calcul of speen score.
 function give_bonus_rapidity_score($id_partie, $coffre_equipe1, $coffre_equipe2)
 {
-    // chaque équipe commence avec 100 de score de rapidité
+    // Each Team beagin with 100 rapidity score.
     $scores = array("equipe1" => 100, "equipe2" => 100);
       
     foreach ($coffre_equipe1 as $value) {
@@ -125,7 +130,7 @@ function give_bonus_rapidity_score($id_partie, $coffre_equipe1, $coffre_equipe2)
     return $scores; 
 }
 
-// A fusionner avec loot_get_coffre_ville dans process_loot.php
+// Need to be fusioned with "loot_get_coffre_ville" in dans "process_loot.php".
 function loot_get_coffre_ville_return($id_equipe, $id_partie) {
     
     global $wpdb;
@@ -141,8 +146,8 @@ function loot_get_coffre_ville_return($id_equipe, $id_partie) {
     }
 }
 
-// Calculer le score de comabt
-function get_combat_score($id_partie, $equipe, $nombre_joueurs, $coffre_equipe)
+// Calcul battle score
+function get_combat_score($id_partie, $equipe, $nombre_joueurs, $coffre_equipe, $level_armurerie)
 {
     $score_coffre = 0;
     
@@ -152,13 +157,14 @@ function get_combat_score($id_partie, $equipe, $nombre_joueurs, $coffre_equipe)
             $score_coffre += $value->valeur_objet * $value->quantite_objet;
         }
     }
-    
-    $total = $nombre_joueurs * 100 + rand($score_coffre, 1000);   
-    
+
+    $total = $nombre_joueurs * 100 + rand($score_coffre, 1000) + $level_armurerie * 100;   
+
     return $total;
 }
 
-// Attribuer les points de victoire
+// Attribute victory points.
+
 function get_victory_points($scores_rapidity, $score_equipe_1, $score_equipe_2)
 {
     $score_equipe_1 += $scores_rapidity["equipe1"];
@@ -201,7 +207,7 @@ function get_victory_points($scores_rapidity, $score_equipe_1, $score_equipe_2)
     return $victory_points;
 }
 
-function enregistrement_bataille($id_partie, $joueurs_equipe_1, $joueurs_equipe_2, $scores_rapidity, $score_equipe_1, $score_equipe_2, $victory_points)
+function enregistrement_bataille($id_partie, $joueurs_equipe_1, $joueurs_equipe_2, $scores_rapidity, $level_armurerie_equipe1, $level_armurerie_equipe2, $score_equipe_1, $score_equipe_2, $victory_points)
 {
     global $wpdb;
     
@@ -215,10 +221,14 @@ function enregistrement_bataille($id_partie, $joueurs_equipe_1, $joueurs_equipe_
             'score_equipe_2' => $score_equipe_2,
             'score_rapidite_equipe_1' => $scores_rapidity["equipe1"],
             'score_rapidite_equipe_2' => $scores_rapidity["equipe2"],
+            'level_armurerie_equipe_1' => $level_armurerie_equipe1,
+            'level_armurerie_equipe_2' => $level_armurerie_equipe2,
             'points_victoire_equipe_1' => $victory_points["equipe1"],
             'points_victoire_equipe_2' => $victory_points["equipe2"]
         ), 
         array(
+            '%d',
+            '%d',
             '%d',
             '%d',
             '%d',
@@ -249,6 +259,8 @@ function enregistrement_bataille($id_partie, $joueurs_equipe_1, $joueurs_equipe_
         'score_equipe_2' => $score_equipe_2,
         'score_rapidite_equipe_1' => $scores_rapidity["equipe1"],
         'score_rapidite_equipe_2' => $scores_rapidity["equipe2"],
+        'level_armurerie_equipe_1' => $level_armurerie_equipe1,
+        'level_armurerie_equipe_2' => $level_armurerie_equipe2,
         'points_victoire_equipe_1' => $victory_points["equipe1"],
         'points_victoire_equipe_2' => $victory_points["equipe2"]
     );
@@ -298,4 +310,23 @@ function check_victoire_temps($id_partie)
         return false;
     }
 
+}
+
+// Récupérer le level de l'armurerie de l'équipe
+function get_level_buildings($id_partie, $equipe, $type)
+{
+    global $wpdb;
+    
+    $prepare = $wpdb->prepare("SELECT niveau FROM batiments WHERE id_partie = %d AND equipe = %d AND type = %d", $id_partie, $equipe, $type);
+    $resultat = $wpdb->get_row($prepare);
+    return $resultat->niveau;
+}
+
+// Récupérer informations rapport
+function get_rapport_combat($id_partie)
+{
+    global $wpdb;
+    $prepare = $wpdb->prepare("SELECT * FROM minuit WHERE id_partie = %d ORDER BY bataille DESC LIMIT 1", $id_partie);
+    $rapport_combat = $wpdb->get_row($prepare);
+    return $rapport_combat;
 }

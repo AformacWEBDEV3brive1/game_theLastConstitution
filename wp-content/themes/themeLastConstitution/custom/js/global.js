@@ -44,14 +44,31 @@ function tour_suivant(id_partie) {
             $('#resultat').html("action effectuée !!");
             $('#points_action').html(output["pa"]);
             
-            $('#score_equipe_1').html(output["score_equipe_1"]);
-            $('#score_equipe_2').html(output["score_equipe_2"]);
+            $('#journal').removeClass("hidden");
+            
+            $('#bataille').html("À l'instant!");
+            
+            $('#decompte_joueurs_equipe_1').html(output["decompte_joueurs_equipe_1"]);
+            $('#decompte_joueurs_equipe_2').html(output["decompte_joueurs_equipe_2"]);
+            
+            $('#level_armurerie_equipe_1').html(output["level_armurerie_equipe_1"]);
+            $('#level_armurerie_equipe_2').html(output["level_armurerie_equipe_2"]);
+            
+            $('#score_rapidite_equipe_1').html(output["score_rapidite_equipe_1"]);
+            $('#score_rapidite_equipe_2').html(output["score_rapidite_equipe_2"]);
+            
+            $('#score_combat_equipe_1').html(output["score_combat_equipe_1"]);
+            $('#score_combat_equipe_2').html(output["score_combat_equipe_2"]);
+            
+            $('#score_equipe_1').html(output["score_rapidite_equipe_1"] + output["score_combat_equipe_1"]);
+            $('#score_equipe_2').html(output["score_rapidite_equipe_2"] + output["score_combat_equipe_2"]);
             
             $('#equipe_gagnante').html(output["equipe_gagnante"]);
             
             $('#points_victoire_equipe_1').html(output["points_victoire_equipe_1"]);
             $('#points_victoire_equipe_2').html(output["points_victoire_equipe_2"]);
             
+            //onglet etat
             $('#pts_victoire').html(output["pts_victoire_totaux"]);
         }
     });

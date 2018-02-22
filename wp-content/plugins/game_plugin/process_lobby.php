@@ -16,7 +16,6 @@ function get_all_games() {
         $query = $wpdb->get_results("SELECT * FROM `games_metadata`");
 
         $query = json_decode(json_encode($query), true);
-        // print_r($query);
 
         return $query;
     } catch (Exception $e) {
@@ -29,7 +28,7 @@ function set_user($id_joueur, $id_partie) {
     global $wpdb;
     try {
         error_log($_POST[id_partie]);
-        //Insert l'objet si n'existe PAS dans la table
+        //Insert the object if doesn't exist in table
         $query = $wpdb->insert(
                 'games_data', //table name
                 array(
@@ -57,8 +56,8 @@ function subscribe_game() {
     global $wpdb;
     $id_joueur = get_current_user_id();
 
-    // joueur present dans table ? isLookingforgame() 
-    // si isLookingforgame() return true => rien faire  
+    // player in table ? isLookingforgame() 
+    // si isLookingforgame() return true => doing nothing  
     // si isLookingforgame() return false => insert 
 
     try {
@@ -91,7 +90,6 @@ function isLookingforgame($id_joueur = null) {
         $query = $wpdb->get_results("SELECT * FROM `lobby` WHERE id_joueur = $id_joueur");
 
         $query = json_decode(json_encode($query), true);
-        // print_r($query);
 
         return $query;
     } catch (Exception $e) {

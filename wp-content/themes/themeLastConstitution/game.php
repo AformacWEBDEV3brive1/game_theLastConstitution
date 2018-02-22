@@ -276,16 +276,46 @@
                             </div>
                             <div id="rapport" class="hidden">
                                 <h2 class="text-center">Résultats des combats</h2>
-                                <div id="journal">
+                                <div>
                                 </b></p>
                                 </div>
 
-                                <div id="journal">
-                                    <p> <em> Hier soir de rudes combats ont eu lieu! </em></p>
-                                    <p> <em> L'équipe <b>1</b> à générer un score de combat de <b><span id="score_equipe_1"></span></b>. </em></p>
-                                    <p> <em> Quant à elle l'équipe <b>2</b> à générer un score de combat de <b><span id="score_equipe_2"></span></b>. </em></p>
-                                    <p> <em> L'équipe <b><span id="equipe_gagnante"></span></b> à gagné la bataille </em></p>
-                                    <p> <em>Equipe <b>1</b> obtient point(s) de victiore <b><span id="points_victoire_equipe_1"></span></b> et l'équipe <b>2</b> obtient <b><span id="points_victoire_equipe_2"> </span></b>point(s) de victoire, gloire à eux! </em></p>
+								<?php $rapport = get_rapport_combat($id_partie_get); if($rapport != NULL):?>
+                                	<div id="journal">
+                                <?php else: ?>
+                                	<div id="journal" class="hidden">
+                                <?php endif ?>                              	
+                                	
+                                	<p>Date bataille : <span id="bataille"><?php echo $rapport->bataille;?></span></p>
+                                	
+                                	<p>Equipe 1 : Il y avait <b><span id="decompte_joueurs_equipe_1"><?php echo $rapport->decompte_joueurs_equipe_1;?></span></b> joueurs en ville.</p>
+                                		<p>L'armurerie était de niveau <b><span id="level_armurerie_equipe_1"><?php echo $rapport->level_armurerie_equipe_1;?></span></b>.</p>
+                                		
+                                		<p>Score de combat: <b><span id="score_combat_equipe_1"><?php $score_combat_equipe_1 = $rapport->score_equipe_1 - $rapport->score_rapidite_equipe_1; echo $score_combat_equipe_1;?></span></b> points.
+                                		
+                                		Score de rapidité: <b><span id="score_rapidite_equipe_1"><?php echo $rapport->score_rapidite_equipe_1;?></span></b> points.</p>
+                                		
+                                		<p>Score total : <b><span id="score_equipe_1"><?php echo $rapport->score_equipe_1;?></span></b> points.</p>
+                                	
+                                	<br/>
+                                	
+                                	<p>Equipe 2 : Il y avait <b><span id="decompte_joueurs_equipe_2"><?php echo $rapport->decompte_joueurs_equipe_2;?></span></b> joueurs en ville.</p>
+                                		<p>L'armurerie était de niveau <b><span id="level_armurerie_equipe_2"><?php echo $rapport->level_armurerie_equipe_2;?></span></b>.</p>
+                                		
+                                		<p>Score de combat: <b><span id="score_combat_equipe_2"><?php $score_combat_equipe_2 = $rapport->score_equipe_2 - $rapport->score_rapidite_equipe_2;echo $score_combat_equipe_2;?></span></b> points.
+                                		
+                                		Score de rapidité: <b><span id="score_rapidite_equipe_2"><?php echo $rapport->score_rapidite_equipe_2;?></span></b> points.</p>
+                                		
+                                		<p>Score total : <b><span id="score_equipe_2"><?php echo $rapport->score_equipe_2;?></span></b> points.</p>
+                                		
+                                		<br/>
+
+                                		<p>Gagnant : Equipe <b><span id="equipe_gagnante"><?php if($rapport->score_equipe_1>$rapport->score_equipe_2){echo "1";} else{echo "2";}?></span></b> !</p>
+                                		
+                                		<p>Modification points de victoire de l'équipe 1 : <b><span id="points_victoire_equipe_1"><?php echo $rapport->points_victoire_equipe_1;?></span></b></p>
+                                		<p>Modification points de victoire de l'équipe 2 : <b><span id="points_victoire_equipe_2"><?php echo $rapport->points_victoire_equipe_2;?></span></b></p>
+										
+
                                 </div>
                             </div>
                         </div>
@@ -352,16 +382,20 @@
 
 
 
-        <div id="admin">
+        <div id="admin" class="row">
+        <div class="col-12">
             <button type="submit" class="btn btn-secondary"
                     onclick="tour_suivant(<?php echo $id_partie_get ?>)">Tour suivant</button>
             <p id="resultat"></p>
+            </div>
         </div>
-        <div id="admin2">
+        <div id="admin2" class="row">
+        <div class="col-12">
             <button type="submit" class="btn btn-secondary"
                     onclick="delete_partie(<?php echo $id_partie_get ?>)">Supprime partie
             </button>
             <p id="resultat"></p>
+            </div>
         </div>
 
 <?php

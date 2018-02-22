@@ -9,7 +9,7 @@ require_once( explode("wp-content", __FILE__)[0] . "wp-load.php" );
 
 /*wp_create_category('$commentaire');*/
 
-//compte le nb d'event restant
+//count number of of event not discovered.
 function count_test() {
     $db = openBDD();
     $bdd = $db->prepare('select count(*) from events');
@@ -17,8 +17,8 @@ function count_test() {
     print_r($bdd->fetch()[0]);
 }
 
-//prend en parametre l'id de la partie
-//renvoie l=les positions des events
+//takes in parameter id_parties.
+//get position of events.
 function check_event($id_partie) {
     $db = openBDD();
     $bdd = $db->prepare('SELECT position FROM `events` WHERE id_partie = ? ');
@@ -26,9 +26,9 @@ function check_event($id_partie) {
     return $bdd->fetchALL();
 }
 
-//sans argument efface tout les events de toutes le base de donnée ;
-//avec un argument id_partie efface les events de la partie concerné ;
-//avec un arg id_partie + position efface l'event à cette position ; 
+//Without arguments : delete aguments of every events on the data base.
+//With arguments id_partie delete events of an specific game
+//With argu id_partie + position delete event of that position.
 function event_delete($id_partie = false, $position = false) {
     $db = openBDD();
     if ($id_partie == false) {
@@ -44,9 +44,9 @@ function event_delete($id_partie = false, $position = false) {
     }
 }
 
-//prend en parametre l'id_partie
-//lance les fonctions relative à la gestion des events
-//envoie un format json au client 
+//takes in parameter id_partie.
+//triggers function about event management.
+//Sends a Json format json to client. 
 function event_check_position($id_partie) {
     
     $position_joueur = get_position(false,$id_partie);
@@ -60,8 +60,8 @@ function event_check_position($id_partie) {
             $bdd = $db->prepare('SELECT type, valeur FROM `events` WHERE id_partie = ? AND position=?');
             $bdd->execute(array($id_partie, $position_joueur));
             $tmp = $bdd->fetchAll();
-           
-            //transforme le resultat objet en tableau
+ 
+            //change the object to array.
             foreach($tmp as $value){
                 $type[]=$value[0];
                 $valeur[]=$value[1];
@@ -70,17 +70,17 @@ function event_check_position($id_partie) {
             $type=$type[0];
             $valeur=$valeur[0];
             
-            //affecte la base donnée
+            //affect the data base.
             event_effect_to_database($type, $valeur);
-            //encode le resultat de la requete en format jSon;
+            //encode request result to json format.
             $json = json_encode($tmp);
             
             break;
         }
     }
-    //si $json N'EST PAS VIDE 
+    //if $json IS NOT EMPTY.  
     if ($json != "") {
-        //efface l'event cibler
+        //delete targeted event
         event_delete($id_partie, $position_joueur);
         echo $json;
         
@@ -90,9 +90,9 @@ function event_check_position($id_partie) {
     }
     
 }
-//prend en parametre un type(+/-) et une valeur
-//calcul les effets des events
-//modifie la table games_data
+//takes in parameters a type(+/-) and a value
+//calcul all effect of events.
+//edit games_data table.
 function event_effect_to_database($type,$valeur){
     
     $id_joueur= get_current_user_id();
@@ -114,8 +114,3 @@ function event_effect_to_database($type,$valeur){
             $bdd = $db->prepare('UPDATE games_data SET points_action=? WHERE id_joueur=?' );
             $bdd->execute(array($points_action, $id_joueur));
 }
-
-
-
-
-
